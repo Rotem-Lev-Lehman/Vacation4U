@@ -1,0 +1,21 @@
+<component name="libraryTable">
+  <library name="javafx-everything">
+    <ANNOTATIONS>
+      <root url="file://$PROJECT_DIR$/lib/javafx-sdk-11" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/lib/javafx-sdk-11" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="file://$PROJECT_DIR$/lib/javafx-sdk-11" />
+    </JAVADOC>
+    <NATIVE>
+      <root url="file://$PROJECT_DIR$/lib/javafx-sdk-11" />
+    </NATIVE>
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/lib/javafx-sdk-11" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/lib/javafx-sdk-11" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/lib/javafx-sdk-11" recursive="false" type="SOURCES" />
+  </library>
+</component>
