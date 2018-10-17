@@ -16,5 +16,18 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="file://C:/javafx 11/javafx-sdk-11/lib" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://C:/javafx 11/javafx-sdk-11/lib" />
+        </SOURCES>
+        <jarDirectory url="file://C:/javafx 11/javafx-sdk-11/lib" recursive="false" />
+        <jarDirectory url="file://C:/javafx 11/javafx-sdk-11/lib" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
   </component>
 </module>
