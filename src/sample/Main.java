@@ -1,6 +1,9 @@
 package sample;
 
 import Model.DataBaseManager;
+import Model.User;
+
+import java.sql.SQLException;
 
 /*
 import javafx.application.Application;
@@ -29,6 +32,24 @@ public class Main extends Application {
 public class Main{
     public static void main(String[] args){
         DataBaseManager dataBaseManager = new DataBaseManager();
+        /*
+        User user = new User("Pazyona","123456","25/1/1994","Paz","Yona","Beer Sheva");
+        try {
+            dataBaseManager.create(user);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        */
+        User user = dataBaseManager.Read("Pazyona");
+        System.out.println(user);
+        /*
+        user.setCity("Beer Sheva");
+        dataBaseManager.Update(user.getUsername(), user);
+        */
+        dataBaseManager.Delete(user);
+
+        User user2 = dataBaseManager.Read("Pazyona");
+        System.out.println(user2);
 
     }
 }

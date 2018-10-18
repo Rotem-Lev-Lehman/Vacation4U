@@ -1,9 +1,6 @@
 package Model;
 
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class DataBaseManager {
 
@@ -12,9 +9,101 @@ public class DataBaseManager {
 
     public DataBaseManager(){
         url = "jdbc:sqlite:resources/DataBase.db";
+        //connect();
+        //closeConnection();
+    }
+    public void Create(User user) throws SQLException{
         connect();
+        String sql = "INSERT INTO users(username,password,birthdate,firstname,lastname,city) VALUES(?,?,?,?,?,?)";
+
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, user.getUsername());
+            pstmt.setString(2, user.getPassword());
+            pstmt.setString(3, user.getBirthdate());
+            pstmt.setString(4, user.getFirstName());
+            pstmt.setString(5, user.getLastName());
+            pstmt.setString(6, user.getCity());
+            pstmt.executeUpdate();
+        }
+        catch (SQLException e){
+            closeConnection();
+            throw e;
+        }
         closeConnection();
     }
+
+    public User Read(String username){
+        connect();
+        String sql = "SELECT username, password, birthdate, firstname, lastname, city FROM users WHERE username = ?";
+        User user = null;
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            // set the value
+            pstmt.setString(1, username);
+            //
+            ResultSet rs = pstmt.executeQuery();
+
+            // loop through the result set
+            while (rs.next()) {
+                if(user != null)
+                    break;
+                user = new User(rs.getString("username"),rs.getString("password"),rs.getString("birthdate"),rs.getString("firstname"),rs.getString("lastname"),rs.getString("city"));
+            }
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        closeConnection();
+        return user;
+    }
+
+    public void Update(String username, User user) {
+        connect();
+        String sql = "UPDATE users SET username = ? , "
+                + "password = ? , "
+                + "birthdate = ? , "
+                + "firstname = ? , "
+                + "lastname = ? , "
+                + "city = ? "
+                + "WHERE username = ?";
+
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            // set the corresponding param
+            pstmt.setString(1, user.getUsername());
+            pstmt.setString(2, user.getPassword());
+            pstmt.setString(3, user.getBirthdate());
+            pstmt.setString(4, user.getFirstName());
+            pstmt.setString(5, user.getLastName());
+            pstmt.setString(6, user.getCity());
+            pstmt.setString(7, username);
+            // update
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        closeConnection();
+    }
+
+    public void Delete(User user) {
+        connect();
+        String sql = "DELETE FROM users WHERE username = ?";
+
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            // set the corresponding param
+            pstmt.setString(1,user.getUsername());
+            // execute the delete statement
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        closeConnection();
+    }
+
     private void connect() {
         conn = null;
         try {
