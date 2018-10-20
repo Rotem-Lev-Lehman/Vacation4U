@@ -5,7 +5,7 @@ import Model.User;
 
 import java.sql.SQLException;
 
-/*
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -28,7 +28,7 @@ public class Main extends Application {
         launch(args);
     }
 }
-*/
+/*
 public class Main{
     public static void main(String[] args){
         DataBaseManager dataBaseManager = new DataBaseManager();
@@ -40,12 +40,14 @@ public class Main{
             e.printStackTrace();
         }
         */
+/*
         User user = dataBaseManager.Read("Pazyona");
         System.out.println(user);
         /*
         user.setCity("Beer Sheva");
         dataBaseManager.Update(user.getUsername(), user);
         */
+/*
         dataBaseManager.Delete(user);
 
         User user2 = dataBaseManager.Read("Pazyona");
@@ -53,3 +55,4 @@ public class Main{
 
     }
 }
+*/
