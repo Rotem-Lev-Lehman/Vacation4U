@@ -31,13 +31,17 @@ public class MainPageController {
             str[0] = username;
             str[1]=password;
 
-            if (model.Read(username).getPassword()
+            if (model.Read(username).getPassword()== password){
+                UserExists();
+            }
+            else
+                UserDoesNotExist();
         }
 
     }
 
     public void UserExists(){
-
+        
     }
 
     public void UserDoesNotExist(){
