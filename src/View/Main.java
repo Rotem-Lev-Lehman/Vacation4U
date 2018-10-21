@@ -18,8 +18,8 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(getClass().getResource("MainPage.fxml"));
         ((AController)fxmlLoader.getController()).setModel(model);
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setTitle("Vacation4U");
+        primaryStage.setScene(new Scene(root, 700, 300));
         primaryStage.show();
         //A comment
         String[] locals = Locale.getISOCountries();
