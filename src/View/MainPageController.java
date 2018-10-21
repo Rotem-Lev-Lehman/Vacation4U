@@ -19,7 +19,7 @@ public class MainPageController {
     public MainPageController(AModel model){
         this.model = model;
     }
-    
+
     public void LoginPressed(ActionEvent event){
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
