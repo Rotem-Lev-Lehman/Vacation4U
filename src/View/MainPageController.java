@@ -1,4 +1,4 @@
-package sample;
+package View;
 
 import javafx.scene.control.Button;
 
