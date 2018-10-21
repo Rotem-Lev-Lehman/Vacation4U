@@ -2,7 +2,7 @@ package Model;
 
 import java.sql.*;
 
-public class DataBaseManager {
+public class DataBaseManager implements IDataBaseManager {
 
     private String url;
     private Connection conn;
