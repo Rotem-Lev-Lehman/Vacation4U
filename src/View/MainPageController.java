@@ -9,16 +9,12 @@ import javafx.scene.text.Text;
 import java.util.Observable;
 
 
-public class MainPageController {
+public class MainPageController extends AController {
 
 
     public TextField usernameTextField;
     public TextField passwordTextField;
     public Text NotregisteredTextField;
-    public AModel model;
-    public MainPageController(AModel model){
-        this.model = model;
-    }
 
     public void LoginPressed(ActionEvent event){
         String username = usernameTextField.getText();
