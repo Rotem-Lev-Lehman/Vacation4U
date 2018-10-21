@@ -1,7 +1,11 @@
 package View;
 
 import Model.AModel;
+import Model.Model;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
@@ -15,7 +19,7 @@ public class MainPageController extends AController {
     public TextField usernameTextField;
     public TextField passwordTextField;
     public Text NotregisteredTextField;
-
+    public AModel model;
     public void LoginPressed(ActionEvent event){
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
@@ -37,6 +41,7 @@ public class MainPageController extends AController {
     }
 
     public void UserExists(){
+
 
     }
 
