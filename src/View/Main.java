@@ -16,7 +16,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         AModel model = new Model();
         FXMLLoader fxmlLoader = new FXMLLoader();
-        Parent root = fxmlLoader.load(getClass().getResource("MainPage.fxml"));
+        Parent root = fxmlLoader.load(getClass().getResource("MainPage.fxml").openStream());
         ((AController)fxmlLoader.getController()).setModel(model);
         primaryStage.setTitle("Vacation4U");
         primaryStage.setScene(new Scene(root, 700, 300));

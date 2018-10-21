@@ -32,16 +32,12 @@
             <Insets />
          </opaqueInsets>
       </TextField>
-      <ImageView fitHeight="152.0" fitWidth="189.0" layoutX="26.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../Desktop/airplane-cartoon-png-3.png" />
-         </image>
+      <ImageView fx:id="airplaneImage" fitHeight="152.0" fitWidth="189.0" layoutX="26.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true">
+
       </ImageView>
       <Text id="process_message" layoutX="126.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-      <ImageView fitHeight="60.0" fitWidth="59.0" layoutX="9.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../Desktop/return-button-png-31.png" />
-         </image>
+      <ImageView fx:id="backImage" fitHeight="60.0" fitWidth="59.0" layoutX="9.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
+
       </ImageView>
       <Text layoutX="27.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Go Back">
          <font>
