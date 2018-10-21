@@ -41,7 +41,7 @@ public class MainPageController {
     }
 
     public void UserExists(){
-        
+
     }
 
     public void UserDoesNotExist(){
