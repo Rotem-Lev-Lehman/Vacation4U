@@ -8,16 +8,15 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainPageController">
    <children>
       <ImageView fitHeight="238.0" fitWidth="250.0" layoutX="181.0" layoutY="-38.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../Downloads/LogoSample_ByTailorBrands.jpg" />
          </image>
       </ImageView>
-      <TextField layoutX="225.0" layoutY="128.0" promptText="Username" />
-      <TextField layoutX="226.0" layoutY="174.0" promptText="Password" />
+      <TextField fx:id="usernameTextField" layoutX="225.0" layoutY="128.0" promptText="Username" />
+      <TextField fx:id="passwordTextField" layoutX="226.0" layoutY="174.0" promptText="Password" />
       <ImageView fitHeight="25.0" fitWidth="43.0" layoutX="195.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../Desktop/17241-200.png" />
@@ -28,11 +27,11 @@
             <Image url="@../../../../Desktop/thread-lock.jpeg" />
          </image>
       </ImageView>
-      <Text layoutX="226.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Not registered yet? Click here!">
+      <Text fx:id="NotregisteredTextField" layoutX="226.0" layoutY="286.0" onMouseClicked="#NotRegistedPressed" strokeType="OUTSIDE" strokeWidth="0.0" text="Not registered yet? Click here!">
          <font>
             <Font size="9.0" />
          </font>
       </Text>
-      <Button layoutX="260.0" layoutY="225.0" mnemonicParsing="false" text="Login" />
+      <Button layoutX="260.0" layoutY="225.0" mnemonicParsing="false" onAction="#LoginPressed" text="Login" />
    </children>
 </AnchorPane>
