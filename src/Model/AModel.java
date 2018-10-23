@@ -1,19 +1,16 @@
 package Model;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public abstract class AModel {
     protected IDataBaseManager dataBaseManager;
 
-    public void Create(User user) {
-        try {
-            dataBaseManager.Create(user);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public void Create(User user) throws SQLException {
+        dataBaseManager.Create(user);
     }
 
-    public User Read(String username) {
+    public List<User> Read(String username) {
         return dataBaseManager.Read(username);
     }
 

@@ -31,11 +31,13 @@ public class MainPageController extends AController {
             str[0] = username;
             str[1]=password;
 
+            /*
             if (model.Read(username).getPassword()== password){
                 UserExists();
             }
             else
                 UserDoesNotExist();
+                */
         }
 
     }
