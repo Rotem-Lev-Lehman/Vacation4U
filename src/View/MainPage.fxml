@@ -21,9 +21,15 @@
       <ImageView fx:id="passwordIcon" fitHeight="32.0" fitWidth="32.0" layoutX="193.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
 
       </ImageView>
-      <Text fx:id="NotregisteredTextField" layoutX="226.0" layoutY="286.0" onMouseClicked="#NotRegistedPressed" strokeType="OUTSIDE" strokeWidth="0.0" text="Not registered yet? Click here!">
+      <Text fx:id="notRegisteredTextField" layoutX="226.0" layoutY="286.0" onMouseClicked="#NotRegisteredPressed" strokeType="OUTSIDE" strokeWidth="0.0" text="Not registered yet? Click here!">
          <font>
             <Font size="9.0" />
+         </font>
+      </Text>
+
+      <Text fx:id="message" layoutX="226.0" layoutY="215" strokeType="OUTSIDE" strokeWidth="0.0" text="" fill="red">
+         <font>
+            <Font size="12" />
          </font>
       </Text>
       <Button layoutX="260.0" layoutY="225.0" mnemonicParsing="false" onAction="#LoginPressed" text="Login" />

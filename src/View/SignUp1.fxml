@@ -9,22 +9,22 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="429.0" prefWidth="383.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="429.0" prefWidth="383.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.SignUp1Controller">
    <children>
       <Text layoutX="118.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Up" wrappingWidth="247.37865447998047">
          <font>
             <Font name="Ink Free" size="47.0" />
          </font>
       </Text>
-      <DatePicker layoutX="122.0" layoutY="193.0" promptText="Birthdate" />
-      <TextField layoutX="122.0" layoutY="108.0" promptText="First Name">
+      <DatePicker fx:id="date" layoutX="122.0" layoutY="193.0" promptText="Birthdate" />
+      <TextField fx:id="firstName" layoutX="122.0" layoutY="108.0" promptText="First Name">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
       </TextField>
-      <TextField layoutX="122.0" layoutY="150.0" promptText="Last Name" />
-      <TextField layoutX="122.0" layoutY="235.0" promptText="City" />
-      <Button layoutX="270.0" layoutY="306.0" mnemonicParsing="false" text="Continue" />
+      <TextField fx:id="lastName" layoutX="122.0" layoutY="150.0" promptText="Last Name" />
+      <TextField fx:id="city" layoutX="122.0" layoutY="235.0" promptText="City" />
+      <Button fx:id="continueBtn" layoutX="270.0" layoutY="306.0" mnemonicParsing="false" text="Continue" onMouseClicked="#ctnClicked" />
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="429.0" prefWidth="383.0">
          <children>
             <Text layoutX="118.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Up" wrappingWidth="247.37865447998047">

@@ -19,7 +19,7 @@ public class Main extends Application {
         Parent root = fxmlLoader.load(getClass().getResource("MainPage.fxml").openStream());
         ((AController)fxmlLoader.getController()).setModel(model);
         primaryStage.setTitle("Vacation4U");
-        primaryStage.setScene(new Scene(root, 700, 300));
+        primaryStage.setScene(new Scene(root, 575, 300));
         primaryStage.show();
         //A comment
         String[] locals = Locale.getISOCountries();
