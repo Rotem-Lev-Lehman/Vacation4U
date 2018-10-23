@@ -10,7 +10,11 @@ public abstract class AModel {
         dataBaseManager.Create(user);
     }
 
-    public List<User> Read(String username) {
+    public List<User> ReadSimilar(String username) {
+        return dataBaseManager.ReadSimilar(username);
+    }
+
+    public User Read(String username){
         return dataBaseManager.Read(username);
     }
 

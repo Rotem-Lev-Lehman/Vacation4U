@@ -35,7 +35,32 @@ public class DataBaseManager implements IDataBaseManager {
         closeConnection();
     }
 
-    public List<User> Read(String username){
+    public User Read(String username){
+        connect();
+        String sql = "SELECT username, password, birthdate, firstname, lastname, city FROM users WHERE username = ?";
+        User user = null;
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            // set the value
+            pstmt.setString(1, username);
+            //
+            ResultSet rs = pstmt.executeQuery();
+
+            // loop through the result set
+            while (rs.next()) {
+                user = new User(rs.getString("username"),rs.getString("password"),rs.getString("birthdate"),rs.getString("firstname"),rs.getString("lastname"),rs.getString("city"));
+                break;
+            }
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        closeConnection();
+        return user;
+    }
+
+    public List<User> ReadSimilar(String username){
         connect();
         String sql = "SELECT username, password, birthdate, firstname, lastname, city FROM users WHERE username LIKE ?";
         List<User> users = new ArrayList<User>();

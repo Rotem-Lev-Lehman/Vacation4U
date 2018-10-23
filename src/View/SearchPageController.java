@@ -25,7 +25,7 @@ public class SearchPageController extends AController {
         }
         else{
             //Search for the user in the DataBase
-            List<User> users = model.Read(userName);
+            List<User> users = model.ReadSimilar(userName);
             if(users == null || users.size() == 0){
                 //say no results
             }
