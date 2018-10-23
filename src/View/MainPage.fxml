@@ -32,6 +32,6 @@
             <Font size="12" />
          </font>
       </Text>
-      <Button layoutX="260.0" layoutY="225.0" mnemonicParsing="false" onAction="#LoginPressed" text="Login" />
+      <Button fx:id="LoginButton" layoutX="260.0" layoutY="225.0" mnemonicParsing="false" onAction="#LoginPressed" text="Login" />
    </children>
 </AnchorPane>

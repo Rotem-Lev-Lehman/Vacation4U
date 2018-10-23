@@ -1,23 +1,27 @@
 package View;
 
 import Model.AModel;
+import Model.User;
 import Model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Observable;
 import java.util.ResourceBundle;
+import javafx.scene.control.Alert;
 
 
 public class MainPageController extends AController implements Initializable {
@@ -27,8 +31,7 @@ public class MainPageController extends AController implements Initializable {
     public TextField passwordTextField;
     public Text notRegisteredTextField, message;
     public ImageView logo, userIcon, passwordIcon;
-
-    public AModel model;
+    public Button LoginButton;
 
 
 
@@ -45,21 +48,36 @@ public class MainPageController extends AController implements Initializable {
         String[] str = new String[2];
         str[0] = username;
         str[1]=password;
+        User user=model.Read(username);
 
-        /*if (model.Read(username).getPassword()== password){
+
+        if (user!=null && user.getPassword().equals(password)){
+
             UserExists();
         }
         else
             UserDoesNotExist();
-        */
+
     }
 
     public void UserExists(){
 
+        moveToNewScreen(400, 395, "HomePage.fxml", "welcome");
+        Stage currentStage = (Stage) LoginButton.getScene().getWindow();
+        currentStage.close();
 
     }
 
     public void UserDoesNotExist(){
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("Password incorrect, please try again");
+
+        alert.showAndWait();
+
+
 
     }
 

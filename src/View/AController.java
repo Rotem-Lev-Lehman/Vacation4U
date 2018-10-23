@@ -26,14 +26,15 @@ public abstract class AController {
         Parent root = null;
         try {
             root = fxmlLoader.load(getClass().getResource(fxml).openStream());
+            ((AController)fxmlLoader.getController()).setModel(model);
+            Stage stage = new Stage();
+            stage.setTitle(title);
+            stage.setScene(new Scene(root, width, height));
+            stage.show();
         } catch (IOException e) {
             System.out.println(e.toString());
         }
 
-        ((AController)fxmlLoader.getController()).setModel(model);
-        Stage stage = new Stage();
-        stage.setTitle(title);
-        stage.setScene(new Scene(root, width, height));
-        stage.show();
+
     }
 }
