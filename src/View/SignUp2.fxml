@@ -18,9 +18,6 @@
       </Text>
       <Button layoutX="270.0" layoutY="306.0" mnemonicParsing="false" text="Register" />
       <TextField layoutX="126.0" layoutY="135.0" promptText="Username">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
       </TextField>
       <TextField layoutX="126.0" layoutY="175.0" promptText="Password">
          <opaqueInsets>

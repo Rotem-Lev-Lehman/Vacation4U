@@ -18,11 +18,9 @@
       </Text>
       <DatePicker fx:id="date" layoutX="122.0" layoutY="193.0" promptText="Birthdate" />
       <TextField fx:id="firstName" layoutX="122.0" layoutY="108.0" promptText="First Name">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
+
       </TextField>
-      <TextField fx:id="lastName" layoutX="122.0" layoutY="150.0" promptText="Last Name" text="hi hjk"/>
+      <TextField fx:id="lastName" layoutX="122.0" layoutY="150.0" promptText="Last Name"/>
       <TextField fx:id="city" layoutX="122.0" layoutY="235.0" promptText="City" />
       <!--<Button layoutX="270.0" layoutY="306.0" mnemonicParsing="false" text="Continue"/>-->
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="429.0" prefWidth="383.0">
