@@ -1,6 +1,8 @@
 package Model;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DataBaseManager implements IDataBaseManager {
 
@@ -33,22 +35,20 @@ public class DataBaseManager implements IDataBaseManager {
         closeConnection();
     }
 
-    public User Read(String username){
+    public List<User> Read(String username){
         connect();
-        String sql = "SELECT username, password, birthdate, firstname, lastname, city FROM users WHERE username = ?";
-        User user = null;
+        String sql = "SELECT username, password, birthdate, firstname, lastname, city FROM users WHERE username LIKE ?";
+        List<User> users = new ArrayList<User>();
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             // set the value
-            pstmt.setString(1, username);
+            pstmt.setString(1, "%" + username + "%");
             //
             ResultSet rs = pstmt.executeQuery();
 
             // loop through the result set
             while (rs.next()) {
-                if(user != null)
-                    break;
-                user = new User(rs.getString("username"),rs.getString("password"),rs.getString("birthdate"),rs.getString("firstname"),rs.getString("lastname"),rs.getString("city"));
+                users.add(new User(rs.getString("username"),rs.getString("password"),rs.getString("birthdate"),rs.getString("firstname"),rs.getString("lastname"),rs.getString("city")));
             }
         }
         catch (SQLException e) {
@@ -56,7 +56,7 @@ public class DataBaseManager implements IDataBaseManager {
         }
 
         closeConnection();
-        return user;
+        return users;
     }
 
     public void Update(String username, User user) {
