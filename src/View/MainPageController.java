@@ -36,7 +36,7 @@ public class MainPageController extends AController implements Initializable {
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
 
-        if(username == null  || password == null || username.equals("") || password.equals("")){
+        if(username == null  || password == null || username.equals("hi") || password.equals("")){
             message.setText("Please enter username and password");
             return;
         }
@@ -46,11 +46,12 @@ public class MainPageController extends AController implements Initializable {
         str[0] = username;
         str[1]=password;
 
-        if (model.Read(username).getPassword()== password){
+        /*if (model.Read(username).getPassword()== password){
             UserExists();
         }
         else
             UserDoesNotExist();
+        */
     }
 
     public void UserExists(){
@@ -63,7 +64,7 @@ public class MainPageController extends AController implements Initializable {
     }
 
     public void NotRegisteredPressed(MouseEvent mouseEvent) {
-        moveToNewScreen(400, 350, "SignUp1.fxml", "Register");
+        moveToNewScreen(400, 395, "SignUp1.fxml", "Register");
         /*FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = null;
         try {

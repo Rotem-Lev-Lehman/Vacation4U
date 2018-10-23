@@ -11,23 +11,23 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="429.0" prefWidth="383.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.SignUp2Controller">
    <children>
-      <Text layoutX="39.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We're almost done..." wrappingWidth="360.0453109741211">
+      <Text layoutX="39.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We're almost done..." wrappingWidth="360.0453109741211">
          <font>
             <Font name="Ink Free" size="38.0" />
          </font>
       </Text>
       <Button layoutX="270.0" layoutY="306.0" mnemonicParsing="false" text="Register" />
-      <TextField layoutX="126.0" layoutY="105.0" promptText="Username">
+      <TextField layoutX="126.0" layoutY="135.0" promptText="Username">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
       </TextField>
-      <TextField layoutX="126.0" layoutY="145.0" promptText="Password">
+      <TextField layoutX="126.0" layoutY="175.0" promptText="Password">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
       </TextField>
-      <TextField layoutX="126.0" layoutY="189.0" promptText="Confirm Password">
+      <TextField layoutX="126.0" layoutY="219.0" promptText="Confirm Password">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -36,10 +36,10 @@
 
       </ImageView>
       <Text id="process_message" layoutX="126.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-      <ImageView fx:id="backImage" fitHeight="60.0" fitWidth="59.0" layoutX="9.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="backImage" fitHeight="60.0" fitWidth="59.0" layoutX="9.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#goBack">
 
       </ImageView>
-      <Text layoutX="27.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Go Back">
+      <Text layoutX="27.0" layoutY="55" strokeType="OUTSIDE" strokeWidth="0.0" text="Go Back" onMouseClicked="#goBack">
          <font>
             <Font size="8.0" />
          </font>
