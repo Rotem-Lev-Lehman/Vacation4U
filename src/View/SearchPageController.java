@@ -2,11 +2,12 @@ package View;
 
 import Model.User;
 import javafx.beans.property.SimpleListProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
+
 import javafx.event.ActionEvent;
-import javafx.scene.control.ListView;
+
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
 public class SearchPageController extends AController {
 
     public TextField searchTextField;
-    public ListView searchResultList;
+    public TableView searchResultTable;
     private ObservableList<User> userObservableList;
 
     public void searchButtonClicked(ActionEvent actionEvent) {
@@ -31,9 +32,10 @@ public class SearchPageController extends AController {
             }
             else{
                 //show results
-                userObservableList = new SimpleListProperty<User>();
-                userObservableList.addAll(users);
-                searchResultList.setItems(userObservableList);
+                userObservableList = FXCollections.observableArrayList(users);
+                //userObservableList.addAll(users);
+
+                searchResultTable.setItems(userObservableList);
 
             }
         }
