@@ -22,25 +22,8 @@
       </TextField>
       <TextField fx:id="lastName" layoutX="122.0" layoutY="150.0" promptText="Last Name"/>
       <TextField fx:id="city" layoutX="122.0" layoutY="235.0" promptText="City" />
-      <!--<Button layoutX="270.0" layoutY="306.0" mnemonicParsing="false" text="Continue"/>-->
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="429.0" prefWidth="383.0">
-         <children>
-            <Text layoutX="118.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Up" wrappingWidth="247.37865447998047">
-               <font>
-                  <Font name="Ink Free" size="47.0" />
-               </font>
-            </Text>
-            <DatePicker layoutX="122.0" layoutY="193.0" promptText="Birthdate" />
-            <TextField layoutX="122.0" layoutY="108.0" promptText="First Name">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </TextField>
-            <TextField layoutX="122.0" layoutY="150.0" promptText="Last Name" />
-            <TextField layoutX="122.0" layoutY="235.0" promptText="City" />
-            <Button fx:id="continueBtn" onMouseClicked="#ctnClicked" layoutX="270.0" layoutY="306.0" mnemonicParsing="false" text="Continue" />
-            <Text fx:id="processMessage" layoutX="126.0" fill="red" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text=""/>
-         </children>
-      </AnchorPane>
+      <Button fx:id="continueBtn" onMouseClicked="#ctnClicked" layoutX="270.0" layoutY="306.0" mnemonicParsing="false" text="Continue" />
+      <Text fx:id="processMessage" layoutX="126.0" fill="red" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text=""/>
+
    </children>
 </AnchorPane>
