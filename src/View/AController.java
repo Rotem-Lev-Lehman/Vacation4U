@@ -10,11 +10,15 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public abstract class AController {
-    protected AModel model;
-    protected User user;
+    protected static AModel model;
+    protected static User user;
 
     public void setModel(AModel model){
         this.model = model;
+    }
+
+    public AModel getModel(){
+        return model;
     }
 
     public void setUser(User user){
@@ -27,6 +31,7 @@ public abstract class AController {
         try {
             root = fxmlLoader.load(getClass().getResource(fxml).openStream());
             ((AController)fxmlLoader.getController()).setModel(model);
+            ((AController)fxmlLoader.getController()).setUser(user);
             Stage stage = new Stage();
             stage.setTitle(title);
             stage.setScene(new Scene(root, width, height));

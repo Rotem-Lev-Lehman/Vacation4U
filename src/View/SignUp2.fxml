@@ -9,6 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.control.PasswordField?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="429.0" prefWidth="383.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.SignUp2Controller">
    <children>
       <Text layoutX="39.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We're almost done..." wrappingWidth="360.0453109741211">
@@ -16,23 +17,21 @@
             <Font name="Ink Free" size="38.0" />
          </font>
       </Text>
-      <Button layoutX="270.0" layoutY="306.0" mnemonicParsing="false" text="Register" />
-      <TextField layoutX="126.0" layoutY="135.0" promptText="Username">
+      <Button fx:id="register" layoutX="270.0" layoutY="306.0" mnemonicParsing="false" text="Register" onMouseClicked="#registerUser"/>
+      <TextField fx:id="userName" layoutX="126.0" layoutY="135.0" promptText="Username">
       </TextField>
-      <TextField layoutX="126.0" layoutY="175.0" promptText="Password">
+      <!--<TextField>
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
-      </TextField>
-      <TextField layoutX="126.0" layoutY="219.0" promptText="Confirm Password">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </TextField>
+      </TextField>-->
+      <PasswordField  fx:id="password" layoutX="126.0" layoutY="175.0" promptText="Password"></PasswordField>
+      <PasswordField  fx:id="passwordCnf" layoutX="126.0" layoutY="219.0" promptText="Password"></PasswordField>
+
       <ImageView fx:id="airplaneImage" fitHeight="152.0" fitWidth="189.0" layoutX="26.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true">
 
       </ImageView>
-      <Text id="process_message" layoutX="126.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text fx:id="process_message" layoutX="126.0" layoutY="265.0" fill="red" strokeType="OUTSIDE" strokeWidth="0.0" />
       <ImageView fx:id="backImage" fitHeight="60.0" fitWidth="59.0" layoutX="9.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#goBack">
 
       </ImageView>

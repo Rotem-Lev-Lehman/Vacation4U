@@ -1,5 +1,6 @@
 package View;
 
+import Model.User;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -11,6 +12,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ResourceBundle;
 
@@ -25,7 +27,13 @@ public class SignUp1Controller extends AController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        if(user != null){
+            firstName.setText(user.getFirstName());
+            lastName.setText(user.getLastName());
+            city.setText(user.getCity());
+            date.setValue(LocalDate.parse(user.getBirthdate()));
+            //date.setValue(new LocalDate(DateTimeFormatter.ofPattern(user.getBirthdate())));
+        }
     }
 
     public void ctnClicked(MouseEvent mouseEvent) {
@@ -46,6 +54,8 @@ public class SignUp1Controller extends AController implements Initializable {
         }
 
         processMessage.setText("");
+        User user = new User("", "", localDate.toString(), firstNameText, lastNameText, cityText);
+        setUser(user);
         moveToNewScreen(400, 395, "SignUp2.fxml", "Register");
         Stage currentStage = (Stage) continueBtn.getScene().getWindow();
         currentStage.close();
