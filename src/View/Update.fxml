@@ -15,10 +15,10 @@
             <Font name="Ink Free" size="47.0" />
          </font>
       </Text>
-      <TextField layoutX="149.0" layoutY="106.0" promptText="First Name" />
-      <TextField layoutX="150.0" layoutY="145.0" promptText="Last Name" />
-      <TextField layoutX="151.0" layoutY="227.0" promptText="City" />
-      <Button layoutX="272.0" layoutY="284.0" mnemonicParsing="false" text="Update" />
-      <PasswordField layoutX="151.0" layoutY="184.0" promptText="Password" />
+      <TextField fx:id="FirstNameText" layoutX="149.0" layoutY="106.0" promptText="First Name" />
+      <TextField fx:id="LastNameText" layoutX="150.0" layoutY="145.0" promptText="Last Name" />
+      <TextField fx:id="CityText" layoutX="151.0" layoutY="227.0" promptText="City" />
+      <Button fx:id="UpdateButton" layoutX="272.0" layoutY="284.0" mnemonicParsing="false" text="Update" />
+      <PasswordField fx:id="password" layoutX="151.0" layoutY="184.0" promptText="Password" />
    </children>
 </AnchorPane>
