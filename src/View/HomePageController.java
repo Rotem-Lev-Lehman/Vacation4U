@@ -50,7 +50,7 @@ public class HomePageController extends AController implements Initializable {
     }
 
     public void goToSettings(MouseEvent mouseEvent) {
-        moveToNewScreen(575, 300, "Update.fxml", "Settings");
+        moveToNewScreen(440, 400, "Update.fxml", "Settings");
     }
 
     public void signOut(){
@@ -62,5 +62,9 @@ public class HomePageController extends AController implements Initializable {
 
     public void signOutClicked(MouseEvent mouseEvent) {
         signOut();
+    }
+
+    public void searchUser(MouseEvent mouseEvent) {
+        moveToNewScreen(575, 300, "SearchPage.fxml", "Search");
     }
 }

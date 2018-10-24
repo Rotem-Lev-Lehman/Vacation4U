@@ -1,12 +1,14 @@
 package View;
 
-import Model.Model;
+
 import Model.User;
-import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 
 import java.net.URL;
@@ -14,32 +16,25 @@ import java.util.ResourceBundle;
 
 public class UpdateController extends AController implements Initializable {
 
-    public TextField FirstNameText;
-    public TextField LastNameText;
-    public TextField CityText;
-    public TextField UserNameText;
-
+    public TextField FirstNameText, LastNameText, CityText, UserNameText;
     public Button UpdateButton;
     public PasswordField password;
     public Text process_message;
-    public PasswordField passwordCnf;
+    public AnchorPane anchor;
+    //public PasswordField passwordCnf;
 
-    public String oldUsername;
-
-    public UpdateController(TextField UserName, TextField firstNameText, TextField lastNameText, TextField cityText, Button updateButton, PasswordField password) {
-        UserNameText =UserName;
-        FirstNameText = firstNameText;
-        LastNameText = lastNameText;
-        CityText = cityText;
-        UpdateButton = updateButton;
-        this.password = password;
-    }
-
+   // public String oldUsername;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Image background = new Image(this.getClass().getResourceAsStream("/images/background_update.jpg"));
+        BackgroundImage myBI= new BackgroundImage(new Image("/images/background_update.jpg",440,400,false,true),
+                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+        anchor.setBackground(new Background(myBI));
+
         if(user != null){
-            oldUsername = UserNameText.getText();
+            //oldUsername = UserNameText.getText();
             UserNameText.setText(user.getUsername());
             FirstNameText.setText(user.getFirstName());
             LastNameText.setText(user.getLastName());
@@ -47,7 +42,41 @@ public class UpdateController extends AController implements Initializable {
             password.setText(user.getPassword());
         }
     }
+
     public void Update(){
+        process_message.setText("");
+        String username = UserNameText.getText();
+        String firstname = FirstNameText.getText();
+        String lastname = LastNameText.getText();
+        String city = CityText.getText();
+        String passwordtxt = password.getText();
+        if(username == null || firstname == null || lastname == null || city == null || passwordtxt == null ||
+                username.equals("") || firstname.equals("") || lastname.equals("") || city.equals("") || passwordtxt.equals("")){
+            process_message.setText("Please make sure all details are filled");
+            return;
+        }
+        if(model.Read(username) != null && !user.getUsername().equals(username)){ //if username is taken or the user didn't change his username
+            process_message.setText("Username taken, Pick a different one");
+            return;
+        }
+
+        User newUser =new User(username, passwordtxt , user.getBirthdate() ,firstname, lastname, city);
+        model.Update(user.getUsername(), newUser);
+
+        showSuccessAlert();
+    }
+
+    private void showSuccessAlert() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Saved");
+        alert.setHeaderText(null);
+        alert.setContentText("Successful Update!");
+
+        alert.showAndWait();
+    }
+
+
+    /*public void Update(){
         String username = UserNameText.getText();
         String firstname = FirstNameText.getText();
         String lastname = LastNameText.getText();
@@ -68,6 +97,6 @@ public class UpdateController extends AController implements Initializable {
         }
 
 
-    }
+    }*/
 
 }
