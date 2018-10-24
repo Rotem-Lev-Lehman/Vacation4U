@@ -42,7 +42,7 @@ public class UpdateController extends AController implements Initializable {
         }
     }
     public void Update(MouseEvent event){
-        String firstname = FirstNameText.getText();
+        String firstname = FirstNameText.getText(); 
         String lastname = LastNameText.getText();
         String city = CityText.getText();
         String passw = password.getText();
