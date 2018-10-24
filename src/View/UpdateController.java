@@ -4,13 +4,12 @@ import Model.Model;
 import Model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
-import java.awt.*;
-import java.awt.event.MouseEvent;
 import java.net.URL;
-import java.security.PublicKey;
 import java.util.ResourceBundle;
 
 public class UpdateController extends AController implements Initializable {
@@ -41,8 +40,8 @@ public class UpdateController extends AController implements Initializable {
             password.setText(user.getPassword());
         }
     }
-    public void Update(MouseEvent event){
-        String firstname = FirstNameText.getText(); 
+    public void Update(){
+        String firstname = FirstNameText.getText();
         String lastname = LastNameText.getText();
         String city = CityText.getText();
         String passw = password.getText();
@@ -50,10 +49,8 @@ public class UpdateController extends AController implements Initializable {
             process_message.setText("Please enter username and password");
             return;
         }
-        if(!password.equals(passwordCnf)){
-            process_message.setText("Passwords don't match");
-            return;
-        }
+
+
     }
 
 }
