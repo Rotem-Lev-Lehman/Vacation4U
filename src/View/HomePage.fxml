@@ -20,8 +20,6 @@
       <ImageView fx:id="logo2" fitHeight="101.0" fitWidth="187.0" layoutX="139.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
 
       </ImageView>
-      <ImageView fx:id="trashImage" fitHeight="25.0" fitWidth="25.0" layoutX="148.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true">
-
-      </ImageView>
+      <ImageView fx:id="trashImage" fitHeight="25.0" fitWidth="25.0" layoutX="148.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true"> </ImageView>
    </children>
 </AnchorPane>

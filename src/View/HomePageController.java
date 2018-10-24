@@ -1,12 +1,15 @@
 package View;
 
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class HomePageController extends AController implements Initializable {
@@ -31,10 +34,29 @@ public class HomePageController extends AController implements Initializable {
     }
 
     public void deleteUser(MouseEvent mouseEvent) {
-        model.Delete(user);
+        if(user != null){
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete");
+            String s = "Are you sure you want to delete your user?";
+            alert.setContentText(s);
+
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if ((result.isPresent()) && (result.get() == ButtonType.OK)) {
+                /*textFld.setText("");
+                actionStatus.setText("An example of Alert Dialogs. Enter some text and save.");
+                textFld.requestFocus();*/
+                model.Delete(user);
+                setUser(null);
+                moveToNewScreen(575, 300, "MainPage.fxml", "Vacation4U");
+                Stage currentStage = (Stage) signOutImage.getScene().getWindow();
+                currentStage.close();
+            }
+        }
+        /*model.Delete(user);
         setUser(null);
         moveToNewScreen(575, 300, "MainPage.fxml", "Vacation4U");
         Stage currentStage = (Stage) signOutImage.getScene().getWindow();
-        currentStage.close();
+        currentStage.close();*/
     }
 }
