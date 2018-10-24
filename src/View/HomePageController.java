@@ -4,6 +4,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -33,5 +34,7 @@ public class HomePageController extends AController implements Initializable {
         model.Delete(user);
         setUser(null);
         moveToNewScreen(575, 300, "MainPage.fxml", "Vacation4U");
+        Stage currentStage = (Stage) signOutImage.getScene().getWindow();
+        currentStage.close();
     }
 }

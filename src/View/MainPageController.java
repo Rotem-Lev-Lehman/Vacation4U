@@ -34,8 +34,6 @@ public class MainPageController extends AController implements Initializable {
     public ImageView logo, userIcon, passwordIcon;
     public Button LoginButton;
 
-
-
     public void LoginPressed(ActionEvent event){
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
@@ -49,20 +47,20 @@ public class MainPageController extends AController implements Initializable {
         String[] str = new String[2];
         str[0] = username;
         str[1]=password;
-        User user=model.Read(username);
+        User currentUser=model.Read(username);
 
 
-        if (user!=null && user.getPassword().equals(password)){
+        if (currentUser!=null && currentUser.getPassword().equals(password)){
 
-            UserExists();
+            UserExists(currentUser);
         }
         else
             UserDoesNotExist();
 
     }
 
-    public void UserExists(){
-
+    public void UserExists(User currentUser){
+        setUser(currentUser);
         moveToNewScreen(455, 270, "HomePage.fxml", "Home Page");
         Stage currentStage = (Stage) LoginButton.getScene().getWindow();
         currentStage.close();

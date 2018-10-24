@@ -6,10 +6,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
+<?import javafx.scene.text.Text?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="287.0" prefWidth="476.0" style="-fx-background-color: WHITE;" fx:controller="View.HomePageController" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button layoutX="180.0" layoutY="170.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" text="Search Users" />
-      <Button layoutX="186.0" layoutY="227.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="Delete My User" />
+      <Button layoutX="186.0" layoutY="227.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="Delete My User" onMouseClicked="#deleteUser"/>
       <ImageView fx:id="settingsImage" fitHeight="43.0" fitWidth="42.0" layoutX="21.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true"></ImageView>
       <ImageView fx:id="signOutImage" fitHeight="43.0" fitWidth="42.0" layoutX="390" layoutY="18.0" pickOnBounds="true" preserveRatio="true"></ImageView>
 
@@ -19,7 +20,7 @@
       <ImageView fx:id="logo2" fitHeight="101.0" fitWidth="187.0" layoutX="139.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
 
       </ImageView>
-      <ImageView fx:id="trashImage" fitHeight="25.0" fitWidth="25.0" layoutX="148.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#deleteUser">
+      <ImageView fx:id="trashImage" fitHeight="25.0" fitWidth="25.0" layoutX="148.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true">
 
       </ImageView>
    </children>
