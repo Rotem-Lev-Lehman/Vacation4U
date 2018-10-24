@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -28,7 +29,7 @@ public class MainPageController extends AController implements Initializable {
 
 
     public TextField usernameTextField;
-    public TextField passwordTextField;
+    public PasswordField passwordTextField;
     public Text notRegisteredTextField, message;
     public ImageView logo, userIcon, passwordIcon;
     public Button LoginButton;
@@ -73,7 +74,7 @@ public class MainPageController extends AController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Error");
         alert.setHeaderText(null);
-        alert.setContentText("Password incorrect, please try again");
+        alert.setContentText("Incorrect Password, please try again");
 
         alert.showAndWait();
 

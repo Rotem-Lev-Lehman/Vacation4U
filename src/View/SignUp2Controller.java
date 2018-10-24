@@ -1,6 +1,7 @@
 package View;
 
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -11,6 +12,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class SignUp2Controller extends AController implements Initializable {
@@ -46,11 +48,31 @@ public class SignUp2Controller extends AController implements Initializable {
             return;
         }
 
-        //if(userExist)
+        if(model.Read(usernameText) != null) { //user exists
+            process_message.setText("Username is taken, please pick a different name");
+            return;
+        }
 
         if(!passwordText.equals(passwordCnfText)){
             process_message.setText("Passwords don't match");
             return;
         }
+
+        user.setUsername(usernameText);
+        user.setPassword(passwordText);
+        try {
+            model.Create(user);
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Registration");
+        alert.setHeaderText(null);
+        alert.setContentText("Registration Successful");
+
+        alert.showAndWait();
+        Stage currentStage = (Stage) register.getScene().getWindow();
+        currentStage.close();
     }
 }
