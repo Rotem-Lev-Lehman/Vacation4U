@@ -44,7 +44,7 @@ public class HomePageController extends AController implements Initializable {
 
             if ((result.isPresent()) && (result.get() == ButtonType.OK)) {
                 model.Delete(user);
-                signout();
+                signOut();
             }
         }
     }
@@ -53,7 +53,7 @@ public class HomePageController extends AController implements Initializable {
         moveToNewScreen(575, 300, "Update.fxml", "Settings");
     }
 
-    public void signout(){
+    public void signOut(){
         setUser(null);
         moveToNewScreen(575, 300, "MainPage.fxml", "Vacation4U");
         Stage currentStage = (Stage) signOutImage.getScene().getWindow();
@@ -61,6 +61,6 @@ public class HomePageController extends AController implements Initializable {
     }
 
     public void signOutClicked(MouseEvent mouseEvent) {
-        signout();
+        signOut();
     }
 }
