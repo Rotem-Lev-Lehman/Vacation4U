@@ -63,7 +63,7 @@ public class MainPageController extends AController implements Initializable {
 
     public void UserExists(){
 
-        moveToNewScreen(400, 395, "HomePage.fxml", "welcome");
+        moveToNewScreen(455, 270, "HomePage.fxml", "Home Page");
         Stage currentStage = (Stage) LoginButton.getScene().getWindow();
         currentStage.close();
 
@@ -77,9 +77,6 @@ public class MainPageController extends AController implements Initializable {
         alert.setContentText("Incorrect Password, please try again");
 
         alert.showAndWait();
-
-
-
     }
 
     public void NotRegisteredPressed(MouseEvent mouseEvent) {

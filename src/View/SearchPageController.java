@@ -7,12 +7,15 @@ import javafx.collections.ObservableList;
 
 import javafx.event.ActionEvent;
 
+import javafx.fxml.Initializable;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class SearchPageController extends AController {
+public class SearchPageController extends AController implements Initializable {
 
     public TextField searchTextField;
     public TableView searchResultTable;
@@ -39,5 +42,10 @@ public class SearchPageController extends AController {
 
             }
         }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
     }
 }
