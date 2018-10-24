@@ -43,24 +43,24 @@ public class HomePageController extends AController implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
 
             if ((result.isPresent()) && (result.get() == ButtonType.OK)) {
-                /*textFld.setText("");
-                actionStatus.setText("An example of Alert Dialogs. Enter some text and save.");
-                textFld.requestFocus();*/
                 model.Delete(user);
-                setUser(null);
-                moveToNewScreen(575, 300, "MainPage.fxml", "Vacation4U");
-                Stage currentStage = (Stage) signOutImage.getScene().getWindow();
-                currentStage.close();
+                signout();
             }
         }
-        /*model.Delete(user);
-        setUser(null);
-        moveToNewScreen(575, 300, "MainPage.fxml", "Vacation4U");
-        Stage currentStage = (Stage) signOutImage.getScene().getWindow();
-        currentStage.close();*/
     }
 
     public void goToSettings(MouseEvent mouseEvent) {
         moveToNewScreen(575, 300, "Update.fxml", "Settings");
+    }
+
+    public void signout(){
+        setUser(null);
+        moveToNewScreen(575, 300, "MainPage.fxml", "Vacation4U");
+        Stage currentStage = (Stage) signOutImage.getScene().getWindow();
+        currentStage.close();
+    }
+
+    public void signOutClicked(MouseEvent mouseEvent) {
+        signout();
     }
 }
