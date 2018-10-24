@@ -59,4 +59,8 @@ public class HomePageController extends AController implements Initializable {
         Stage currentStage = (Stage) signOutImage.getScene().getWindow();
         currentStage.close();*/
     }
+
+    public void goToSettings(MouseEvent mouseEvent) {
+        moveToNewScreen(575, 300, "Update.fxml", "Settings");
+    }
 }
