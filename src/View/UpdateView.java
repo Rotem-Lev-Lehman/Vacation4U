@@ -14,7 +14,7 @@ import javafx.scene.text.Text;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class UpdateController extends AController implements Initializable {
+public class UpdateView extends AView implements Initializable {
 
     public TextField FirstNameText, LastNameText, CityText, UserNameText;
     public Button UpdateButton;
@@ -33,7 +33,8 @@ public class UpdateController extends AController implements Initializable {
                 BackgroundSize.DEFAULT);
         anchor.setBackground(new Background(myBI));
 
-        if(user != null){
+        if(!controller.isUserNull()){
+            User user = controller.getUser();
             //oldUsername = UserNameText.getText();
             UserNameText.setText(user.getUsername());
             FirstNameText.setText(user.getFirstName());
@@ -50,23 +51,27 @@ public class UpdateController extends AController implements Initializable {
         String lastname = LastNameText.getText();
         String city = CityText.getText();
         String passwordtxt = password.getText();
-        if(username == null || firstname == null || lastname == null || city == null || passwordtxt == null ||
-                username.equals("") || firstname.equals("") || lastname.equals("") || city.equals("") || passwordtxt.equals("")){
-            process_message.setText("Please make sure all details are filled");
-            return;
-        }
-        if(model.Read(username) != null && !user.getUsername().equals(username)){ //if username is taken or the user didn't change his username
-            process_message.setText("Username taken, Pick a different one");
-            return;
-        }
 
-        User newUser =new User(username, passwordtxt , user.getBirthdate() ,firstname, lastname, city);
-        model.Update(user.getUsername(), newUser);
+        String[] strings = new String[5];
+        strings[0] = username;
+        strings[1] = firstname;
+        strings[2] = lastname;
+        strings[3] = city;
+        strings[4] = passwordtxt;
 
-        showSuccessAlert();
+        setChanged();
+        notifyObservers(strings);
     }
 
-    private void showSuccessAlert() {
+    public void setMessageFillDetails(){
+        process_message.setText("Please make sure all details are filled");
+    }
+
+    public void setMessageUsernameTaken(){
+        process_message.setText("Username taken, Pick a different one");
+    }
+
+    public void showSuccessAlert() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Saved");
         alert.setHeaderText(null);

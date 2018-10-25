@@ -1,6 +1,7 @@
 package View;
 
 import Model.User;
+import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -8,32 +9,40 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.ResourceBundle;
 
-import static java.time.temporal.ChronoUnit.YEARS;
-
-public class SignUp1Controller extends AController implements Initializable {
+public class SignUp1View extends AView implements Initializable {
 
     public TextField firstName, lastName, city;
     public Text processMessage;
     public DatePicker date;
     public Button continueBtn;
+    private boolean pressedContinue;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if(user != null){
+        pressedContinue = false;
+
+        if(!controller.isUserNull()){
+            User user = controller.getUser();
             firstName.setText(user.getFirstName());
             lastName.setText(user.getLastName());
             city.setText(user.getCity());
             date.setValue(LocalDate.parse(user.getBirthdate()));
             //date.setValue(new LocalDate(DateTimeFormatter.ofPattern(user.getBirthdate())));
         }
+
+        Stage currentStage = (Stage) continueBtn.getScene().getWindow();
+        currentStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            public void handle(WindowEvent we) {
+                if(!pressedContinue)
+                    controller.setUser(null);
+            }
+        });
     }
 
     public void ctnClicked(MouseEvent mouseEvent) {
@@ -42,29 +51,30 @@ public class SignUp1Controller extends AController implements Initializable {
         LocalDate localDate = date.getValue();
         String cityText = city.getText();
 
-        if(firstNameText == null || lastNameText == null || localDate == null || cityText == null ||
-                    firstNameText.equals("") || lastNameText.equals("") || cityText.equals("") || localDate.toString().equals("")){
-            processMessage.setText("Please fill all details above");
-            return;
-        }
+        Object[] objects = new Object[4];
+        objects[0] = firstNameText;
+        objects[1] = lastNameText;
+        objects[2] = localDate;
+        objects[3] = cityText;
 
-        if(!legalAge()){
-            processMessage.setText("You must be above 18");
-            return;
-        }
+        setChanged();
+        notifyObservers(objects);
+    }
 
+    public void setMessageFillDetails(){
+        processMessage.setText("Please fill all details above");
+    }
+
+    public void setMessageLegalAge(){
+        processMessage.setText("You must be above 18");
+    }
+
+    public void successfullySignedUp(){
         processMessage.setText("");
-        User user = new User("", "", localDate.toString(), firstNameText, lastNameText, cityText);
-        setUser(user);
+        pressedContinue = true;
         moveToNewScreen(400, 395, "SignUp2.fxml", "Register");
         Stage currentStage = (Stage) continueBtn.getScene().getWindow();
         currentStage.close();
-    }
-
-    private boolean legalAge() {
-        LocalDate dateNow = java.time.LocalDate.now();
-        Period p = Period.between(date.getValue(), dateNow);
-        return p.getYears() >= 18;
     }
 
     /*private boolean legalAge2() {

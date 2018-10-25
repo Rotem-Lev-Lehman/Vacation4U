@@ -12,7 +12,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class HomePageController extends AController implements Initializable {
+public class HomePageView extends AView implements Initializable {
 
     public ImageView logo2, trashImage, magnifyImage, settingsImage, signOutImage;
     @Override
@@ -34,7 +34,7 @@ public class HomePageController extends AController implements Initializable {
     }
 
     public void deleteUser(MouseEvent mouseEvent) {
-        if(user != null){
+        if(!controller.isUserNull()){
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Delete");
             String s = "Are you sure you want to delete your user?";
@@ -43,8 +43,8 @@ public class HomePageController extends AController implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
 
             if ((result.isPresent()) && (result.get() == ButtonType.OK)) {
-                model.Delete(user);
-                signOut();
+                setChanged();
+                notifyObservers("Delete user");
             }
         }
     }
@@ -54,7 +54,6 @@ public class HomePageController extends AController implements Initializable {
     }
 
     public void signOut(){
-        setUser(null);
         moveToNewScreen(575, 300, "MainPage.fxml", "Vacation4U");
         Stage currentStage = (Stage) signOutImage.getScene().getWindow();
         currentStage.close();

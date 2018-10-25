@@ -1,6 +1,8 @@
 package View;
 
 
+import Control.AController;
+import Control.Controller;
 import Model.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -15,9 +17,14 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         AModel model = new Model();
+
+        AController controller = new Controller();
+        controller.setModel(model);
+
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(getClass().getResource("MainPage.fxml").openStream());
-        ((AController)fxmlLoader.getController()).setModel(model);
+        ((AView)fxmlLoader.getController()).setController(controller);
+
         primaryStage.setTitle("Vacation4U");
         primaryStage.setScene(new Scene(root, 575, 300));
         primaryStage.show();

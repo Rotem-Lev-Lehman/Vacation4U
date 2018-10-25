@@ -1,13 +1,8 @@
 package View;
 
-import Model.AModel;
 import Model.User;
-import Model.Model;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -16,16 +11,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
-import java.io.IOException;
 import java.net.URL;
-import java.util.Observable;
 import java.util.ResourceBundle;
 import javafx.scene.control.Alert;
 
 
-public class MainPageController extends AController implements Initializable {
+public class MainPageView extends AView implements Initializable {
 
 
     public TextField usernameTextField;
@@ -34,41 +26,31 @@ public class MainPageController extends AController implements Initializable {
     public ImageView logo, userIcon, passwordIcon;
     public Button LoginButton;
 
-    public void LoginPressed(ActionEvent event){
+    public void LoginPressed(ActionEvent event) {
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
 
-        if(username == null  || password == null || username.equals("hi") || password.equals("")){
+        if (username == null || password == null || username.equals("hi") || password.equals("")) {
             message.setText("Please enter username and password");
             return;
         }
 
-        //search database
+        //notify Controller that there was a login request
         String[] str = new String[2];
         str[0] = username;
-        str[1]=password;
-        User currentUser=model.Read(username);
+        str[1] = password;
 
-
-        if (currentUser!=null && currentUser.getPassword().equals(password)){
-
-            UserExists(currentUser);
-        }
-        else
-            UserDoesNotExist();
-
+        setChanged();
+        notifyObservers(str);
     }
 
-    public void UserExists(User currentUser){
-        setUser(currentUser);
+    public void UserExists(){
         moveToNewScreen(455, 270, "HomePage.fxml", "Home Page");
         Stage currentStage = (Stage) LoginButton.getScene().getWindow();
         currentStage.close();
-
     }
 
     public void UserDoesNotExist(){
-
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Error");
         alert.setHeaderText(null);
@@ -79,19 +61,6 @@ public class MainPageController extends AController implements Initializable {
 
     public void NotRegisteredPressed(MouseEvent mouseEvent) {
         moveToNewScreen(400, 395, "SignUp1.fxml", "Register");
-        /*FXMLLoader fxmlLoader = new FXMLLoader();
-        Parent root = null;
-        try {
-            root = fxmlLoader.load(getClass().getResource("SignUp1.fxml").openStream());
-        } catch (IOException e) {
-            System.out.println(e.toString());
-        }
-
-        ((AController)fxmlLoader.getController()).setModel(model);
-        Stage stage = new Stage();
-        stage.setTitle("Register");
-        stage.setScene(new Scene(root, 400, 350));
-        stage.show();*/
     }
 
     @Override
