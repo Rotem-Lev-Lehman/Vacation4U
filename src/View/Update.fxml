@@ -14,23 +14,23 @@
             <Font name="Ink Free" size="47.0" />
          </font>
       </Text>
-      <Text text="Username:" layoutX="70" layoutY="120" ></Text>
+      <Text text="Username:" layoutX="70" layoutY="120" />
       <TextField fx:id="UserNameText" layoutX="149.0" layoutY="106.0" promptText="Username" />
 
-      <Text text="First Name:" layoutX="70" layoutY="159" ></Text>
+      <Text text="First Name:" layoutX="70" layoutY="159" />
       <TextField fx:id="FirstNameText" layoutX="149.0" layoutY="145.0" promptText="First Name" />
 
-      <Text text="Last Name:" layoutX="70" layoutY="198"></Text>
+      <Text text="Last Name:" layoutX="70" layoutY="198"/>
       <TextField fx:id="LastNameText" layoutX="150.0" layoutY="184.0" promptText="Last Name" />
 
-      <Text text="City:" layoutX="70" layoutY="280"></Text>
+      <Text text="City:" layoutX="70" layoutY="280"/>
       <TextField fx:id="CityText" layoutX="151.0" layoutY="266.0" promptText="City" />
 
       <Button fx:id="UpdateButton" layoutX="272.0" layoutY="323" mnemonicParsing="false" onAction="#Update" text="Update" />
 
-      <Text text="Password:" layoutX="70" layoutY="241"></Text>
+      <Text text="Password:" layoutX="70" layoutY="241"/>
       <PasswordField fx:id="password" layoutX="151.0" layoutY="227.0" promptText="Password" />
 
-      <Text fx:id="process_message" layoutX="50" fill="red" layoutY="340"></Text>
+      <Text fx:id="process_message" layoutX="50" fill="red" layoutY="340"/>
    </children>
 </AnchorPane>

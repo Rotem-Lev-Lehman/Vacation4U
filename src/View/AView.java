@@ -9,12 +9,17 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Observable;
 
-public abstract class AView extends Observable {
+public abstract class AView extends Observable implements IDefaultSettable {
     protected AController controller;
 
     public void setController(AController controller){
         this.controller = controller;
         this.addObserver(this.controller);
+    }
+
+    @Override
+    public void setDefaults(Stage currentStage) {
+        //Do nothing, only the ones who need to set defaults will implement it
     }
 
     protected void moveToNewScreen(int width, int height, String fxml, String title){
@@ -30,6 +35,9 @@ public abstract class AView extends Observable {
             stage.setTitle(title);
             stage.setScene(new Scene(root, width, height));
             stage.show();
+
+            view.setDefaults(stage);
+
         } catch (IOException e) {
             System.out.println(e.toString());
         }

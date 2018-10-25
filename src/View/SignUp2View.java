@@ -35,8 +35,11 @@ public class SignUp2View extends AView implements Initializable {
 
         Image goBackImg = new Image(this.getClass().getResourceAsStream("/images/return_button.png"));
         backImage.setImage(goBackImg);
+    }
 
-        Stage currentStage = (Stage) register.getScene().getWindow();
+    @Override
+    public void setDefaults(Stage currentStage) {
+        //Stage currentStage = (Stage) register.getScene().getWindow();
         currentStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent we) {
                 if(!pressedContinue)

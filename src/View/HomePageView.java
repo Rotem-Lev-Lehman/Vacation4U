@@ -60,6 +60,7 @@ public class HomePageView extends AView implements Initializable {
     }
 
     public void signOutClicked(MouseEvent mouseEvent) {
+        controller.setUser(null);
         signOut();
     }
 

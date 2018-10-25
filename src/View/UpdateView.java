@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -32,7 +33,10 @@ public class UpdateView extends AView implements Initializable {
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
         anchor.setBackground(new Background(myBI));
+    }
 
+    @Override
+    public void setDefaults(Stage currentStage){
         if(!controller.isUserNull()){
             User user = controller.getUser();
             //oldUsername = UserNameText.getText();

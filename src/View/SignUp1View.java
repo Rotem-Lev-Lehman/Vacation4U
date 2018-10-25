@@ -26,7 +26,10 @@ public class SignUp1View extends AView implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         pressedContinue = false;
+    }
 
+    @Override
+    public void setDefaults(Stage currentStage) {
         if(!controller.isUserNull()){
             User user = controller.getUser();
             firstName.setText(user.getFirstName());
@@ -36,7 +39,6 @@ public class SignUp1View extends AView implements Initializable {
             //date.setValue(new LocalDate(DateTimeFormatter.ofPattern(user.getBirthdate())));
         }
 
-        Stage currentStage = (Stage) continueBtn.getScene().getWindow();
         currentStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent we) {
                 if(!pressedContinue)
