@@ -28,8 +28,6 @@ public class Main extends Application {
         primaryStage.setTitle("Vacation4U");
         primaryStage.setScene(new Scene(root, 575, 300));
         primaryStage.show();
-        //A comment
-        String[] locals = Locale.getISOCountries();
     }
 
 
