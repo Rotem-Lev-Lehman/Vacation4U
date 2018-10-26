@@ -24,12 +24,13 @@ public class SignUp2View extends AView implements Initializable {
     public TextField userName;
     public Text process_message;
     public PasswordField password, passwordCnf;
-    private boolean pressedContinue;
+    private boolean pressedContinue; //boolean variable to determinate rather user should be null on exist or not
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        pressedContinue = false;
+        pressedContinue = false; //user should be null if existed
 
+        //load images into ImageViews
         Image airplaneImg = new Image(this.getClass().getResourceAsStream("/images/airplane.png"));
         airplaneImage.setImage(airplaneImg);
 
@@ -37,6 +38,9 @@ public class SignUp2View extends AView implements Initializable {
         backImage.setImage(goBackImg);
     }
 
+    //When screen closed - if the user should be null turn into null and if not then don't
+    //User should be null if the user exited the registration process
+    //User should not be null if the user moves between the different signup screen
     @Override
     public void setDefaults(Stage currentStage) {
         //Stage currentStage = (Stage) register.getScene().getWindow();
@@ -48,6 +52,7 @@ public class SignUp2View extends AView implements Initializable {
         });
     }
 
+    //Go back to the first sign up screen
     public void goBack(MouseEvent mouseEvent) {
         pressedContinue = true;
         moveToNewScreen(400, 395, "SignUp1.fxml", "Register");
@@ -55,6 +60,7 @@ public class SignUp2View extends AView implements Initializable {
         currentStage.close();
     }
 
+    //Register the user - send information to the controller
     public void registerUser(MouseEvent mouseEvent) {
         String usernameText = userName.getText();
         String passwordText = password.getText();
@@ -69,18 +75,22 @@ public class SignUp2View extends AView implements Initializable {
         notifyObservers(strings);
     }
 
+    //Show error message in case user didn't fill all information - function is called by controller
     public void setMessageFillDetails(){
         process_message.setText("Please fill all details above");
     }
 
+    //Show error message in cause user picked a user that is taken - function is called by controller
     public void setMessageUsernameTaken(){
         process_message.setText("Username is taken, please pick a different name");
     }
 
+    //Show error message in cause passwords don't match - function is called by controller
     public void setMessagePasswordsDontMatch(){
         process_message.setText("Passwords don't match");
     }
 
+    //Show successful message if registration was successfully
     public void registrationComplete(){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Registration");

@@ -15,6 +15,9 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * View for update screen
+ */
 public class UpdateView extends AView implements Initializable {
 
     public TextField FirstNameText, LastNameText, CityText, UserNameText;
@@ -28,6 +31,7 @@ public class UpdateView extends AView implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //Set background for screen
         Image background = new Image(this.getClass().getResourceAsStream("/images/background_update.jpg"));
         BackgroundImage myBI= new BackgroundImage(new Image("/images/background_update.jpg",440,400,false,true),
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
@@ -37,6 +41,7 @@ public class UpdateView extends AView implements Initializable {
 
     @Override
     public void setDefaults(Stage currentStage){
+        //Set the user details in matching textfields.
         if(!controller.isUserNull()){
             User user = controller.getUser();
             //oldUsername = UserNameText.getText();
@@ -49,6 +54,7 @@ public class UpdateView extends AView implements Initializable {
     }
 
     public void Update(){
+        //Send updated information to the controller
         process_message.setText("");
         String username = UserNameText.getText();
         String firstname = FirstNameText.getText();
@@ -67,14 +73,17 @@ public class UpdateView extends AView implements Initializable {
         notifyObservers(strings);
     }
 
+    //Show error message in case user didn't fill all information - function is called by controller
     public void setMessageFillDetails(){
         process_message.setText("Please make sure all details are filled");
     }
 
+    //Show error message in cause user picked a user that is taken - function is called by controller
     public void setMessageUsernameTaken(){
         process_message.setText("Username taken, Pick a different one");
     }
 
+    //Show successful message if information was updated successfully
     public void showSuccessAlert() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Saved");
@@ -83,29 +92,4 @@ public class UpdateView extends AView implements Initializable {
 
         alert.showAndWait();
     }
-
-
-    /*public void Update(){
-        String username = UserNameText.getText();
-        String firstname = FirstNameText.getText();
-        String lastname = LastNameText.getText();
-        String city = CityText.getText();
-        String passw = password.getText();
-        if(username == null  ||firstname == null  || lastname == null || city == null || passw == null || password.equals("") || model.Read(username)==null){
-            process_message.setText("Please enter username and password");
-            return;
-        }
-        else if(model.Read(username)!=null){
-            process_message.setText("This Username already exist! Please choose another username");
-            return;
-        }
-
-        else  {
-            User user =new User(username,passw,model.Read(oldUsername).getBirthdate(),firstname, lastname, city);
-            model.Update(oldUsername,user);
-        }
-
-
-    }*/
-
 }

@@ -26,10 +26,12 @@ public class MainPageView extends AView implements Initializable {
     public ImageView logo, userIcon, passwordIcon;
     public Button LoginButton;
 
+    //Login button pressed
     public void LoginPressed(ActionEvent event) {
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
 
+        //Show error message if not all details are filled
         if (username == null || password == null || username.equals("hi") || password.equals("")) {
             message.setText("Please enter username and password");
             return;
@@ -44,27 +46,31 @@ public class MainPageView extends AView implements Initializable {
         notifyObservers(str);
     }
 
+    //Move to homepage if user exists - called by the controller
     public void UserExists(){
         moveToNewScreen(455, 270, "HomePage.fxml", "Home Page");
         Stage currentStage = (Stage) LoginButton.getScene().getWindow();
         currentStage.close();
     }
 
+    //Show error message if details are wrong - called by the controller
     public void UserDoesNotExist(){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Error");
         alert.setHeaderText(null);
-        alert.setContentText("Incorrect Password, please try again");
+        alert.setContentText("Incorrect Username or Password, please try again");
 
         alert.showAndWait();
     }
 
+    //Move to registration screen
     public void NotRegisteredPressed(MouseEvent mouseEvent) {
         moveToNewScreen(400, 395, "SignUp1.fxml", "Register");
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //load images to imageViews
         Image logoImage = new Image(this.getClass().getResourceAsStream("/images/LogoSample_ByTailorBrands.jpg"));
         logo.setImage(logoImage);
 

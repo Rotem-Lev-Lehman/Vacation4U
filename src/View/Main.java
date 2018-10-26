@@ -16,11 +16,12 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        AModel model = new Model();
+        AModel model = new Model(); //create model
 
         AController controller = new Controller();
         controller.setModel(model);
 
+        //open main page
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(getClass().getResource("MainPage.fxml").openStream());
         ((AView)fxmlLoader.getController()).setController(controller);

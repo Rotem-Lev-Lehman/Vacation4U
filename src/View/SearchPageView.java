@@ -43,10 +43,12 @@ public class SearchPageView extends AView implements Initializable {
         }
     }
 
+    //In case there is no results, don't show anything
     public void showNoResult(){
         searchResultTable.setItems(null);
     }
 
+    //Show users that were found
     public void showUsers(List<User> users){
         //show results
         userObservableList = FXCollections.observableArrayList(users);
@@ -55,6 +57,7 @@ public class SearchPageView extends AView implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //Set columns name and set image to imageView
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
         firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));

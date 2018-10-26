@@ -12,6 +12,7 @@ import java.util.Observable;
 public abstract class AView extends Observable implements IDefaultSettable {
     protected AController controller;
 
+    //Set controller to a view
     public void setController(AController controller){
         this.controller = controller;
         this.addObserver(this.controller);
@@ -22,6 +23,7 @@ public abstract class AView extends Observable implements IDefaultSettable {
         //Do nothing, only the ones who need to set defaults will implement it
     }
 
+    //Move to a new screen - define its width, height and title
     protected void moveToNewScreen(int width, int height, String fxml, String title){
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = null;

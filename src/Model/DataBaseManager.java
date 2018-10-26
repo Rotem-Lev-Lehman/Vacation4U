@@ -10,14 +10,19 @@ public class DataBaseManager implements IDataBaseManager {
     private Connection conn;
 
     public DataBaseManager(){
-        url = "jdbc:sqlite:resources/DataBase.db";
+        url = "jdbc:sqlite:resources/DataBase.db"; // Set databse project
         //connect();
         //closeConnection();
     }
+
+    //Create user
     public void Create(User user) throws SQLException{
-        connect();
+        connect(); //connect to database
+
+        //create user - sql command
         String sql = "INSERT INTO users(username,password,birthdate,firstname,lastname,city) VALUES(?,?,?,?,?,?)";
 
+        //try to create user
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, user.getUsername());
@@ -29,14 +34,17 @@ public class DataBaseManager implements IDataBaseManager {
             pstmt.executeUpdate();
         }
         catch (SQLException e){
-            closeConnection();
+            closeConnection(); //close connection to datebase
             throw e;
         }
-        closeConnection();
+        closeConnection(); //close connection
     }
 
+    //Read User
     public User Read(String username){
-        connect();
+        connect(); //Connect to databse
+
+        //Read user - sql commend
         String sql = "SELECT username, password, birthdate, firstname, lastname, city FROM users WHERE username = ?";
         User user = null;
         try {
@@ -56,14 +64,18 @@ public class DataBaseManager implements IDataBaseManager {
             System.out.println(e.getMessage());
         }
 
-        closeConnection();
+        closeConnection(); //disconnect from datebase
         return user;
     }
 
+    //Read similar users (similar users - users with similar usernames)
     public List<User> ReadSimilar(String username){
-        connect();
+        connect(); //connect to database
+
+        //sql commend
         String sql = "SELECT username, password, birthdate, firstname, lastname, city FROM users WHERE username LIKE ?";
-        List<User> users = new ArrayList<User>();
+
+        List<User> users = new ArrayList<User>(); //list of similar users
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             // set the value
@@ -80,12 +92,14 @@ public class DataBaseManager implements IDataBaseManager {
             System.out.println(e.getMessage());
         }
 
-        closeConnection();
+        closeConnection(); //disconnect from database
         return users;
     }
 
+    //Update user information
     public void Update(String username, User user) {
-        connect();
+        connect(); //Connect to databse
+        //SQL commend
         String sql = "UPDATE users SET username = ? , "
                 + "password = ? , "
                 + "birthdate = ? , "
@@ -95,6 +109,7 @@ public class DataBaseManager implements IDataBaseManager {
                 + "WHERE username = ?";
 
         try {
+            //Run sql commend
             PreparedStatement pstmt = conn.prepareStatement(sql);
             // set the corresponding param
             pstmt.setString(1, user.getUsername());
@@ -109,15 +124,16 @@ public class DataBaseManager implements IDataBaseManager {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        closeConnection();
+        closeConnection(); //disconnect from databse
     }
 
+    //Delte user from database
     public void Delete(User user) {
-        connect();
-        String sql = "DELETE FROM users WHERE username = ?";
+        connect(); //Connect to database
+        String sql = "DELETE FROM users WHERE username = ?"; //SQL commend
 
         try {
-            PreparedStatement pstmt = conn.prepareStatement(sql);
+            PreparedStatement pstmt = conn.prepareStatement(sql); //Run SQL commend
             // set the corresponding param
             pstmt.setString(1,user.getUsername());
             // execute the delete statement
@@ -126,26 +142,29 @@ public class DataBaseManager implements IDataBaseManager {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        closeConnection();
+        closeConnection(); //Disconnect from database
     }
 
+    //Connect to database
     private void connect() {
         conn = null;
         try {
             // create a connection to the database
             conn = DriverManager.getConnection(url);
 
-            System.out.println("Connection to SQLite has been established.");
+            //System.out.println("Connection to SQLite has been established.");
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
+
+    //Disconnect from database
     private void closeConnection(){
         try {
             if (conn != null) {
                 conn.close();
-                System.out.println("Connection to SQLite has been closed");
+                //System.out.println("Connection to SQLite has been closed");
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

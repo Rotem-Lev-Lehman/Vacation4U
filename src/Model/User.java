@@ -1,5 +1,6 @@
 package Model;
 
+//User in the system
 public class User {
     private String username;
     private String password;
@@ -8,6 +9,7 @@ public class User {
     private String lastName;
     private String city;
 
+    //Constructor for user
     public User(String username, String password, String birthdate, String firstName, String lastName, String city) {
         this.username = username;
         this.password = password;
@@ -17,6 +19,7 @@ public class User {
         this.city = city;
     }
 
+    //Convert user information to string
     @Override
     public String toString() {
         return "User{" +
@@ -28,6 +31,10 @@ public class User {
                 ", city='" + city + '\'' +
                 '}';
     }
+
+    /**
+     * Getters and setters for user fields
+     * */
 
     public String getUsername() {
         return username;

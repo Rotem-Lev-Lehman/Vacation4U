@@ -21,8 +21,9 @@ public class SignUp1View extends AView implements Initializable {
     public Text processMessage;
     public DatePicker date;
     public Button continueBtn;
-    private boolean pressedContinue;
+    private boolean pressedContinue; //boolean variable to determinate rather user should be null on exist or not
 
+    //user should be null if existed
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         pressedContinue = false;
@@ -30,15 +31,18 @@ public class SignUp1View extends AView implements Initializable {
 
     @Override
     public void setDefaults(Stage currentStage) {
+        //If the user went back to this screen from second sign up screen, then load the details that were already filled
         if(!controller.isUserNull()){
             User user = controller.getUser();
             firstName.setText(user.getFirstName());
             lastName.setText(user.getLastName());
             city.setText(user.getCity());
             date.setValue(LocalDate.parse(user.getBirthdate()));
-            //date.setValue(new LocalDate(DateTimeFormatter.ofPattern(user.getBirthdate())));
         }
 
+        //When screen closed - if the user should be null turn into null and if not then don't
+        //User should be null if the user exited the registration process
+        //User should not be null if the user moves between the different signup screen
         currentStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent we) {
                 if(!pressedContinue)
@@ -47,6 +51,7 @@ public class SignUp1View extends AView implements Initializable {
         });
     }
 
+    //Move to the second Sign up screen and save the current filled information - done by controller
     public void ctnClicked(MouseEvent mouseEvent) {
         String firstNameText = firstName.getText();
         String lastNameText = lastName.getText();
@@ -63,14 +68,17 @@ public class SignUp1View extends AView implements Initializable {
         notifyObservers(objects);
     }
 
+    //Show error message in case user didn't fill all information - function is called by controller
     public void setMessageFillDetails(){
         processMessage.setText("Please fill all details above");
     }
 
+    //Show error message in case user is under 18 - function is called by controller
     public void setMessageLegalAge(){
         processMessage.setText("You must be above 18");
     }
 
+    //move to new screen if first part of registration was successfully
     public void successfullySignedUp(){
         processMessage.setText("");
         pressedContinue = true;

@@ -17,6 +17,7 @@ public class HomePageView extends AView implements Initializable {
     public ImageView logo2, trashImage, magnifyImage, settingsImage, signOutImage;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //Set images to ImageViews
         Image logoImage = new Image(this.getClass().getResourceAsStream("/images/vac_logo.jpg"));
         logo2.setImage(logoImage);
 
@@ -33,37 +34,42 @@ public class HomePageView extends AView implements Initializable {
         signOutImage.setImage(logoutImg);
     }
 
+    //Delete user button was pressed
     public void deleteUser(MouseEvent mouseEvent) {
         if(!controller.isUserNull()){
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Delete");
-            String s = "Are you sure you want to delete your user?";
+            String s = "Are you sure you want to delete your user?"; //makes sure the user wants to delete his account
             alert.setContentText(s);
 
             Optional<ButtonType> result = alert.showAndWait();
 
-            if ((result.isPresent()) && (result.get() == ButtonType.OK)) {
+            if ((result.isPresent()) && (result.get() == ButtonType.OK)) { //if user wants to delete his account
                 setChanged();
-                notifyObservers("Delete user");
+                notifyObservers("Delete user"); //Notify controller that user wants to delete his account
             }
         }
     }
 
+    //Move to settings screen
     public void goToSettings(MouseEvent mouseEvent) {
         moveToNewScreen(440, 400, "Update.fxml", "Settings");
     }
 
+    //Sign out user - called by controller
     public void signOut(){
         moveToNewScreen(575, 300, "MainPage.fxml", "Vacation4U");
         Stage currentStage = (Stage) signOutImage.getScene().getWindow();
         currentStage.close();
     }
 
+    //User clicked on sign out button - notify controller
     public void signOutClicked(MouseEvent mouseEvent) {
         controller.setUser(null);
         signOut();
     }
 
+    //Move to search screen
     public void searchUser(MouseEvent mouseEvent) {
         moveToNewScreen(575, 300, "SearchPage.fxml", "Search");
     }
