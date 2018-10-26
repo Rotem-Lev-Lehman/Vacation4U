@@ -15,6 +15,10 @@ import java.util.ResourceBundle;
 public class HomePageView extends AView implements Initializable {
 
     public ImageView logo2, trashImage, magnifyImage, settingsImage, signOutImage;
+    private Thread threadSettings = null; //Settings animation thread
+    private volatile boolean stopSettings = false; //boolean to determent if setting gear should rotate
+    private int settingsImageNum = 1; //int number to determent what setting picture is shown currently
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //Set images to ImageViews
@@ -72,5 +76,37 @@ public class HomePageView extends AView implements Initializable {
     //Move to search screen
     public void searchUser(MouseEvent mouseEvent) {
         moveToNewScreen(575, 300, "SearchPage.fxml", "Search");
+    }
+
+    //Mouse entered settings icon
+    public void mouseEnteredSettings(MouseEvent mouseEvent) {
+        stopSettings = false;
+        threadSettings = new Thread(()->{
+            try {
+                while(!stopSettings) {
+                    //Image settings = new Image(new FileInputStream("resources/images/settings.jpg"));
+                    Image settings = new Image(this.getClass().getResourceAsStream("/images/settings_icon.png"));
+                    //Image settings2 = new Image(new FileInputStream("resources/images/settings2.jpg"));
+                    Image settings2 = new Image(this.getClass().getResourceAsStream("/images/settings2_icon.png"));
+                    if(settingsImageNum == 1) {
+                        settingsImage.setImage(settings2);
+                        settingsImageNum = 0;
+                    }
+                    else {
+                        settingsImage.setImage(settings);
+                        settingsImageNum = 1;
+                    }
+                    int time = 100;
+                    Thread.sleep(time);
+                }
+            }
+            catch (Exception e) {System.out.println(e); }
+        });
+        threadSettings.start();
+    }
+
+    //Mouse exited settings icon
+    public void mouseExitedSettings(MouseEvent mouseEvent) {
+        stopSettings = true;
     }
 }

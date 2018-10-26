@@ -7,12 +7,25 @@
 
 
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.text.Font?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="287.0" prefWidth="476.0" style="-fx-background-color: WHITE;" fx:controller="View.HomePageView" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button layoutX="180.0" layoutY="170.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" text="Search Users" onMouseClicked="#searchUser" />
       <Button layoutX="186.0" layoutY="227.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="Delete My User" onMouseClicked="#deleteUser"/>
-      <ImageView fx:id="settingsImage" fitHeight="43.0" fitWidth="42.0" layoutX="21.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#goToSettings"></ImageView>
+
+      <ImageView fx:id="settingsImage" fitHeight="43.0" fitWidth="42.0" layoutX="21.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#goToSettings" onMouseEntered="#mouseEnteredSettings" onMouseExited="#mouseExitedSettings"></ImageView>
+      <Text text="Update Profile" layoutX="16.0" layoutY="70.0" onMouseClicked="#goToSettings">
+         <font>
+            <Font size="9" />
+         </font>
+      </Text>
+
       <ImageView fx:id="signOutImage" fitHeight="43.0" fitWidth="42.0" layoutX="390" layoutY="18.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#signOutClicked"></ImageView>
+      <Text text="Sign Out" layoutX="398" layoutY="70.0" onMouseClicked="#signOutClicked">
+         <font>
+            <Font size="9" />
+         </font>
+      </Text>
 
       <ImageView fx:id="magnifyImage" fitHeight="25.0" fitWidth="26.0" layoutX="143.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true">
 
