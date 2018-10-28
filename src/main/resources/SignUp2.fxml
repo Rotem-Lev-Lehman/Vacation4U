@@ -17,7 +17,7 @@
             <Font name="Ink Free" size="38.0" />
          </font>
       </Text>
-      <Button fx:id="register" layoutX="270.0" layoutY="306.0" mnemonicParsing="false" text="Register" onMouseClicked="#registerUser"/>
+
       <TextField fx:id="userName" layoutX="126.0" layoutY="135.0" promptText="Username">
       </TextField>
       <!--<TextField>
@@ -28,6 +28,7 @@
       <PasswordField  fx:id="password" layoutX="126.0" layoutY="175.0" promptText="Password"></PasswordField>
       <PasswordField  fx:id="passwordCnf" layoutX="126.0" layoutY="219.0" promptText="Password"></PasswordField>
 
+      <Button fx:id="register" layoutX="270.0" layoutY="306.0" mnemonicParsing="false" text="Register" onMouseClicked="#registerUser"/>
       <ImageView fx:id="airplaneImage" fitHeight="152.0" fitWidth="189.0" layoutX="26.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true">
 
       </ImageView>

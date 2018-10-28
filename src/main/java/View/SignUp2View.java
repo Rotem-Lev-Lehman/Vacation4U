@@ -56,8 +56,9 @@ public class SignUp2View extends AView implements Initializable {
     public void goBack(MouseEvent mouseEvent) {
         pressedContinue = true;
         moveToNewScreen(400, 395, "SignUp1.fxml", "Register");
-        Stage currentStage = (Stage) backImage.getScene().getWindow();
-        currentStage.close();
+        //Stage currentStage = (Stage) backImage.getScene().getWindow();
+        //currentStage.close();
+        realClose();
     }
 
     //Register the user - send information to the controller
@@ -98,7 +99,15 @@ public class SignUp2View extends AView implements Initializable {
         alert.setContentText("Registration Successful");
 
         alert.showAndWait();
-        pressedContinue = true;
+        pressedContinue = false;
+        //Stage currentStage = (Stage) register.getScene().getWindow();
+        //currentStage.close();
+        realClose();
+    }
+
+    private void realClose(){
+        if(!pressedContinue)
+            controller.setUser(null);
         Stage currentStage = (Stage) register.getScene().getWindow();
         currentStage.close();
     }

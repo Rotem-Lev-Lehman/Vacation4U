@@ -28,7 +28,7 @@ public abstract class AView extends Observable implements IDefaultSettable {
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = null;
         try {
-            root = fxmlLoader.load(getClass().getResource(fxml).openStream());
+            root = fxmlLoader.load(getClass().getResource("/" + fxml).openStream());
 
             AView view = fxmlLoader.getController();
             view.setController(controller);

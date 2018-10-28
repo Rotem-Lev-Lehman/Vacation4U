@@ -15,12 +15,13 @@
             <Font name="Ink Free" size="47.0" />
          </font>
       </Text>
-      <DatePicker fx:id="date" layoutX="122.0" layoutY="235.0" promptText="Birthdate" />
+
       <TextField fx:id="firstName" layoutX="122.0" layoutY="108.0" promptText="First Name">
 
       </TextField>
       <TextField fx:id="lastName" layoutX="122.0" layoutY="150.0" promptText="Last Name"/>
       <TextField fx:id="city" layoutX="122.0" layoutY="193" promptText="City" />
+      <DatePicker fx:id="date" layoutX="122.0" layoutY="235.0" promptText="Birthdate" />
       <Button fx:id="continueBtn" onMouseClicked="#ctnClicked" layoutX="270.0" layoutY="306.0" mnemonicParsing="false" text="Continue" />
       <Text fx:id="processMessage" layoutX="126.0" fill="red" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text=""/>
 

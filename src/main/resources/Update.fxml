@@ -23,13 +23,15 @@
       <Text text="Last Name:" layoutX="70" layoutY="198"/>
       <TextField fx:id="LastNameText" layoutX="150.0" layoutY="184.0" promptText="Last Name" />
 
+      <Text text="Password:" layoutX="70" layoutY="241"/>
+      <PasswordField fx:id="password" layoutX="151.0" layoutY="227.0" promptText="Password" />
+
       <Text text="City:" layoutX="70" layoutY="280"/>
       <TextField fx:id="CityText" layoutX="151.0" layoutY="266.0" promptText="City" />
 
       <Button fx:id="UpdateButton" layoutX="272.0" layoutY="323" mnemonicParsing="false" onAction="#Update" text="Update" />
 
-      <Text text="Password:" layoutX="70" layoutY="241"/>
-      <PasswordField fx:id="password" layoutX="151.0" layoutY="227.0" promptText="Password" />
+
 
       <Text fx:id="process_message" layoutX="50" fill="red" layoutY="340"/>
    </children>

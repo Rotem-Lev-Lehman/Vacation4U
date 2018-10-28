@@ -18,19 +18,19 @@ public class Controller extends AController {
             if (arg instanceof String && ((String) arg).equals("Delete user"))
                 deleteUser((HomePageView) o);
         } else if (o instanceof MainPageView) {
-            if (arg instanceof String[] && ((String[]) arg).length == 2 && ((String[]) arg)[0] != null && ((String[]) arg)[1] != null)
+            if (arg instanceof String[] && ((String[]) arg).length == 2 /*&& ((String[]) arg)[0] != null && ((String[]) arg)[1] != null*/)
                 checkLogin((MainPageView) o, (String[]) arg);
         } else if (o instanceof SearchPageView) {
             if (arg instanceof String)
                 searchForSimilarUsers((SearchPageView) o, (String) arg);
         } else if (o instanceof SignUp1View) {
-            if (arg instanceof Object[] && ((Object[]) arg).length == 4 && ((Object[]) arg)[0] instanceof String && ((Object[]) arg)[1] instanceof String && ((Object[]) arg)[2] instanceof LocalDate && ((Object[]) arg)[3] instanceof String)
+            if (arg instanceof Object[] && ((Object[]) arg).length == 4 /*&& ((Object[]) arg)[0] instanceof String && ((Object[]) arg)[1] instanceof String && ((Object[]) arg)[2] instanceof LocalDate && ((Object[]) arg)[3] instanceof String*/)
                 checkSignUp1((SignUp1View) o, (Object[]) arg);
         } else if (o instanceof SignUp2View) {
-            if (arg instanceof String[] && ((String[]) arg).length == 3 && ((String[]) arg)[0] != null && ((String[]) arg)[1] != null && ((String[]) arg)[2] != null)
+            if (arg instanceof String[] && ((String[]) arg).length == 3 /* && ((String[]) arg)[0] != null && ((String[]) arg)[1] != null && ((String[]) arg)[2] != null*/)
                 checkSignUp2((SignUp2View) o, (String[]) arg);
         } else if (o instanceof UpdateView) {
-            if (arg instanceof String[] && ((String[]) arg).length == 5 && ((String[]) arg)[0] != null && ((String[]) arg)[1] != null && ((String[]) arg)[2] != null && ((String[]) arg)[3] != null && ((String[]) arg)[4] != null)
+            if (arg instanceof String[] && ((String[]) arg).length == 5 /*&& ((String[]) arg)[0] != null && ((String[]) arg)[1] != null && ((String[]) arg)[2] != null && ((String[]) arg)[3] != null && ((String[]) arg)[4] != null*/)
                 checkUpdate((UpdateView) o, (String[]) arg);
         }
     }
