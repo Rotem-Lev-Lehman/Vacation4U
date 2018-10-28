@@ -26,7 +26,9 @@ public class SearchPageView extends AView implements Initializable {
     public TableColumn<User,String> lastNameColumn;
     public TableColumn<User,String> cityColumn;
     public TableColumn<User,String> birthDateColumn;
+    public TableColumn<User,String> passwordColumn;
     public ImageView magViewBox;
+
     private ObservableList<User> userObservableList;
 
     public void searchButtonClicked(MouseEvent mouseEvent) {
@@ -59,6 +61,7 @@ public class SearchPageView extends AView implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         //Set columns name and set image to imageView
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
+        passwordColumn.setCellValueFactory(new PropertyValueFactory<>("password"));
         firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         cityColumn.setCellValueFactory(new PropertyValueFactory<>("city"));

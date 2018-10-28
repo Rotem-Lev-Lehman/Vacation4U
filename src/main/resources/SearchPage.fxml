@@ -12,6 +12,7 @@
       <TableView fx:id="searchResultTable" layoutX="2.0" layoutY="124.0" prefHeight="230.0" prefWidth="592.0">
         <columns>
           <TableColumn fx:id="usernameColumn" prefWidth="75.0" text="Username" />
+            <TableColumn fx:id="passwordColumn" prefWidth="75.0" text="Password" />
           <TableColumn fx:id="firstNameColumn" prefWidth="75.0" text="First Name" />
             <TableColumn fx:id="lastNameColumn" prefWidth="75.0" text="Last Name" />
             <TableColumn fx:id="cityColumn" prefWidth="75.0" text="City" />

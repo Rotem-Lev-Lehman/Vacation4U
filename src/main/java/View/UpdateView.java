@@ -3,16 +3,17 @@ package View;
 
 import Model.User;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 /**
@@ -25,6 +26,7 @@ public class UpdateView extends AView implements Initializable {
     public PasswordField password;
     public Text process_message;
     public AnchorPane anchor;
+    public DatePicker BirthDate;
     //public PasswordField passwordCnf;
 
    // public String oldUsername;
@@ -50,6 +52,8 @@ public class UpdateView extends AView implements Initializable {
             LastNameText.setText(user.getLastName());
             CityText.setText(user.getCity());
             password.setText(user.getPassword());
+            LocalDate date = LocalDate.parse(user.getBirthdate());
+            BirthDate.setValue(date);
         }
     }
 
@@ -61,16 +65,18 @@ public class UpdateView extends AView implements Initializable {
         String lastname = LastNameText.getText();
         String city = CityText.getText();
         String passwordtxt = password.getText();
+        LocalDate birthDate = BirthDate.getValue();
 
-        String[] strings = new String[5];
-        strings[0] = username;
-        strings[1] = firstname;
-        strings[2] = lastname;
-        strings[3] = city;
-        strings[4] = passwordtxt;
+        Object[] objects = new Object[6];
+        objects[0] = username;
+        objects[1] = firstname;
+        objects[2] = lastname;
+        objects[3] = city;
+        objects[4] = passwordtxt;
+        objects[5] = birthDate;
 
         setChanged();
-        notifyObservers(strings);
+        notifyObservers(objects);
     }
 
     //Show error message in case user didn't fill all information - function is called by controller

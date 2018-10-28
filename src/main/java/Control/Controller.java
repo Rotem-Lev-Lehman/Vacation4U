@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
 import java.util.Observable;
+import java.util.Observer;
 
 public class Controller extends AController {
 
@@ -18,44 +19,46 @@ public class Controller extends AController {
             if (arg instanceof String && ((String) arg).equals("Delete user"))
                 deleteUser((HomePageView) o);
         } else if (o instanceof MainPageView) {
-            if (arg instanceof String[] && ((String[]) arg).length == 2 /*&& ((String[]) arg)[0] != null && ((String[]) arg)[1] != null*/)
+            if (arg instanceof String[] && ((String[]) arg).length == 2)
                 checkLogin((MainPageView) o, (String[]) arg);
         } else if (o instanceof SearchPageView) {
             if (arg instanceof String)
                 searchForSimilarUsers((SearchPageView) o, (String) arg);
         } else if (o instanceof SignUp1View) {
-            if (arg instanceof Object[] && ((Object[]) arg).length == 4 /*&& ((Object[]) arg)[0] instanceof String && ((Object[]) arg)[1] instanceof String && ((Object[]) arg)[2] instanceof LocalDate && ((Object[]) arg)[3] instanceof String*/)
+            if (arg instanceof Object[] && ((Object[]) arg).length == 4)
                 checkSignUp1((SignUp1View) o, (Object[]) arg);
         } else if (o instanceof SignUp2View) {
-            if (arg instanceof String[] && ((String[]) arg).length == 3 /* && ((String[]) arg)[0] != null && ((String[]) arg)[1] != null && ((String[]) arg)[2] != null*/)
+            if (arg instanceof String[] && ((String[]) arg).length == 3)
                 checkSignUp2((SignUp2View) o, (String[]) arg);
         } else if (o instanceof UpdateView) {
-            if (arg instanceof String[] && ((String[]) arg).length == 5 /*&& ((String[]) arg)[0] != null && ((String[]) arg)[1] != null && ((String[]) arg)[2] != null && ((String[]) arg)[3] != null && ((String[]) arg)[4] != null*/)
-                checkUpdate((UpdateView) o, (String[]) arg);
+            if (arg instanceof Object[] && ((Object[]) arg).length == 6)
+                checkUpdate((UpdateView) o, (Object[]) arg);
         }
     }
 
     //Check if update is valid
-    private void checkUpdate(UpdateView updateView, String[] strings) {
-        String username = strings[0];
-        String firstname = strings[1];
-        String lastname = strings[2];
-        String city = strings[3];
-        String passwordtxt = strings[4];
+    private void checkUpdate(UpdateView updateView, Object[] objects) {
+        String username = (String) objects[0];
+        String firstname = (String) objects[1];
+        String lastname = (String) objects[2];
+        String city = (String) objects[3];
+        String passwordtxt = (String) objects[4];
+        LocalDate birthDate = (LocalDate) objects[5];
 
         //Check that all details are filled
-        if(username.equals("") || firstname.equals("") || lastname.equals("") || city.equals("") || passwordtxt.equals("")){
+        if (username == null || firstname == null || lastname == null || city == null || passwordtxt == null || birthDate == null ||
+                username.equals("") || firstname.equals("") || lastname.equals("") || city.equals("") || passwordtxt.equals("") || birthDate.toString().equals("")) {
             updateView.setMessageFillDetails();
             return;
         }
 
         //if username is taken by a different user
-        if(!user.getUsername().equals(username) && model.Read(username) != null){
+        if (!user.getUsername().equals(username) && model.Read(username) != null) {
             updateView.setMessageUsernameTaken();
             return;
         }
 
-        User newUser =new User(username, passwordtxt , user.getBirthdate() ,firstname, lastname, city);
+        User newUser = new User(username, passwordtxt, birthDate.toString(), firstname, lastname, city);
         model.Update(user.getUsername(), newUser); //update user
 
         setUser(newUser); //set new user
