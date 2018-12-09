@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="459.0" prefWidth="648.0" fx:controller="View.CreateVacation" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="19.0" layoutY="60.0" prefHeight="17.0" prefWidth="43.0" text="Country" />
+      <TextField fx:id="TextFieldcountryName" layoutX="111.0" layoutY="56.0" />
+      <DatePicker fx:id="DeparturesDate" layoutX="111.0" layoutY="92.0" />
+      <DatePicker  fx:id="ArrivalsDate" layoutX="384.0" layoutY="92.0" />
+      <Label layoutX="19.0" layoutY="96.0" text="Departures Date" />
+      <Label layoutX="307.0" layoutY="96.0" text="Arrivals Date" />
+      <Button fx:id="ButtonCreate" layoutX="237.0" layoutY="420.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="141.0" text="Create Vacation" />
+      <Label layoutX="21.0" layoutY="133.0" text="Tickets Quantity:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="ChoiceBoxVacationKind" layoutX="130.0" layoutY="381.0" prefWidth="150.0" />
+      <Label layoutX="38.0" layoutY="385.0" text="Vacation Kind" />
+      <TextField layoutX="130.0" layoutY="307.0" />
+      <Label layoutX="40.0" layoutY="311.0" text="Airline" />
+      <ComboBox fx:id="ChoiceBoxTickKind" layoutX="130.0" layoutY="346.0" prefWidth="150.0" />
+      <Label layoutX="40.0" layoutY="350.0" text="Ticket Kind" />
+      <CheckBox fx:id="CheckBoxBaggage" layoutX="431.0" layoutY="326.0" mnemonicParsing="false" text="Include Return Flight" />
+      <CheckBox fx:id="CheckBoxConnectionFlight" layoutX="431.0" layoutY="356.0" mnemonicParsing="false" text="have Connection Flight" />
+      <CheckBox fx:id="CheckBoxReturnFlight" layoutX="431.0" layoutY="299.0" mnemonicParsing="false" text="Include baggage" />
+      <CheckBox fx:id="CheckBoxSleepPlace" layoutX="431.0" layoutY="385.0" mnemonicParsing="false" text="Include a place to sleep" />
+      <Label layoutX="24.0" layoutY="172.0" text="Adult">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="ComboBoxAdult" layoutX="74.0" layoutY="170.0" prefHeight="25.0" prefWidth="51.0" />
+      <Label layoutX="23.0" layoutY="210.0" text="Child">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="ComboBoxChild" layoutX="74.0" layoutY="208.0" prefHeight="25.0" prefWidth="51.0" />
+      <Label layoutX="23.0" layoutY="248.0" text="Infant">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="ComboBoxInfant" layoutX="74.0" layoutY="246.0" prefHeight="25.0" prefWidth="51.0" />
+   </children>
+</AnchorPane>
