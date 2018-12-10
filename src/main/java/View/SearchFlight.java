@@ -17,6 +17,9 @@ public class SearchFlight extends AView implements Initializable {
 
 
     public void searchVacation(){
+
+
+        
         String destinationCountry =TextFieldCountry.getText();
         String ticketMum = TextFieldTickNum.getText();
         String airline = TextFieldAirline.getText();
