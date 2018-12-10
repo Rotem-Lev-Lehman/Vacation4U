@@ -1,15 +1,36 @@
 package View;
 
 
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
-public class SearchFlight {
+import java.net.URL;
+import java.time.LocalDate;
+import java.util.ResourceBundle;
+
+public class SearchFlight extends AView implements Initializable {
     public TextField TextFieldCountry, TextFieldTickNum, TextFieldAirline;
     public DatePicker DatePickerDepartures,DatePickerArrivals;
-    public ChoiceBox ChoiceBoxVacationKind,ChoiceBoxTickKind;
+    public ComboBox ChoiceBoxVacationKind,ChoiceBoxTickKind;
     public CheckBox CheckBoxReturnFlight,CheckBoxBaggage, CheckBoxSleepPlace;
     public Button SearchButton;
 
+
+    public void searchVacation(){
+        String destinationCountry =TextFieldCountry.getText();
+        String ticketMum = TextFieldTickNum.getText();
+        String airline = TextFieldAirline.getText();
+        LocalDate departureDate = DatePickerDepartures.getValue();
+        LocalDate arrivalDate = DatePickerArrivals.getValue();
+        String vacationKind;
+        if(ChoiceBoxVacationKind.getValue() != null)
+            vacationKind = ChoiceBoxVacationKind.getValue().toString();
+        String ticketKind = ChoiceBoxTickKind.getSelectionModel().getSelectedItem().toString();
+        boolean isReturnFlight = CheckBoxReturnFlight.isSelected();
+        boolean isConnection = CheckBoxBaggage.isSelected();
+        boolean isSleepPlace = CheckBoxSleepPlace.isSelected();
+
+   }
 
     public void Country(){
 
@@ -44,5 +65,11 @@ public class SearchFlight {
     public void SearchButton(){
 
     }
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        ChoiceBoxTickKind.getItems().addAll("Adult", "Child", "Infant");
+        ChoiceBoxVacationKind.getItems().addAll("Urbanic", "Exotic");
+    }
+
 
 }

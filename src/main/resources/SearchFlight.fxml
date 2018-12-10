@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
@@ -8,26 +9,30 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" fx:controller="View.SearchFlight" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.control.ComboBox?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.SearchFlight">
    <children>
       <Label layoutX="29.0" layoutY="70.0" prefHeight="17.0" prefWidth="43.0" text="Country" />
-      <TextField promptText="Enter Destination" onAction="#Country" fx:id="TextFieldCountry" layoutX="121.0" layoutY="66.0" />
-      <DatePicker onAction="#DateDepartures" fx:id="DatePickerDepartures" layoutX="121.0" layoutY="102.0" />
-      <DatePicker onAction="#DateArrivals" fx:id="DatePickerArrivals" layoutX="394.0" layoutY="102.0" />
+      <TextField promptText="Enter destination" fx:id="TextFieldCountry" layoutX="121.0" layoutY="66.0" onAction="#Country" />
+      <DatePicker promptText="Enter Departures date" fx:id="DatePickerDepartures" layoutX="121.0" layoutY="102.0" onAction="#DateDepartures" />
+      <DatePicker promptText="Enter Arrivals date" fx:id="DatePickerArrivals" layoutX="394.0" layoutY="102.0" onAction="#DateArrivals" />
       <Label layoutX="29.0" layoutY="106.0" text="Departures Date" />
       <Label layoutX="317.0" layoutY="106.0" text="Arrivals Date" />
       <Label layoutX="31.0" layoutY="143.0" text="Tickets Number" />
-      <TextField onAction="#TickNum" fx:id="TextFieldTickNum" layoutX="121.0" layoutY="139.0" prefHeight="25.0" prefWidth="53.0" />
-      <ChoiceBox onAction="#VacationKind" fx:id="ChoiceBoxVacationKind" layoutX="121.0" layoutY="252.0" prefWidth="150.0" />
+      <TextField fx:id="TextFieldTickNum" layoutX="121.0" layoutY="139.0" onAction="#TickNum" prefHeight="25.0" prefWidth="53.0" />
+      <ComboBox promptText="Choose Vacation Kind" fx:id="ChoiceBoxVacationKind" layoutX="121.0" layoutY="252.0" onAction="#VacationKind" prefWidth="150.0" />
       <Label layoutX="29.0" layoutY="256.0" text="Vacation Kind" />
-      <TextField onAction="#Airline" fx:id="TextFieldAirline" layoutX="121.0" layoutY="178.0" />
+      <TextField promptText="Enter Airline" fx:id="TextFieldAirline" layoutX="121.0" layoutY="178.0" onAction="#Airline" />
       <Label layoutX="31.0" layoutY="182.0" text="Airline" />
-      <ChoiceBox onAction="#TickKind" fx:id="ChoiceBoxTickKind" layoutX="121.0" layoutY="217.0" prefWidth="150.0" />
+      <ComboBox promptText="Choose Ticket Kind" fx:id="ChoiceBoxTickKind" layoutX="121.0" layoutY="217.0" onAction="#TickKind" prefWidth="150.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets></ComboBox>
       <Label layoutX="31.0" layoutY="221.0" text="Ticket Kind" />
-      <CheckBox onAction="#ReturnFlight" fx:id="CheckBoxReturnFlight" layoutX="422.0" layoutY="197.0" mnemonicParsing="false" text="Include Return Flight" />
-      <CheckBox onAction="#Baggage" fx:id="CheckBoxBaggage" layoutX="422.0" layoutY="170.0" mnemonicParsing="false" text="Include baggage" />
-      <CheckBox onAction="#SleepPlace" fx:id="CheckBoxSleepPlace" layoutX="422.0" layoutY="221.0" mnemonicParsing="false" text="Include a place to sleep" />
-      <Button onAction="#SearchButton" fx:id="SearchButton" layoutX="230.0" layoutY="348.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="141.0" text="Search Flight" />
+      <CheckBox fx:id="CheckBoxReturnFlight" layoutX="422.0" layoutY="197.0" mnemonicParsing="false" onAction="#ReturnFlight" text="Include Return Flight" />
+      <CheckBox fx:id="CheckBoxBaggage" layoutX="422.0" layoutY="170.0" mnemonicParsing="false" onAction="#Baggage" text="Include baggage" />
+      <CheckBox fx:id="CheckBoxSleepPlace" layoutX="422.0" layoutY="221.0" mnemonicParsing="false" onAction="#SleepPlace" text="Include a place to sleep" />
+      <Button fx:id="SearchButton" onMouseClicked="#searchVacation"  layoutX="230.0" layoutY="348.0" mnemonicParsing="false" onAction="#SearchButton" prefHeight="25.0" prefWidth="141.0" text="Search Flight" />
    </children>
 </AnchorPane>
+
