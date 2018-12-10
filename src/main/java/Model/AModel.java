@@ -36,15 +36,15 @@ public abstract class AModel {
         dataBaseManager.DeleteUser(user);
     }
 
-    void CreateUsersProfileImage(String username, File imageFile){
+    public void CreateUsersProfileImage(String username, File imageFile){
         dataBaseManager.CreateUsersProfileImage(username,imageFile);
     }
 
-    Image ReadUsersProfileImage(String username){
+    public Image ReadUsersProfileImage(String username){
         return dataBaseManager.ReadUsersProfileImage(username);
     }
 
-    void UpdateUsersProfileImage(String username, File imageFile){
+    public void UpdateUsersProfileImage(String username, File imageFile){
         dataBaseManager.UpdateUsersProfileImage(username, imageFile);
     }
 
@@ -52,38 +52,38 @@ public abstract class AModel {
         dataBaseManager.CreateVacation(vacation);
     }
 
-    List<Vacation> ReadSimilarVacations(Vacation vacation){
+    public List<Vacation> ReadSimilarVacations(Vacation vacation){
         return dataBaseManager.ReadSimilarVacations(vacation);
     }
 
-    void UpdateVacation(Vacation vacation){
+    public void UpdateVacation(Vacation vacation){
         dataBaseManager.UpdateVacation(vacation);
     }
 
-    void CreateOrder(Order order){
+    public void CreateOrder(Order order){
         dataBaseManager.CreateOrder(order);
     }
 
-    List<Order> ReadOrdersForVacation(Vacation vacation){
+    public List<Order> ReadOrdersForVacation(Vacation vacation){
         return dataBaseManager.ReadOrdersForVacation(vacation);
     }
 
-    void UpdateOrder(Order order){
+    public void UpdateOrder(Order order){
         dataBaseManager.UpdateOrder(order);
     }
 
-    void CreatePaymentTransaction(PaymentTransaction paymentTransaction){
+    public void CreatePaymentTransaction(PaymentTransaction paymentTransaction){
         dataBaseManager.CreatePaymentTransaction(paymentTransaction);
     }
 
-    void CreateMessage(Message message){
+    public void CreateMessage(Message message){
         dataBaseManager.CreateMessage(message);
     }
 
-    List<Message> ReadAllMessages(String username){
+    public List<Message> ReadAllMessages(String username){
         return dataBaseManager.ReadAllMessages(username);
     }
-    int CountUnseenMessages(String username){
+    public int CountUnseenMessages(String username){
         return dataBaseManager.CountUnseenMessages(username);
     }
 }
