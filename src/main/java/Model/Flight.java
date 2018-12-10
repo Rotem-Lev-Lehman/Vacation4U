@@ -3,7 +3,6 @@ package Model;
 import java.util.Date;
 
 public class Flight {
-    private Vacation vacation;
     private String flightCompany;
     private String startCountry;
     private String destCountry;
@@ -12,23 +11,14 @@ public class Flight {
     private Flight continueFlight;
     private Flight returnFlight;
 
-    public Flight(Vacation vacation, String flightCompany, String startCountry, String destCountry, Date startDate, Date endDate) {
-        this.vacation = vacation;
+    public Flight(String flightCompany, String startCountry, String destCountry, Date startDate, Date endDate) {
         this.flightCompany = flightCompany;
         this.startCountry = startCountry;
         this.destCountry = destCountry;
         this.startDate = startDate;
         this.endDate = endDate;
     }
-
-    public Vacation getVacation() {
-        return vacation;
-    }
-
-    public void setVacation(Vacation vacation) {
-        this.vacation = vacation;
-    }
-
+    
     public String getFlightCompany() {
         return flightCompany;
     }
