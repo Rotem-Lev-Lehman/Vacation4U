@@ -1,5 +1,6 @@
 package Control;
 
+import Model.Message;
 import Model.PaymentTransaction;
 import Model.User;
 import Model.Vacation;
@@ -46,6 +47,23 @@ public class Controller extends AController {
         } else if (o instanceof OrderVacation){
             if(arg instanceof PaymentTransaction)
                 createPayment((OrderVacation)o,(PaymentTransaction)arg);
+        } else if( o instanceof MailBoxView){
+            if(arg instanceof String && ((String)arg).equals("Get Messages")){
+                searchForMessages((MailBoxView)o);
+            }
+        }
+    }
+
+    private void searchForMessages(MailBoxView o) {
+        List<Message> messages = model.ReadAllMessages(user.getUsername());
+
+        if(messages== null || messages.size() == 0){ //if there are no results
+            //say no results
+            o.showNoResult();
+        }
+        else {
+            //show messages
+           o.showMessages(messages);
         }
     }
 

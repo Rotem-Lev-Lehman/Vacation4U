@@ -1,5 +1,6 @@
 package View;
 
+import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -9,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.net.URL;
 import java.util.Optional;
@@ -23,6 +25,7 @@ public class HomePageView extends AView implements Initializable {
     private volatile boolean stopSettings = false; //boolean to determent if setting gear should rotate
     private int settingsImageNum = 1; //int number to determent what setting picture is shown currently
     private Thread checkForNewMessages;
+    private volatile boolean checkMessages = true;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -51,11 +54,18 @@ public class HomePageView extends AView implements Initializable {
         checkForNewMessages = new Thread(new Runnable() {
             @Override
             public void run() {
-                while (true) {
+                while (checkMessages) {
                     setChanged();
                     notifyObservers("Count Unread Messages");
                     try {
                         Thread.sleep(1000);
+                        Stage stage = (Stage)email_number.getScene().getWindow();
+                        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                            @Override
+                            public void handle(WindowEvent event) {
+                                checkMessages = false;
+                            }
+                        });
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -153,5 +163,9 @@ public class HomePageView extends AView implements Initializable {
 
     public void openCreateVacation(MouseEvent mouseEvent) {
         moveToNewScreen(650, 500, "CreateVacation.fxml","Create Vacation");
+    }
+
+    public void openMailBox(MouseEvent mouseEvent) {
+        moveToNewScreen(650, 500, "MailBox.fxml","MailBox");
     }
 }

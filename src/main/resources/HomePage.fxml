@@ -33,7 +33,7 @@
 
       </ImageView>
       <ImageView fx:id="trashImage" fitHeight="25.0" fitWidth="25.0" layoutX="21.0" layoutY="368.0" pickOnBounds="true" preserveRatio="true"> </ImageView>
-      <ImageView fx:id="email_img" fitHeight="32.0" fitWidth="42.0" layoutX="400.0" layoutY="366.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="email_img" onMouseClicked="#openMailBox" fitHeight="32.0" fitWidth="42.0" layoutX="400.0" layoutY="366.0" pickOnBounds="true" preserveRatio="true" />
       <Circle fx:id="email_circle" fill="#ff2a1f" layoutX="414.0" layoutY="373.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
       <Text fx:id="email_number" fill="WHITE" layoutX="410.0" layoutY="377.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" visible="false">
          <font>
