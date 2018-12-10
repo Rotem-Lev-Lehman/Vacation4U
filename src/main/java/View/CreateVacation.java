@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ResourceBundle;
@@ -44,16 +45,13 @@ public class CreateVacation extends AView implements Initializable {
         boolean isConnection = CheckBoxConnectionFlight.isSelected();
         boolean isReturnFlight = CheckBoxReturnFlight.isSelected();
 
-        if(airline.equals("") || price.equals("")|| !legalDates(departureDate,arrivalDate) || destination.equals("")){
+        if(airline.equals("") || price.equals("")|| !legalDates(departureDate,arrivalDate) || destination.equals("")|| OriginCountry.equals((""))){
             showFillDetailsError();
         }
-        //flight=new Flight()
+        flight=new Flight(airline,OriginCountry,destination, departureDate,arrivalDate);
         Vacation v= new Vacation(controller.getUser(),flight,departureDate.toString(),arrivalDate.toString(),OriginCountry,destination,vacationKind,false,
                 Integer.parseInt(adultTicketNumber),Integer.parseInt(childTicketNumber),Integer.parseInt(infantTicketNumber));
-
-
-    //public Vacation(User SellerId,String StartDate, String EndDate, String StartCountry, String DestCountry, String TypesOfVacation,
-      //  int alreadySold, int amountOfAdultTickets, int amountOfChildTickets,int amountOfInfantTickets)
+        int x=0;
     }
 
     private void showFillDetailsError() {
