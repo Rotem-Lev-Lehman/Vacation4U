@@ -5,6 +5,7 @@ import javafx.scene.image.Image;
 
 import java.io.File;
 import java.sql.SQLException;
+import java.util.Comparator;
 import java.util.List;
 
 //Abstract model
@@ -52,8 +53,8 @@ public abstract class AModel {
         dataBaseManager.CreateVacation(vacation);
     }
 
-    public List<Vacation> ReadSimilarVacations(Vacation vacation){
-        return dataBaseManager.ReadSimilarVacations(vacation);
+    public List<Vacation> ReadSimilarVacations(Vacation vacation, Comparator<Vacation> vacationComparator){
+        return dataBaseManager.ReadSimilarVacations(vacation, vacationComparator);
     }
 
     public void UpdateVacation(Vacation vacation){
