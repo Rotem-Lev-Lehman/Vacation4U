@@ -6,6 +6,7 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -67,7 +68,6 @@
       <CheckBox fx:id="CheckBoxBaggage" layoutX="381.0" layoutY="247.0" mnemonicParsing="false" text="Include Return Flight" textFill="WHITE" />
       <CheckBox fx:id="CheckBoxConnectionFlight" layoutX="381.0" layoutY="277.0" mnemonicParsing="false" text="have Connection Flight" textFill="WHITE" />
       <CheckBox fx:id="CheckBoxReturnFlight" layoutX="381.0" layoutY="220.0" mnemonicParsing="false" text="Include baggage" textFill="WHITE" />
-      <Button fx:id="ButtonSleepPlace" layoutX="382.0" layoutY="306.0" mnemonicParsing="false" text="Include a place to sleep" textFill="WHITE" />
       <Label layoutX="20.0" layoutY="257.0" text="Adult" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
@@ -91,5 +91,8 @@
             <Font name="System Bold Italic" size="36.0" />
          </font>
       </Label>
+      <ToggleButton fx:id="ButtonSleepPlace" layoutX="381.0" layoutY="319.0" mnemonicParsing="false" onMouseClicked="#PlaceToSleep" prefHeight="25.0" prefWidth="217.0" text="Place to sleep" />
+      <ComboBox visible="false" fx:id="RankPlace" layoutX="380.0" layoutY="356.0" prefHeight="25.0" prefWidth="73.0" promptText="rank" />
+      <ComboBox visible="false" fx:id="Place" layoutX="468.0" layoutY="356.0" prefHeight="25.0" prefWidth="132.0" promptText="place" />
    </children>
 </AnchorPane>
