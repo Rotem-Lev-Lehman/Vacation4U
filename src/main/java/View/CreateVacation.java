@@ -45,13 +45,18 @@ public class CreateVacation extends AView implements Initializable {
         boolean isConnection = CheckBoxConnectionFlight.isSelected();
         boolean isReturnFlight = CheckBoxReturnFlight.isSelected();
 
-        if(airline.equals("") || price.equals("")|| departureDate == null || arrivalDate == null || !legalDates(departureDate,arrivalDate) || destination.equals("")|| OriginCountry.equals((""))){
+        if(airline.equals("") || price.equals("")|| departureDate == null || arrivalDate == null || destination.equals("")|| OriginCountry.equals((""))){
             showFillDetailsError();
             return;
         }
+
+        if(!legalDates(departureDate,arrivalDate)){
+            showDateDetailsError();
+            return;
+        }
         flight=new Flight(airline,OriginCountry,destination, departureDate,arrivalDate);
-        Vacation v= new Vacation(controller.getUser(),flight,departureDate.toString(),arrivalDate.toString(),OriginCountry,destination,vacationKind,false,
-                Integer.parseInt(adultTicketNumber),Integer.parseInt(childTicketNumber),Integer.parseInt(infantTicketNumber));
+        Vacation v= new Vacation(controller.getUser(),flight,departureDate.toString(),arrivalDate.toString(),OriginCountry,destination,vacationKind,"default",5,"default",
+                false,Integer.parseInt(adultTicketNumber),Integer.parseInt(childTicketNumber),Integer.parseInt(infantTicketNumber),0);
         setChanged();
         notifyObservers(v);
 
@@ -61,6 +66,14 @@ public class CreateVacation extends AView implements Initializable {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText("Error");
         alert.setContentText("Please Fill in All Fields");
+        alert.show();
+        return;
+    }
+
+    private void showDateDetailsError() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText("Error");
+        alert.setContentText("Illegal Dates");
         alert.show();
         return;
     }
