@@ -61,6 +61,7 @@ public class MessagesTableManager extends ATableManager {
     }
 
     public int countUnseenMessages(String username) {
+        connect();
         String sql = "SELECT COUNT(messageID) AS amount FROM messages WHERE seen = ? AND receiverID = ?";
         int amount = 0;
         try{
@@ -71,12 +72,14 @@ public class MessagesTableManager extends ATableManager {
 
             // loop through the result set
             while (rs.next()) {
-                amount += rs.getInt("amount");
+                amount = rs.getInt("amount");
+                break;
             }
         }
         catch (SQLException e){
             e.printStackTrace();
         }
+        closeConnection();
         return amount;
     }
 

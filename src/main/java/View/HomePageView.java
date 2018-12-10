@@ -22,6 +22,7 @@ public class HomePageView extends AView implements Initializable {
     private Thread threadSettings = null; //Settings animation thread
     private volatile boolean stopSettings = false; //boolean to determent if setting gear should rotate
     private int settingsImageNum = 1; //int number to determent what setting picture is shown currently
+    private Thread checkForNewMessages;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -47,8 +48,21 @@ public class HomePageView extends AView implements Initializable {
         Image uploadImg = new Image(this.getClass().getResourceAsStream("/images/airplane_upload.png"));
         airplane_upload.setImage(uploadImg);
 
-        setChanged();
-        notifyObservers("Count Unread Messages");
+        checkForNewMessages = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    setChanged();
+                    notifyObservers("Count Unread Messages");
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+        checkForNewMessages.start();
     }
 
     //Delete user button was pressed
