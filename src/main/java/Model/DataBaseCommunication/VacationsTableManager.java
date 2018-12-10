@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -63,13 +64,11 @@ public class VacationsTableManager extends ATableManager {
 
     }
 
-    /*
-
-    public List<Vacation> ReadSimilarVacations(Vacation vacation, Comparator<Vacation> vacationsComparator) {
+    public List<Vacation> ReadSimilarVacationsNotBought(Vacation vacation, Comparator<Vacation> vacationsComparator) {
         connect(); //connect to database
 
         //sql commend
-        String sql = "SELECT vacationID, sellerId, startDate, endDate, startCountry, destCountry, typesOfVacation, typeOfHotel, rankingOfHotel, typeOfLuggage, alreadySold, amountOfAdultTickets, amountOfChildTickets, amountOfInfantTickets, price FROM vacations WHERE startCountry LIKE ? AND destCountry LIKE ?";
+        String sql = "SELECT vacationID, sellerId, startDate, endDate, startCountry, destCountry, typesOfVacation, typeOfHotel, rankingOfHotel, typeOfLuggage, alreadySold, amountOfAdultTickets, amountOfChildTickets, amountOfInfantTickets, price FROM vacations WHERE startCountry LIKE ? AND destCountry LIKE ? AND alreadySold = ?";
 
         List<Vacation> vacations = new ArrayList<Vacation>(); //list of similar vacations
         try {
@@ -77,23 +76,23 @@ public class VacationsTableManager extends ATableManager {
             // set the value
             pstmt.setString(1, "%" + vacation.getStartCountry() + "%");
             pstmt.setString(2, "%" + vacation.getDestCountry() + "%");
+            pstmt.setInt(3, 0); //not bought
             //
             ResultSet rs = pstmt.executeQuery();
 
             // loop through the result set
             while (rs.next()) {
-            */
                 /*
                 User SellerId, Flight flight, String StartDate, String EndDate, String StartCountry, String DestCountry, String TypesOfVacation,
                     boolean alreadySold, int amountOfAdultTickets, int amountOfChildTickets,int amountOfInfantTickets
                  */
-                /*
+
                 String username = rs.getString("sellerId");
                 User seller = usersTable.ReadWithOutConnection(username);
 
                 int vacationID = rs.getInt("vacationID");
 
-                Flight flight = flightsTable.GetFlight(vacationID);
+                Flight flight = flightsTable.GetFlightWithoutConnection(vacationID);
 
                 int alreadySoldDataBase = rs.getInt("alreadySold");
                 boolean alreadySold = false;
@@ -111,9 +110,10 @@ public class VacationsTableManager extends ATableManager {
         }
 
         closeConnection(); //disconnect from database
+
+        Collections.sort(vacations, vacationsComparator);
         return vacations;
     }
-    */
 
     public void UpdateVacation(Vacation vacation) {
 

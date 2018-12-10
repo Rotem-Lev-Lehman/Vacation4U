@@ -9,24 +9,26 @@ import java.sql.SQLException;
 
 public class MessagesTableManager extends ATableManager {
 
-    public void Create(Message message) throws SQLException {
+    public void Create(Message message) {
         connect(); //connect to database
         //create user - sql command
         String sql = "INSERT INTO messages(messageID,senderID,receiverID,message,seen) VALUES(?,?,?,?,?)";
 
+        int nextID = getNextID();
         //try to create user
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, String.valueOf(message.getMessageID()));
-            pstmt.setString(2, String.valueOf(message.getSender()));
-            pstmt.setString(3, String.valueOf(message.getReceiver()));
+            pstmt.setInt(1, nextID);
+            pstmt.setString(2, message.getSender().getUsername());
+            pstmt.setString(3, message.getReceiver().getUsername());
             pstmt.setString(4, message.getText());
-            pstmt.setString(5, "0");
+            pstmt.setInt(5, 0);
             pstmt.executeUpdate();
+            message.setMessageID(nextID);
         }
         catch (SQLException e){
-            closeConnection(); //close connection to datebase
-            throw e;
+            //closeConnection(); //close connection to datebase
+            e.printStackTrace();
         }
         closeConnection(); //close connection
     }
@@ -76,5 +78,25 @@ public class MessagesTableManager extends ATableManager {
             e.printStackTrace();
         }
         return amount;
+    }
+
+    private int getNextID() {
+        String sql = "SELECT MAX(messageID) AS max_id FROM messages";
+        int nextID = -1;
+        try{
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+
+            // loop through the result set
+            while (rs.next()) {
+                nextID = rs.getInt("max_id");
+                break;
+            }
+            nextID++;
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        return nextID;
     }
 }

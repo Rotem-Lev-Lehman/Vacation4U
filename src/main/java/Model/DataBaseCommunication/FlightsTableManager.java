@@ -3,7 +3,9 @@ package Model.DataBaseCommunication;
 import Model.Flight;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class FlightsTableManager extends ATableManager {
     public void CreateFlight(Flight flight, int vacationID){
@@ -57,9 +59,51 @@ public class FlightsTableManager extends ATableManager {
         return returnFlightID;
     }
 
-    /*
     public Flight GetFlight(int vacationID){
-
+        connect();
+        Flight flight = GetFlightRecursively(vacationID, 0);
+        closeConnection();
+        return flight;
     }
-    */
+
+    protected Flight GetFlightWithoutConnection(int vacationID){
+        return GetFlightRecursively(vacationID, 0);
+    }
+
+    public Flight GetFlightRecursively(int vacationID, int flightID){
+        //Read flight - sql commend
+        String sql = "SELECT vacationID, flightID, flightCompany, startCountry, destCountry, startDate, endDate, continueFlightID, returnFlightID FROM flights WHERE vacationID = ? AND flightID = ?";
+        Flight flight = null;
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            // set the value
+            pstmt.setInt(1, vacationID);
+            pstmt.setInt(2, flightID);
+            //
+            ResultSet rs = pstmt.executeQuery();
+
+            // loop through the result set
+            while (rs.next()) {
+                int continueFlightID = rs.getInt("continueFlightID");
+                Flight continueFlight = null;
+                if(continueFlightID != -1)
+                    continueFlight = GetFlightRecursively(vacationID, continueFlightID);
+
+                int returnFlightID = rs.getInt("returnFlightID");
+                Flight returnFlight = null;
+                if(returnFlightID != -1)
+                    returnFlight = GetFlightRecursively(vacationID, returnFlightID);
+
+                flight = new Flight(rs.getString("flightCompany"),rs.getString("startCountry"),rs.getString("destCountry"),LocalDate.parse(rs.getString("startDate")),LocalDate.parse(rs.getString("endDate")));
+                flight.setContinueFlight(continueFlight);
+                flight.setReturnFlight(returnFlight);
+                break;
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return flight;
+    }
+
 }

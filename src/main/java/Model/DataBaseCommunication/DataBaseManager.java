@@ -102,7 +102,7 @@ public class DataBaseManager implements IDataBaseManager{
 
     @Override
     public void CreateMessage(Message message) {
-
+        messagesTable.Create(message);
     }
 
     @Override
