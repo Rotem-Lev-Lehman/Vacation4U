@@ -9,13 +9,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="505.0" prefWidth="600.0" style="-fx-background-color: #2193d1;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.SearchFlight">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="551.0" prefWidth="600.0" style="-fx-background-color: #2193d1;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.SearchFlight">
    <children>
       <Label layoutX="29.0" layoutY="99.0" prefHeight="17.0" prefWidth="43.0" text="Origin" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
-      <TextField fx:id="TextFieldOriginCountry" layoutX="123.0" layoutY="95.0" onAction="#Country" promptText="Enter Origin" />
+      <TextField fx:id="TextFieldCountryOrigin" layoutX="123.0" layoutY="95.0" onAction="#Country" promptText="Enter Origin" />
       <DatePicker fx:id="DatePickerDepartures" layoutX="123.0" layoutY="131.0" onAction="#DateDepartures" promptText="Enter Departures Date" />
       <DatePicker fx:id="DatePickerArrivals" layoutX="396.0" layoutY="131.0" onAction="#DateArrivals" promptText="Enter Arrivals Date" />
       <Label layoutX="25.0" layoutY="135.0" text="Departures Date" textFill="WHITE">
@@ -40,25 +40,21 @@
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
-      <CheckBox fx:id="CheckBoxReturnFlight" layoutX="424.0" layoutY="311.0" mnemonicParsing="false" onAction="#ReturnFlight" text="Include Return Flight" textFill="WHITE">
+      <CheckBox fx:id="CheckBoxReturnFlight" layoutX="424.0" layoutY="285.0" mnemonicParsing="false" onAction="#ReturnFlight" text="Include Return Flight" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></CheckBox>
-      <CheckBox fx:id="CheckBoxBaggage" layoutX="424.0" layoutY="284.0" mnemonicParsing="false" onAction="#Baggage" text="Include baggage" textFill="WHITE">
+      <CheckBox fx:id="CheckBoxSleepPlace" layoutX="424.0" layoutY="309.0" mnemonicParsing="false" onAction="#SleepPlace" text="Include a place to sleep" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></CheckBox>
-      <CheckBox fx:id="CheckBoxSleepPlace" layoutX="424.0" layoutY="335.0" mnemonicParsing="false" onAction="#SleepPlace" text="Include a place to sleep" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></CheckBox>
-      <Button fx:id="SearchButton" layoutX="227.0" layoutY="472.0" mnemonicParsing="false" onAction="#SearchButton" onMouseClicked="#searchVacation" prefHeight="25.0" prefWidth="141.0" text="Search Flight" />
+      <Button fx:id="SearchButton" layoutX="227.0" layoutY="501.0" mnemonicParsing="false" onAction="#SearchButton" onMouseClicked="#searchVacation" prefHeight="25.0" prefWidth="141.0" text="Search Flight" />
       <Label layoutX="319.0" layoutY="99.0" prefHeight="17.0" prefWidth="67.0" text="Destination" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="TextFieldDestinationCountry" layoutX="396.0" layoutY="95.0" promptText="Enter Destination" />
+      <TextField fx:id="DestCounty" layoutX="396.0" layoutY="95.0" promptText="Enter Destination" />
       <TextField fx:id="TextMaxPrice" layoutX="276.0" layoutY="223.0" prefHeight="25.0" prefWidth="98.0" />
       <Label layoutX="250.0" layoutY="227.0" prefHeight="17.0" prefWidth="26.0" text="to" textFill="WHITE">
          <font>
@@ -94,15 +90,21 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <CheckBox fx:id="CheckNonStopFlight" layoutX="424.0" layoutY="360.0" mnemonicParsing="false" text="Prefer Non-Stop Flight" textFill="WHITE">
+      <CheckBox fx:id="CheckNonStopFlight" layoutX="424.0" layoutY="334.0" mnemonicParsing="false" text="Prefer Non-Stop Flight" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </CheckBox>
-      <Label layoutX="24.0" layoutY="21.0" prefHeight="53.0" prefWidth="248.0" text="Search Flight" textFill="WHITE">
+      <Label layoutX="24.0" layoutY="21.0" prefHeight="53.0" prefWidth="288.0" text="Search Vacation" textFill="WHITE">
          <font>
             <Font name="System Bold Italic" size="36.0" />
          </font>
       </Label>
+      <Label layoutX="32.0" layoutY="464.0" prefHeight="17.0" prefWidth="89.0" text="Baggage Type" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="ChoiceBoxBaggageType" layoutX="126.0" layoutY="460.0" prefHeight="25.0" prefWidth="174.0" promptText="choose Baggage Type" />
    </children>
 </AnchorPane>
