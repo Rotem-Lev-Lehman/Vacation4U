@@ -1,6 +1,7 @@
 package Model;
 
 public class Message {
+    private int messageID;
     private User sender;
     private User receiver;
     private String text;
@@ -43,5 +44,13 @@ public class Message {
 
     public void setSeen(boolean seen) {
         this.seen = seen;
+    }
+
+    public int getMessageID() {
+        return messageID;
+    }
+
+    public void setMessageID(int messageID) {
+        this.messageID = messageID;
     }
 }
