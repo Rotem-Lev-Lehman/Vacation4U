@@ -82,17 +82,17 @@ public class DataBaseManager implements IDataBaseManager{
 
     @Override
     public void CreateOrder(Order order) {
-
+        ordersTable.CreateOrder(order);
     }
 
     @Override
     public List<Order> ReadOrdersForVacation(Vacation vacation) {
-        return null;
+        return ordersTable.ReadOrdersForVacation(vacation);
     }
 
     @Override
-    public void UpdateOrder(Order order) {
-
+    public void UpdateOrderStatus(Order order) {
+        ordersTable.UpdateOrderStatus(order);
     }
 
     @Override
