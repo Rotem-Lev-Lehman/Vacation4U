@@ -16,10 +16,13 @@ import java.util.ResourceBundle;
 public class CreateVacation extends AView implements Initializable {
     public TextField TextFieldcountryName, TextFieldAirline, TextFieldPrice, TextFieldOrigin;
     public DatePicker DeparturesDate, ArrivalsDate;
-    public Button ButtonCreate, ButtonSleepPlace;
-    public ComboBox ChoiceBoxVacationKind, ComboBoxAdult, ComboBoxChild, ComboBoxInfant;
+    public Button ButtonCreate;
+    public ToggleButton ButtonSleepPlace;
+    public ComboBox ChoiceBoxVacationKind, ComboBoxAdult, ComboBoxChild, ComboBoxInfant, RankPlace, Place;
     public CheckBox CheckBoxReturnFlight, CheckBoxConnectionFlight,CheckBoxBaggage;
     public Flight flight;
+    String rankPlace;
+    String place;
 
     public void CountryName(){
 
@@ -27,8 +30,23 @@ public class CreateVacation extends AView implements Initializable {
     public void DeparturesDate(){
 
     }
+    public void PlaceToSleep(){
+        if(ButtonSleepPlace.isSelected()) {
+            Place.setVisible(true);
+            RankPlace.setVisible(true);
+
+        }
+        else{
+            Place.setVisible(false);
+            RankPlace.setVisible(false);
+            place=" ";
+            rankPlace=" ";
+        }
+    }
     public void CreateVacation(){
         String airline = TextFieldAirline.getText();
+        place=Place.getValue().toString();
+        rankPlace=RankPlace.getValue().toString();
         String price = TextFieldPrice.getText();
         LocalDate departureDate = DeparturesDate.getValue();
         LocalDate arrivalDate = ArrivalsDate.getValue();
@@ -55,7 +73,7 @@ public class CreateVacation extends AView implements Initializable {
             return;
         }
         flight=new Flight(airline,OriginCountry,destination, departureDate,arrivalDate);
-        Vacation v= new Vacation(controller.getUser(),flight,departureDate.toString(),arrivalDate.toString(),OriginCountry,destination,vacationKind,"default",5,"default",
+        Vacation v= new Vacation(controller.getUser(),flight,departureDate.toString(),arrivalDate.toString(),OriginCountry,destination,vacationKind,place,Integer.parseInt(rankPlace),"default",
                 false,Integer.parseInt(adultTicketNumber),Integer.parseInt(childTicketNumber),Integer.parseInt(infantTicketNumber),0);
         setChanged();
         notifyObservers(v);
@@ -123,7 +141,9 @@ public class CreateVacation extends AView implements Initializable {
         ComboBoxChild.setValue("0");
         ComboBoxInfant.setValue("0");
         ChoiceBoxVacationKind.setValue("None");
-        ButtonSleepPlace.setDisable(true);
+        Place.getItems().addAll("Hotel", "rented room", "Tzimer");
+        RankPlace.getItems().addAll("0", "1", "2", "3", "4", "5");
+       // ButtonSleepPlace.setDisable(true);
 
     }
 }
