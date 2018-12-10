@@ -84,7 +84,7 @@ public class VacationsTableManager extends ATableManager {
             while (rs.next()) {
 
                 String username = rs.getString("sellerId");
-                User seller = usersTable.ReadWithOutConnection(username);
+                User seller = usersTable.Read(username);
 
                 int vacationID = rs.getInt("vacationID");
 
@@ -104,7 +104,6 @@ public class VacationsTableManager extends ATableManager {
         catch (SQLException e) {
             e.printStackTrace();
         }
-
         closeConnection(); //disconnect from database
 
         Collections.sort(vacations, vacationsComparator);

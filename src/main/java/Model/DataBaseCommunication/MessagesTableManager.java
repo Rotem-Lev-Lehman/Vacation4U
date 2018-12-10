@@ -88,10 +88,10 @@ public class MessagesTableManager extends ATableManager {
             while (rs.next()) {
 
                 String senderName = rs.getString("senderID");
-                User sender = usersTable.ReadWithOutConnection(senderName);
+                User sender = usersTable.Read(senderName);
 
                 String receiverName = rs.getString("receiverID");
-                User receiver = usersTable.ReadWithOutConnection(receiverName);
+                User receiver = usersTable.Read(receiverName);
 
                 int seen = rs.getInt("seen");
                 boolean isSeen = false;
@@ -106,7 +106,6 @@ public class MessagesTableManager extends ATableManager {
         catch (SQLException e) {
             e.printStackTrace();
         }
-
         closeConnection(); //disconnect from database
 
         return messages;

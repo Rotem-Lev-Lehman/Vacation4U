@@ -33,5 +33,6 @@ public interface IDataBaseManager {
     void CreateMessage(Message message);
     List<Message> ReadAllMessages(String username);
     int CountUnseenMessages(String username);
+    void UpdateMessageAsSeen(Message message);
 
 }

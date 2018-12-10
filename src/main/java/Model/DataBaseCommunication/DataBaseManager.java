@@ -114,4 +114,9 @@ public class DataBaseManager implements IDataBaseManager{
     public int CountUnseenMessages(String username) {
         return messagesTable.countUnseenMessages(username);
     }
+
+    @Override
+    public void UpdateMessageAsSeen(Message message) {
+        messagesTable.UpdateAsSeen(message);
+    }
 }
