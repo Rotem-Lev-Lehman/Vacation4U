@@ -70,7 +70,7 @@ public abstract class AModel {
     }
 
     public void UpdateOrder(Order order){
-        dataBaseManager.UpdateOrder(order);
+        //dataBaseManager.UpdateOrder(order);
     }
 
     public void CreatePaymentTransaction(PaymentTransaction paymentTransaction){

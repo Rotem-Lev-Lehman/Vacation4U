@@ -101,6 +101,7 @@ public class HomePageView extends AView implements Initializable {
     public void signOut(){
         moveToNewScreen(600, 400, "MainPage.fxml", "Vacation4U");
         Stage currentStage = (Stage) signOutImage.getScene().getWindow();
+        checkMessages = false;
         currentStage.close();
     }
 

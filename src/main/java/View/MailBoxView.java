@@ -2,6 +2,8 @@ package View;
 
 import Model.Message;
 import Model.User;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -17,6 +19,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -32,15 +35,19 @@ public class MailBoxView extends AView implements Initializable {
     //Show users that were found
     public void showMessages(List<Message> messages){
         //show results
-        messagesObservableList = FXCollections.observableArrayList(messages);
+        List<TableMessage> tableMessages = new ArrayList<>();
+        for(Message msg : messages)
+            tableMessages.add(new TableMessage(msg.getText(), msg.getSender().getUsername(),msg.isSeen()));
+        messagesObservableList = FXCollections.observableArrayList(messages/*tableMessages*/);
         messagesTable.setItems(messagesObservableList);
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //Set columns name and set image to imageView
-        messageColumn.setCellValueFactory(new PropertyValueFactory<>("message"));
-        fromColumn.setCellValueFactory(new PropertyValueFactory<>("receiverID"));
+        //messageColumn.setCellValueFactory(new PropertyValueFactory<>("from"));
+        messageColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getText()));
+        fromColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSender().getUsername().toString()));/*new PropertyValueFactory<>("receiverID")*/
         seenColumn.setCellValueFactory(new PropertyValueFactory<>("seen"));
         Thread checkForNewMessages = new Thread(new Runnable() {
             @Override
@@ -68,5 +75,17 @@ public class MailBoxView extends AView implements Initializable {
 
     public void showNoResult() {
         messagesTable.setItems(null);
+    }
+
+    private class TableMessage{
+        String m_message;
+        String m_from;
+        boolean m_seen;
+
+        public TableMessage(String message, String from, boolean seen){
+            m_message = message;
+            m_from = from;
+            m_seen = seen;
+        }
     }
 }
