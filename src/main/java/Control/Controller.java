@@ -2,7 +2,10 @@ package Control;
 
 import Model.User;
 import View.*;
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.Period;
@@ -28,7 +31,7 @@ public class Controller extends AController {
             if (arg instanceof Object[] && ((Object[]) arg).length == 4)
                 checkSignUp1((SignUp1View) o, (Object[]) arg);
         } else if (o instanceof SignUp2View) {
-            if (arg instanceof String[] && ((String[]) arg).length == 3)
+            if (arg instanceof Object[] && ((Object[][]) arg).length == 4)
                 checkSignUp2((SignUp2View) o, (String[]) arg);
         } else if (o instanceof UpdateView) {
             if (arg instanceof Object[] && ((Object[]) arg).length == 6)
@@ -67,10 +70,11 @@ public class Controller extends AController {
     }
 
     //Check if second part of signing up is valid
-    private void checkSignUp2(SignUp2View signUp2View, String[] strings) {
-        String usernameText = strings[0];
-        String passwordText = strings[1];
-        String passwordCnfText = strings[2];
+    private void checkSignUp2(SignUp2View signUp2View, Object[] strings) {
+        String usernameText = (String)strings[0];
+        String passwordText = (String)strings[1];
+        String passwordCnfText = (String)strings[2];
+        File fileImage = (File)strings[3];
 
         //Make sure al details are filled in
         if(usernameText.equals("") || passwordText.equals("") || passwordCnfText.equals("")){
@@ -89,6 +93,10 @@ public class Controller extends AController {
             signUp2View.setMessagePasswordsDontMatch();
             return;
         }
+
+        //check if Image was set
+        if(fileImage != null)
+            user.setProfileImage(new Image(fileImage.toURI().toString()));
 
         user.setUsername(usernameText);
         user.setPassword(passwordText);

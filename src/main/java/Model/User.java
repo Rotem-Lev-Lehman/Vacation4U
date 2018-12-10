@@ -1,5 +1,7 @@
 package Model;
 
+import javafx.scene.image.Image;
+
 //User in the system
 public class User {
     private String username;
@@ -8,6 +10,7 @@ public class User {
     private String firstName;
     private String lastName;
     private String city;
+    private Image profileImage;
 
     //Constructor for user
     public User(String username, String password, String birthdate, String firstName, String lastName, String city) {
@@ -84,4 +87,11 @@ public class User {
         this.city = city;
     }
 
+    public Image getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(Image profileImage) {
+        this.profileImage = profileImage;
+    }
 }

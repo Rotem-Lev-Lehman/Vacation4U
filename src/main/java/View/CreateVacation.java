@@ -1,7 +1,11 @@
 package View;
 
+import Model.Flight;
+import Model.User;
+import Model.Vacation;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -9,11 +13,12 @@ import java.time.Period;
 import java.util.ResourceBundle;
 
 public class CreateVacation extends AView implements Initializable {
-    public TextField TextFieldcountryName, TextFieldAirline;
+    public TextField TextFieldcountryName, TextFieldAirline, TextFieldPrice, TextFieldOrigin;
     public DatePicker DeparturesDate, ArrivalsDate;
-    public Button ButtonCreate;
+    public Button ButtonCreate, ButtonSleepPlace;
     public ComboBox ChoiceBoxVacationKind, ComboBoxAdult, ComboBoxChild, ComboBoxInfant;
-    public CheckBox CheckBoxReturnFlight, CheckBoxConnectionFlight,CheckBoxBaggage, CheckBoxSleepPlace;
+    public CheckBox CheckBoxReturnFlight, CheckBoxConnectionFlight,CheckBoxBaggage;
+    public Flight flight;
 
     public void CountryName(){
 
@@ -23,6 +28,7 @@ public class CreateVacation extends AView implements Initializable {
     }
     public void CreateVacation(){
         String airline = TextFieldAirline.getText();
+        String price = TextFieldPrice.getText();
         LocalDate departureDate = DeparturesDate.getValue();
         LocalDate arrivalDate = ArrivalsDate.getValue();
         boolean isBaggage = CheckBoxBaggage.isSelected();
@@ -30,16 +36,24 @@ public class CreateVacation extends AView implements Initializable {
         String childTicketNumber = ComboBoxChild.getSelectionModel().getSelectedItem().toString();
         String infantTicketNumber = ComboBoxInfant.getSelectionModel().getSelectedItem().toString();
         String destination = TextFieldcountryName.getText();
-        String vacationKind;
+        String OriginCountry= TextFieldOrigin.getText();
+        String vacationKind=" ";
         if(ChoiceBoxVacationKind.getValue() != null)
-            vacationKind = ChoiceBoxVacationKind.getValue().toString();
-        boolean isSleepPlace = CheckBoxSleepPlace.isSelected();
+             vacationKind = ChoiceBoxVacationKind.getValue().toString();
+
         boolean isConnection = CheckBoxConnectionFlight.isSelected();
         boolean isReturnFlight = CheckBoxReturnFlight.isSelected();
 
-        if(airline.equals("") || !legalDates(departureDate,arrivalDate) || destination.equals("")){
+        if(airline.equals("") || price.equals("")|| !legalDates(departureDate,arrivalDate) || destination.equals("")){
             showFillDetailsError();
         }
+        //flight=new Flight()
+        Vacation v= new Vacation(controller.getUser(),flight,departureDate.toString(),arrivalDate.toString(),OriginCountry,destination,vacationKind,false,
+                Integer.parseInt(adultTicketNumber),Integer.parseInt(childTicketNumber),Integer.parseInt(infantTicketNumber));
+
+
+    //public Vacation(User SellerId,String StartDate, String EndDate, String StartCountry, String DestCountry, String TypesOfVacation,
+      //  int alreadySold, int amountOfAdultTickets, int amountOfChildTickets,int amountOfInfantTickets)
     }
 
     private void showFillDetailsError() {
@@ -56,6 +70,8 @@ public class CreateVacation extends AView implements Initializable {
         Period p2 = Period.between(departureDate, arrivalDate);
         return !p.isNegative() && !p1.isNegative() && !p2.isNegative();
     }
+
+
 
     public void TickNum(){
 
@@ -91,6 +107,7 @@ public class CreateVacation extends AView implements Initializable {
         ComboBoxAdult.setValue("0");
         ComboBoxChild.setValue("0");
         ComboBoxInfant.setValue("0");
+        ButtonSleepPlace.setDisable(true);
 
     }
 }

@@ -82,7 +82,7 @@ public class SignUp1View extends AView implements Initializable {
     public void successfullySignedUp(){
         processMessage.setText("");
         pressedContinue = true;
-        moveToNewScreen(400, 395, "SignUp2.fxml", "Register");
+        moveToNewScreen(400, 470, "SignUp2.fxml", "Register");
         Stage currentStage = (Stage) continueBtn.getScene().getWindow();
         currentStage.close();
     }
