@@ -5,39 +5,41 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="367.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.UpdateView">
+<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="502.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.UpdateView">
    <children>
       <Text layoutX="149.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Update" wrappingWidth="247.37865447998047">
          <font>
             <Font name="Ink Free" size="47.0" />
          </font>
       </Text>
-      <Text layoutX="70.0" layoutY="119.0" text="Username:" />
-      <TextField fx:id="UserNameText" layoutX="150.0" layoutY="102.0" promptText="Username" />
+      <Text layoutX="73.0" layoutY="233.0" text="Username:" />
+      <TextField fx:id="UserNameText" layoutX="153.0" layoutY="216.0" promptText="Username" />
 
-      <Text layoutX="69.0" layoutY="158.0" text="First Name:" />
-      <TextField fx:id="FirstNameText" layoutX="150.0" layoutY="141.0" promptText="First Name" />
+      <Text layoutX="72.0" layoutY="272.0" text="First Name:" />
+      <TextField fx:id="FirstNameText" layoutX="153.0" layoutY="255.0" promptText="First Name" />
 
-      <Text layoutX="69.0" layoutY="198.0" text="Last Name:" />
-      <TextField fx:id="LastNameText" layoutX="149.0" layoutY="181.0" promptText="Last Name" />
+      <Text layoutX="72.0" layoutY="312.0" text="Last Name:" />
+      <TextField fx:id="LastNameText" layoutX="152.0" layoutY="295.0" promptText="Last Name" />
 
-      <Text layoutX="68.0" layoutY="238.0" text="Password:" />
-      <PasswordField fx:id="password" layoutX="149.0" layoutY="221.0" promptText="Password" />
+      <Text layoutX="71.0" layoutY="352.0" text="Password:" />
+      <PasswordField fx:id="password" layoutX="152.0" layoutY="335.0" promptText="Password" />
 
-      <Text layoutX="67.0" layoutY="278.0" text="Birth Date:" />
-       <DatePicker fx:id="BirthDate" layoutX="149.0" layoutY="260.0" promptText="Birth Date" />
+      <Text layoutX="70.0" layoutY="392.0" text="Birth Date:" />
+       <DatePicker fx:id="BirthDate" layoutX="152.0" layoutY="374.0" promptText="Birth Date" />
 
-      <Text layoutX="70.0" layoutY="316.0" text="City:" />
-      <TextField fx:id="CityText" layoutX="148.0" layoutY="300.0" promptText="City" />
+      <Text layoutX="73.0" layoutY="430.0" text="City:" />
+      <TextField fx:id="CityText" layoutX="151.0" layoutY="414.0" promptText="City" />
 
-      <Button fx:id="UpdateButton" layoutX="321.0" layoutY="330.0" mnemonicParsing="false" onAction="#Update" text="Update" />
+      <Button fx:id="UpdateButton" layoutX="324.0" layoutY="444.0" mnemonicParsing="false" onAction="#Update" text="Update" />
 
 
 
       <Text fx:id="process_message" fill="red" layoutX="50" layoutY="340" />
+      <Circle fx:id="profile_image_circle" onMouseClicked="#openImagePicker" fill="#e6f3ff" layoutX="218.0" layoutY="140.0" radius="58.0" stroke="BLACK" strokeType="INSIDE" />
 
    </children>
 </AnchorPane>

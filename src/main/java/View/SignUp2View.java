@@ -129,7 +129,9 @@ public class SignUp2View extends AView implements Initializable {
         fileChooser.getExtensionFilters().add(imageFilter);
         Stage currentStage = (Stage) register.getScene().getWindow();
         imageFile = fileChooser.showOpenDialog(currentStage);
-        Image profileImage = new Image(imageFile.toURI().toString());
-        profile_image_circle.setFill(new ImagePattern(profileImage));
+        if(imageFile != null) {
+            Image profileImage = new Image(imageFile.toURI().toString());
+            profile_image_circle.setFill(new ImagePattern(profileImage));
+        }
     }
 }

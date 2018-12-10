@@ -5,10 +5,15 @@ import Model.User;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,6 +32,8 @@ public class UpdateView extends AView implements Initializable {
     public Text process_message;
     public AnchorPane anchor;
     public DatePicker BirthDate;
+    public Circle profile_image_circle;
+    private File imageFile;
     //public PasswordField passwordCnf;
 
    // public String oldUsername;
@@ -54,6 +61,14 @@ public class UpdateView extends AView implements Initializable {
             password.setText(user.getPassword());
             LocalDate date = LocalDate.parse(user.getBirthdate());
             BirthDate.setValue(date);
+            Image profileImage = user.getProfileImage();
+            if(profileImage !=null)
+                profile_image_circle.setFill(new ImagePattern(profileImage));
+            else{
+                Image defaultProfileImage = new Image(this.getClass().getResourceAsStream("/images/defaultProfileImage.png"));
+                profile_image_circle.setFill(new ImagePattern(defaultProfileImage));
+            }
+
         }
     }
 
@@ -67,13 +82,14 @@ public class UpdateView extends AView implements Initializable {
         String passwordtxt = password.getText();
         LocalDate birthDate = BirthDate.getValue();
 
-        Object[] objects = new Object[6];
+        Object[] objects = new Object[7];
         objects[0] = username;
         objects[1] = firstname;
         objects[2] = lastname;
         objects[3] = city;
         objects[4] = passwordtxt;
         objects[5] = birthDate;
+        objects[6] = imageFile;
 
         setChanged();
         notifyObservers(objects);
@@ -97,5 +113,17 @@ public class UpdateView extends AView implements Initializable {
         alert.setContentText("Successful Update!");
 
         alert.showAndWait();
+    }
+
+    public void openImagePicker(MouseEvent mouseEvent) {
+        final FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png");
+        fileChooser.getExtensionFilters().add(imageFilter);
+        Stage currentStage = (Stage) profile_image_circle.getScene().getWindow();
+        imageFile = fileChooser.showOpenDialog(currentStage);
+        if(imageFile != null) {
+            Image profileImage = new Image(imageFile.toURI().toString());
+            profile_image_circle.setFill(new ImagePattern(profileImage));
+        }
     }
 }
