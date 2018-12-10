@@ -45,7 +45,7 @@ public class CreateVacation extends AView implements Initializable {
         boolean isConnection = CheckBoxConnectionFlight.isSelected();
         boolean isReturnFlight = CheckBoxReturnFlight.isSelected();
 
-        if(airline.equals("") || price.equals("")|| !legalDates(departureDate,arrivalDate) || destination.equals("")|| OriginCountry.equals((""))){
+        if(airline.equals("") || price.equals("")|| departureDate == null || arrivalDate == null || !legalDates(departureDate,arrivalDate) || destination.equals("")|| OriginCountry.equals((""))){
             showFillDetailsError();
             return;
         }

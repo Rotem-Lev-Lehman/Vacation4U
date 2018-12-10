@@ -135,4 +135,9 @@ public class HomePageView extends AView implements Initializable {
     public void mouseExitedSettings(MouseEvent mouseEvent) {
         stopSettings = true;
     }
+
+
+    public void openCreateVacation(MouseEvent mouseEvent) {
+        moveToNewScreen(650, 500, "CreateVacation.fxml","Create Vacation");
+    }
 }

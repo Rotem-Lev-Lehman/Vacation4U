@@ -85,6 +85,6 @@ public class MainPageView extends AView implements Initializable {
     }
 
     public void openSearch(MouseEvent mouseEvent) {
-        moveToNewScreen(600, 400, "SearchVacation.fxml", "Search");
+        moveToNewScreen(600, 400, "SearchPage.fxml", "Search");
     }
 }
