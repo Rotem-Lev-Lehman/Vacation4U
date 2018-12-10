@@ -6,13 +6,13 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class DataBaseManager implements IDataBaseManager{
-    private ATableManager usersTable;
-    private ATableManager vacationsTable;
-    private ATableManager flightsTable;
-    private ATableManager messagesTable;
-    private ATableManager ordersTable;
-    private ATableManager paymentDetailsTable;
-    private ATableManager usersPicturesTable;
+    private UsersTableManager usersTable;
+    private VacationsTableManager vacationsTable;
+    private FlightsTableManager flightsTable;
+    private MessagesTableManager messagesTable;
+    private OrdersTableManager ordersTable;
+    private PaymentsTableManager paymentDetailsTable;
+    private UsersPicturesTableManager usersPicturesTable;
 
     public DataBaseManager(){
         usersTable = new UsersTableManager();
@@ -21,31 +21,31 @@ public class DataBaseManager implements IDataBaseManager{
         messagesTable = new MessagesTableManager();
         ordersTable = new OrdersTableManager();
         paymentDetailsTable = new PaymentsTableManager();
-        usersPicturesTable = new UsersTableManager();
+        usersPicturesTable = new UsersPicturesTableManager();
     }
 
     @Override
-    public void Create(User user) throws SQLException {
-
+    public void CreateUser(User user) throws SQLException {
+        usersTable.Create(user);
     }
 
     @Override
-    public User Read(String username) {
-        return null;
+    public User ReadUser(String username) {
+        return usersTable.Read(username);
     }
 
     @Override
-    public List<User> ReadSimilar(String username) {
-        return null;
+    public List<User> ReadSimilarUsers(String username) {
+        return usersTable.ReadSimilar(username);
     }
 
     @Override
-    public void Update(String username, User user) {
-
+    public void UpdateUser(String username, User user) {
+        usersTable.Update(username, user);
     }
 
     @Override
-    public void Delete(User user) {
-
+    public void DeleteUser(User user) {
+        usersTable.Delete(user);
     }
 }
