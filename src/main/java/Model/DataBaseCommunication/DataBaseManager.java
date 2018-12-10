@@ -5,12 +5,12 @@ import javafx.scene.image.Image;
 
 import java.io.File;
 import java.sql.SQLException;
+import java.util.Comparator;
 import java.util.List;
 
 public class DataBaseManager implements IDataBaseManager{
     private UsersTableManager usersTable;
     private VacationsTableManager vacationsTable;
-    private FlightsTableManager flightsTable;
     private MessagesTableManager messagesTable;
     private OrdersTableManager ordersTable;
     private PaymentsTableManager paymentDetailsTable;
@@ -19,7 +19,6 @@ public class DataBaseManager implements IDataBaseManager{
     public DataBaseManager(){
         usersTable = new UsersTableManager();
         vacationsTable = new VacationsTableManager();
-        flightsTable = new FlightsTableManager();
         messagesTable = new MessagesTableManager();
         ordersTable = new OrdersTableManager();
         paymentDetailsTable = new PaymentsTableManager();
@@ -72,7 +71,7 @@ public class DataBaseManager implements IDataBaseManager{
     }
 
     @Override
-    public List<Vacation> ReadSimilarVacations(Vacation vacation) {
+    public List<Vacation> ReadSimilarVacations(Vacation vacation, Comparator<Vacation> vacationsComparator) {
         return null;
     }
 

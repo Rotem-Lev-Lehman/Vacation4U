@@ -5,6 +5,7 @@ import javafx.scene.image.Image;
 
 import java.io.File;
 import java.sql.SQLException;
+import java.util.Comparator;
 import java.util.List;
 
 //Database manager interface
@@ -20,7 +21,7 @@ public interface IDataBaseManager {
     void UpdateUsersProfileImage(String username, File imageFile);
 
     void CreateVacation(Vacation vacation); //Create Vacation
-    List<Vacation> ReadSimilarVacations(Vacation vacation); //Read vacations with similar parameters
+    List<Vacation> ReadSimilarVacations(Vacation vacation, Comparator<Vacation> vacationsComparator); //Read vacations with similar parameters
     void UpdateVacation(Vacation vacation); //Update a given vacation in the database
 
     void CreateOrder(Order order); //Create Order

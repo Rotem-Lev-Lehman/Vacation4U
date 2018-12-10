@@ -75,4 +75,12 @@ public class Flight {
     public void setReturnFlight(Flight returnFlight) {
         this.returnFlight = returnFlight;
     }
+
+    public String getStartDateAsString(){
+        return startDate.toString();
+    }
+
+    public String getEndDateAsString(){
+        return endDate.toString();
+    }
 }

@@ -36,29 +36,9 @@ public class UsersTableManager extends ATableManager {
 
     //Read User
     public User Read(String username){
-        connect(); //Connect to databse
-
-        //Read user - sql commend
-        String sql = "SELECT username, password, birthdate, firstname, lastname, city FROM users WHERE username = ?";
-        User user = null;
-        try {
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            // set the value
-            pstmt.setString(1, username);
-            //
-            ResultSet rs = pstmt.executeQuery();
-
-            // loop through the result set
-            while (rs.next()) {
-                user = new User(rs.getString("username"),rs.getString("password"),rs.getString("birthdate"),rs.getString("firstname"),rs.getString("lastname"),rs.getString("city"));
-                break;
-            }
-        }
-        catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-
-        closeConnection(); //disconnect from datebase
+        connect(); //Connect to database
+        User user = ReadWithOutConnection(username);
+        closeConnection();
         return user;
     }
 
@@ -83,7 +63,7 @@ public class UsersTableManager extends ATableManager {
             }
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
 
         closeConnection(); //disconnect from database
@@ -116,7 +96,7 @@ public class UsersTableManager extends ATableManager {
             // update
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
         closeConnection(); //disconnect from databse
     }
@@ -134,8 +114,31 @@ public class UsersTableManager extends ATableManager {
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
         closeConnection(); //Disconnect from database
+    }
+
+    protected User ReadWithOutConnection(String username){
+        //Read user - sql commend
+        String sql = "SELECT username, password, birthdate, firstname, lastname, city FROM users WHERE username = ?";
+        User user = null;
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            // set the value
+            pstmt.setString(1, username);
+            //
+            ResultSet rs = pstmt.executeQuery();
+
+            // loop through the result set
+            while (rs.next()) {
+                user = new User(rs.getString("username"),rs.getString("password"),rs.getString("birthdate"),rs.getString("firstname"),rs.getString("lastname"),rs.getString("city"));
+                break;
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 }
