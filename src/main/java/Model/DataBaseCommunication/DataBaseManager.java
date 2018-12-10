@@ -1,7 +1,9 @@
 package Model.DataBaseCommunication;
 
 import Model.*;
+import javafx.scene.image.Image;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -50,6 +52,21 @@ public class DataBaseManager implements IDataBaseManager{
     }
 
     @Override
+    public void CreateUsersProfileImage(String username, File imageFile) {
+
+    }
+
+    @Override
+    public Image ReadUsersProfileImage(String username) {
+        return null;
+    }
+
+    @Override
+    public void UpdateUsersProfileImage(String username, File imageFile) {
+
+    }
+
+    @Override
     public void CreateVacation(Vacation vacation) {
 
     }
@@ -90,7 +107,12 @@ public class DataBaseManager implements IDataBaseManager{
     }
 
     @Override
-    public List<Message> ReadMessages(String username) {
+    public List<Message> ReadAllMessages(String username) {
         return null;
+    }
+
+    @Override
+    public int CountUnseenMessages(String username) {
+        return 0;
     }
 }

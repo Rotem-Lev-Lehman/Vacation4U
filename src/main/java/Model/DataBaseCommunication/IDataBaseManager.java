@@ -1,7 +1,9 @@
 package Model.DataBaseCommunication;
 
 import Model.*;
+import javafx.scene.image.Image;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -12,6 +14,10 @@ public interface IDataBaseManager {
     List<User> ReadSimilarUsers(String username); //Read user with similar usernames
     void UpdateUser(String username, User user); //Update user information
     void DeleteUser(User user); //Delete User
+
+    void CreateUsersProfileImage(String username, File imageFile);
+    Image ReadUsersProfileImage(String username);
+    void UpdateUsersProfileImage(String username, File imageFile);
 
     void CreateVacation(Vacation vacation); //Create Vacation
     List<Vacation> ReadSimilarVacations(Vacation vacation); //Read vacations with similar parameters
@@ -24,5 +30,7 @@ public interface IDataBaseManager {
     void CreatePaymentTransaction(PaymentTransaction paymentTransaction);
 
     void CreateMessage(Message message);
-    List<Message> ReadMessages(String username);
+    List<Message> ReadAllMessages(String username);
+    int CountUnseenMessages(String username);
+
 }

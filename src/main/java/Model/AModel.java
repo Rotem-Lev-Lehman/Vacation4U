@@ -1,7 +1,9 @@
 package Model;
 
 import Model.DataBaseCommunication.IDataBaseManager;
+import javafx.scene.image.Image;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -32,6 +34,18 @@ public abstract class AModel {
     //Delete user
     public void DeleteUser(User user) {
         dataBaseManager.DeleteUser(user);
+    }
+
+    void CreateUsersProfileImage(String username, File imageFile){
+        dataBaseManager.CreateUsersProfileImage(username,imageFile);
+    }
+
+    Image ReadUsersProfileImage(String username){
+        return dataBaseManager.ReadUsersProfileImage(username);
+    }
+
+    void UpdateUsersProfileImage(String username, File imageFile){
+        dataBaseManager.UpdateUsersProfileImage(username, imageFile);
     }
 
     public void CreateVacation(Vacation vacation){
@@ -66,7 +80,10 @@ public abstract class AModel {
         dataBaseManager.CreateMessage(message);
     }
 
-    List<Message> ReadMessages(String username){
-        return dataBaseManager.ReadMessages(username);
+    List<Message> ReadAllMessages(String username){
+        return dataBaseManager.ReadAllMessages(username);
+    }
+    int CountUnseenMessages(String username){
+        return dataBaseManager.CountUnseenMessages(username);
     }
 }
