@@ -7,17 +7,23 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +41,6 @@ public class MailBoxView extends AView implements Initializable {
     //Show users that were found
     public void showMessages(List<Message> messages){
         //show results
-        List<TableMessage> tableMessages = new ArrayList<>();
-        for(Message msg : messages)
-            tableMessages.add(new TableMessage(msg.getText(), msg.getSender().getUsername(),msg.isSeen()));
         messagesObservableList = FXCollections.observableArrayList(messages/*tableMessages*/);
         messagesTable.setItems(messagesObservableList);
     }
@@ -47,8 +50,19 @@ public class MailBoxView extends AView implements Initializable {
         //Set columns name and set image to imageView
         //messageColumn.setCellValueFactory(new PropertyValueFactory<>("from"));
         messageColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getText()));
-        fromColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSender().getUsername().toString()));/*new PropertyValueFactory<>("receiverID")*/
+        fromColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSender().getUsername()));/*new PropertyValueFactory<>("receiverID")*/
         seenColumn.setCellValueFactory(new PropertyValueFactory<>("seen"));
+        messagesTable.setRowFactory(tv -> {
+            TableRow<Message> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                    Message clickedRow = row.getItem();
+                    openMessageBox(clickedRow.getText(), clickedRow.getSender().getUsername(), clickedRow.isSeen());
+                    setChanged();
+                    notifyObservers(clickedRow);
+            });
+            return row ;
+        });
+
         Thread checkForNewMessages = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -73,19 +87,24 @@ public class MailBoxView extends AView implements Initializable {
         checkForNewMessages.start();
     }
 
-    public void showNoResult() {
-        messagesTable.setItems(null);
+    private void openMessageBox(String message, String from, boolean seen) {
+        Parent root = null;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("MessageBox.fxml"));
+            root = loader.load();
+            MessageBoxView messageBoxView = loader.getController();
+            messageBoxView.setMessage(message, from); //set the dictionary
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Stage stage = new Stage();
+        stage.setTitle("Message");
+        stage.setScene(new Scene(root, 600, 255));
+        stage.show();
     }
 
-    private class TableMessage{
-        String m_message;
-        String m_from;
-        boolean m_seen;
-
-        public TableMessage(String message, String from, boolean seen){
-            m_message = message;
-            m_from = from;
-            m_seen = seen;
-        }
+    public void showNoResult() {
+        messagesTable.setItems(null);
     }
 }
