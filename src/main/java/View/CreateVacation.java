@@ -47,6 +47,7 @@ public class CreateVacation extends AView implements Initializable {
 
         if(airline.equals("") || price.equals("")|| !legalDates(departureDate,arrivalDate) || destination.equals("")|| OriginCountry.equals((""))){
             showFillDetailsError();
+            return;
         }
         flight=new Flight(airline,OriginCountry,destination, departureDate,arrivalDate);
         Vacation v= new Vacation(controller.getUser(),flight,departureDate.toString(),arrivalDate.toString(),OriginCountry,destination,vacationKind,false,
