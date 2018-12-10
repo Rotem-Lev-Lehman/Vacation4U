@@ -1,6 +1,6 @@
 package Model;
 
-public class Vacation {
+public class Vacation{
 
 
     private int vacationID;
@@ -160,10 +160,6 @@ public class Vacation {
     public void setPrice(int price) {
         this.price = price;
     }
-
-
-
-
 
 
 }

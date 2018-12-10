@@ -51,7 +51,9 @@ public class CreateVacation extends AView implements Initializable {
         flight=new Flight(airline,OriginCountry,destination, departureDate,arrivalDate);
         Vacation v= new Vacation(controller.getUser(),flight,departureDate.toString(),arrivalDate.toString(),OriginCountry,destination,vacationKind,false,
                 Integer.parseInt(adultTicketNumber),Integer.parseInt(childTicketNumber),Integer.parseInt(infantTicketNumber));
-        int x=0;
+        setChanged();
+        notifyObservers(v);
+
     }
 
     private void showFillDetailsError() {
@@ -59,6 +61,7 @@ public class CreateVacation extends AView implements Initializable {
         alert.setHeaderText("Error");
         alert.setContentText("Please Fill in All Fields");
         alert.show();
+        return;
     }
 
     private boolean legalDates(LocalDate departureDate, LocalDate arrivalDate) {
