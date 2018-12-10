@@ -72,7 +72,7 @@ public class DataBaseManager implements IDataBaseManager{
 
     @Override
     public List<Vacation> ReadSimilarVacations(Vacation vacation, Comparator<Vacation> vacationsComparator) {
-        return null;
+        return vacationsTable.ReadSimilarVacationsNotBought(vacation, vacationsComparator);
     }
 
     @Override

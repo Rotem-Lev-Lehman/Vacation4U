@@ -82,10 +82,6 @@ public class VacationsTableManager extends ATableManager {
 
             // loop through the result set
             while (rs.next()) {
-                /*
-                User SellerId, Flight flight, String StartDate, String EndDate, String StartCountry, String DestCountry, String TypesOfVacation,
-                    boolean alreadySold, int amountOfAdultTickets, int amountOfChildTickets,int amountOfInfantTickets
-                 */
 
                 String username = rs.getString("sellerId");
                 User seller = usersTable.ReadWithOutConnection(username);
