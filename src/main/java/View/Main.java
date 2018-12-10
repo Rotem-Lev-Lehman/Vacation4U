@@ -23,11 +23,11 @@ public class Main extends Application {
 
         //open main page
         FXMLLoader fxmlLoader = new FXMLLoader();
-        Parent root = fxmlLoader.load(getClass().getResource(/*"/MainPage.fxml"*/"/CreateVacation.fxml").openStream());
+        Parent root = fxmlLoader.load(getClass().getResource("/CreateVacation.fxml").openStream());
         ((AView)fxmlLoader.getController()).setController(controller);
 
         primaryStage.setTitle("Vacation4U");
-        primaryStage.setScene(new Scene(root, 575, 300));
+        primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
     }
 

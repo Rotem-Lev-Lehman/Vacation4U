@@ -6,6 +6,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -14,7 +16,9 @@ import java.util.ResourceBundle;
 
 public class HomePageView extends AView implements Initializable {
 
-    public ImageView logo2, trashImage, magnifyImage, settingsImage, signOutImage;
+    public ImageView logo2, trashImage, magnifyImage, settingsImage, signOutImage, email_img, airplane_upload;
+    public Circle email_circle;
+    public Text email_number;
     private Thread threadSettings = null; //Settings animation thread
     private volatile boolean stopSettings = false; //boolean to determent if setting gear should rotate
     private int settingsImageNum = 1; //int number to determent what setting picture is shown currently
@@ -28,7 +32,7 @@ public class HomePageView extends AView implements Initializable {
         Image trashImg = new Image(this.getClass().getResourceAsStream("/images/trash.png"));
         trashImage.setImage(trashImg);
 
-        Image magnifyImg = new Image(this.getClass().getResourceAsStream("/images/mag_glass.png"));
+        Image magnifyImg = new Image(this.getClass().getResourceAsStream("/images/search_flight.png"));
         magnifyImage.setImage(magnifyImg);
 
         Image settingsImg = new Image(this.getClass().getResourceAsStream("/images/settings_icon.png"));
@@ -36,6 +40,15 @@ public class HomePageView extends AView implements Initializable {
 
         Image logoutImg = new Image(this.getClass().getResourceAsStream("/images/log_out_icon.png"));
         signOutImage.setImage(logoutImg);
+
+        Image emailImg = new Image(this.getClass().getResourceAsStream("/images/email.png"));
+        email_img.setImage(emailImg);
+
+        Image uploadImg = new Image(this.getClass().getResourceAsStream("/images/airplane_upload.png"));
+        airplane_upload.setImage(uploadImg);
+
+        setChanged();
+        notifyObservers("Count Unread Messages");
     }
 
     //Delete user button was pressed
@@ -57,12 +70,12 @@ public class HomePageView extends AView implements Initializable {
 
     //Move to settings screen
     public void goToSettings(MouseEvent mouseEvent) {
-        moveToNewScreen(440, 400, "Update.fxml", "Settings");
+        moveToNewScreen(440, 480, "Update.fxml", "Settings");
     }
 
     //Sign out user - called by controller
     public void signOut(){
-        moveToNewScreen(575, 300, "MainPage.fxml", "Vacation4U");
+        moveToNewScreen(600, 400, "MainPage.fxml", "Vacation4U");
         Stage currentStage = (Stage) signOutImage.getScene().getWindow();
         currentStage.close();
     }
@@ -105,8 +118,26 @@ public class HomePageView extends AView implements Initializable {
         threadSettings.start();
     }
 
+    public void updateUnreadEmailsCount(int count){
+        if(count > 0) {
+            email_number.setText(String.valueOf(count));
+            email_number.setVisible(true);
+            email_circle.setVisible(true);
+        }
+        else{
+            email_number.setText("0");
+            email_number.setVisible(false);
+            email_circle.setVisible(false);
+        }
+    }
+
     //Mouse exited settings icon
     public void mouseExitedSettings(MouseEvent mouseEvent) {
         stopSettings = true;
+    }
+
+
+    public void openCreateVacation(MouseEvent mouseEvent) {
+        moveToNewScreen(650, 500, "CreateVacation.fxml","Create Vacation");
     }
 }

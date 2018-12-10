@@ -41,7 +41,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Button fx:id="ButtonCreate" layoutX="233.0" layoutY="408.0" mnemonicParsing="false" onMouseClicked="#CreateVacation" prefHeight="25.0" prefWidth="141.0" text="Create Vacation" textFill="WHITE">
+      <Button fx:id="ButtonCreate" layoutX="234.0" layoutY="433.0" mnemonicParsing="false" onMouseClicked="#CreateVacation" prefHeight="25.0" prefWidth="141.0" text="Create Vacation">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>

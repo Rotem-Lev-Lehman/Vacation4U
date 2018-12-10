@@ -33,4 +33,5 @@ public abstract class AController implements Observer {
     public boolean isUserNull(){
         return user == null;
     }
+
 }

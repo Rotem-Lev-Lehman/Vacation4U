@@ -1,6 +1,6 @@
 package Model;
 
-public class Vacation {
+public class Vacation{
 
 
     private int vacationID;
@@ -21,7 +21,7 @@ public class Vacation {
     private int price;
 
     public Vacation(User SellerId, Flight flight, String StartDate, String EndDate, String StartCountry, String DestCountry, String TypesOfVacation,
-                    boolean alreadySold, int amountOfAdultTickets, int amountOfChildTickets,int amountOfInfantTickets){
+                    String TypeOfHotel, int rankingOfHotel, String typeOfLuggage,boolean alreadySold, int amountOfAdultTickets, int amountOfChildTickets,int amountOfInfantTickets, int price){
         this.SellerId=SellerId;
         this.flight=flight;
         this.EndDate=EndDate;
@@ -33,6 +33,12 @@ public class Vacation {
         this.amountOfAdultTickets=amountOfAdultTickets;
         this.amountOfChildTickets=amountOfChildTickets;
         this.amountOfInfantTickets=amountOfInfantTickets;
+        this.TypeOfHotel=TypeOfHotel;
+        this.rankingOfHotel=rankingOfHotel;
+        this.typeOfLuggage=typeOfLuggage;
+        this.price=price;
+
+
     }
     public Flight getFlight() {
         return flight;
@@ -160,10 +166,6 @@ public class Vacation {
     public void setPrice(int price) {
         this.price = price;
     }
-
-
-
-
 
 
 }

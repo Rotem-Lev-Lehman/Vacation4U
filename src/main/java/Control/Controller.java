@@ -1,6 +1,8 @@
 package Control;
 
+import Model.PaymentTransaction;
 import Model.User;
+import Model.Vacation;
 import View.*;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
@@ -21,6 +23,8 @@ public class Controller extends AController {
         if (o instanceof HomePageView) {
             if (arg instanceof String && ((String) arg).equals("Delete user"))
                 deleteUser((HomePageView) o);
+            if(arg instanceof String && ((String) arg).equals("Count Unread Messages"))
+                countEmails((HomePageView) o);
         } else if (o instanceof MainPageView) {
             if (arg instanceof String[] && ((String[]) arg).length == 2)
                 checkLogin((MainPageView) o, (String[]) arg);
@@ -34,9 +38,29 @@ public class Controller extends AController {
             if (arg instanceof Object[] && ((Object[][]) arg).length == 4)
                 checkSignUp2((SignUp2View) o, (String[]) arg);
         } else if (o instanceof UpdateView) {
-            if (arg instanceof Object[] && ((Object[]) arg).length == 6)
+            if (arg instanceof Object[] && ((Object[]) arg).length == 7)
                 checkUpdate((UpdateView) o, (Object[]) arg);
+        } else if (o instanceof  CreateVacation){
+            if(arg instanceof Vacation)
+                createVacation((CreateVacation)o, (Vacation)arg);
+        } else if (o instanceof OrderVacation){
+            if(arg instanceof PaymentTransaction)
+                createPayment((OrderVacation)o,(PaymentTransaction)arg);
         }
+    }
+
+    private void createPayment(OrderVacation o, PaymentTransaction arg) {
+        model.CreatePaymentTransaction(arg);
+    }
+
+    private void createVacation(CreateVacation o, Vacation arg) {
+        model.CreateVacation(arg);
+    }
+
+    private void countEmails(HomePageView o) {
+        /***undo**/
+        //int count = model.countUnreadEmail(user.getUsername());
+        //o.updateUnreadEmailsCount(count);
     }
 
     //Check if update is valid
@@ -47,6 +71,7 @@ public class Controller extends AController {
         String city = (String) objects[3];
         String passwordtxt = (String) objects[4];
         LocalDate birthDate = (LocalDate) objects[5];
+        File imageFile = (File) objects[6];
 
         //Check that all details are filled
         if (username == null || firstname == null || lastname == null || city == null || passwordtxt == null || birthDate == null ||
@@ -56,13 +81,15 @@ public class Controller extends AController {
         }
 
         //if username is taken by a different user
-        if (!user.getUsername().equals(username) && model.Read(username) != null) {
+        if (!user.getUsername().equals(username) && model.ReadUser(username) != null) {
             updateView.setMessageUsernameTaken();
             return;
         }
 
         User newUser = new User(username, passwordtxt, birthDate.toString(), firstname, lastname, city);
-        model.Update(user.getUsername(), newUser); //update user
+        model.UpdateUser(user.getUsername(), newUser); //update user
+        if(imageFile != null)
+            model.UpdateUsersProfileImage(user.getUsername(), imageFile);
 
         setUser(newUser); //set new user
 
@@ -83,7 +110,7 @@ public class Controller extends AController {
         }
 
         //Check if the username is not taken
-        if(model.Read(usernameText) != null) { //user exists
+        if(model.ReadUser(usernameText) != null) { //user exists
             signUp2View.setMessageUsernameTaken();
             return;
         }
@@ -101,7 +128,9 @@ public class Controller extends AController {
         user.setUsername(usernameText);
         user.setPassword(passwordText);
         try {
-            model.Create(user); //create user
+            model.CreateUser(user); //create user
+            if(fileImage!= null)
+                model.CreateUsersProfileImage(user.getUsername(), fileImage);
         } catch (SQLException e) {
             System.out.println(e.toString());
         }
@@ -137,7 +166,7 @@ public class Controller extends AController {
 
     //Search for similar users - executed by model
     private void searchForSimilarUsers(SearchPageView searchPageView, String username) {
-        List<User> users = model.ReadSimilar(username);
+        List<User> users = model.ReadSimilarUsers(username);
 
         if(users == null || users.size() == 0){ //if there are no results
             //say no results
@@ -151,7 +180,7 @@ public class Controller extends AController {
 
     //Check rather there is a user logged in
     private void checkLogin(MainPageView mainPageView, String[] str) {
-        User currentUser = model.Read(str[0]);
+        User currentUser = model.ReadUser(str[0]);
 
         if (currentUser != null && currentUser.getPassword().equals(str[1])) { //if there is a user logged in
             setUser(currentUser);
@@ -162,7 +191,7 @@ public class Controller extends AController {
 
     //Delete user - executed by model
     private void deleteUser(HomePageView homePageView) {
-        model.Delete(user);
+        model.DeleteUser(user);
         setUser(null); //Set user as null
 
         homePageView.signOut(); //sign out user

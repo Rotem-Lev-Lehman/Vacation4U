@@ -20,7 +20,7 @@ public class OrderVacation extends AView implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Image paymentImage = new Image(this.getClass().getResourceAsStream("/images/Payment-Logo.pnp"));
+        Image paymentImage = new Image(this.getClass().getResourceAsStream("/images/Payment-Logo.png"));
         payment_img.setImage(paymentImage);
     }
     public void ContinueToPay(){
@@ -29,6 +29,8 @@ public class OrderVacation extends AView implements Initializable {
         String credit = creditCardNname.getText().toString();
         LocalDate dateNow = java.time.LocalDate.now();
         PaymentTransaction pay=new PaymentTransaction(order,credit,valid,c,order.getVacation().getPrice(),dateNow);
+        setChanged();
+        notifyObservers(pay);
     }
 
 }

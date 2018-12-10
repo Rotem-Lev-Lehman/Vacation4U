@@ -23,8 +23,8 @@ public class MainPageView extends AView implements Initializable {
     public TextField usernameTextField;
     public PasswordField passwordTextField;
     public Text notRegisteredTextField, message;
-    public ImageView logo, userIcon, passwordIcon;
-    public Button LoginButton;
+    public ImageView logo, userIcon, passwordIcon, airplane_search_img;
+    public Button LoginButton, search_button;
 
     //Login button pressed
     public void LoginPressed(ActionEvent event) {
@@ -48,7 +48,7 @@ public class MainPageView extends AView implements Initializable {
 
     //Move to homepage if user exists - called by the controller
     public void UserExists(){
-        moveToNewScreen(455, 270, "HomePage.fxml", "Home Page");
+        moveToNewScreen(455, 410, "HomePage.fxml", "Home Page");
         Stage currentStage = (Stage) LoginButton.getScene().getWindow();
         currentStage.close();
     }
@@ -79,5 +79,12 @@ public class MainPageView extends AView implements Initializable {
 
         Image passwordImage = new Image(this.getClass().getResourceAsStream("/images/lock.jpeg"));
         passwordIcon.setImage(passwordImage);
+
+        Image airplaneImage = new Image(this.getClass().getResourceAsStream("/images/search_flight.png"));
+        airplane_search_img.setImage(airplaneImage);
+    }
+
+    public void openSearch(MouseEvent mouseEvent) {
+        moveToNewScreen(600, 400, "SearchPage.fxml", "Search");
     }
 }
