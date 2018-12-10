@@ -1,16 +1,17 @@
 package Model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class PaymentTransaction {
     private Order order;
     private String creditCardNumber;
-    private Date validDate;
+    private String validDate;
     private String cvv;
     private int amount;
-    private Date paymentDate;
+    private LocalDate paymentDate;
 
-    public PaymentTransaction(Order order, String creditCardNumber, Date validDate, String cvv, int amount, Date paymentDate) {
+    public PaymentTransaction(Order order, String creditCardNumber, String validDate, String cvv, int amount, LocalDate paymentDate) {
         this.order = order;
         this.creditCardNumber = creditCardNumber;
         this.validDate = validDate;
@@ -35,11 +36,11 @@ public class PaymentTransaction {
         this.creditCardNumber = creditCardNumber;
     }
 
-    public Date getValidDate() {
+    public String getValidDate() {
         return validDate;
     }
 
-    public void setValidDate(Date validDate) {
+    public void setValidDate(String validDate) {
         this.validDate = validDate;
     }
 
@@ -59,11 +60,11 @@ public class PaymentTransaction {
         this.amount = amount;
     }
 
-    public Date getPaymentDate() {
+    public LocalDate getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(Date paymentDate) {
+    public void setPaymentDate(LocalDate paymentDate) {
         this.paymentDate = paymentDate;
     }
 }
