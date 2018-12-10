@@ -112,6 +112,6 @@ public class DataBaseManager implements IDataBaseManager{
 
     @Override
     public int CountUnseenMessages(String username) {
-        return 0;
+        return messagesTable.countUnseenMessages(username);
     }
 }

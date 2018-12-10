@@ -58,9 +58,8 @@ public class Controller extends AController {
     }
 
     private void countEmails(HomePageView o) {
-        /***undo**/
-        //int count = model.countUnreadEmail(user.getUsername());
-        //o.updateUnreadEmailsCount(count);
+        int count = model.CountUnseenMessages(user.getUsername());
+        o.updateUnreadEmailsCount(count);
     }
 
     //Check if update is valid

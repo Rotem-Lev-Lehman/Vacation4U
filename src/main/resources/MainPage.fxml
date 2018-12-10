@@ -35,7 +35,7 @@
          </font>
       </Text>
       <Button fx:id="LoginButton" layoutX="269.0" layoutY="315.0" mnemonicParsing="false" onAction="#LoginPressed" text="Login" />
-      <Button fx:id="search_button" onMouseClicked="#openSearch" layoutX="184.0" layoutY="120.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="243.0" text="Search for Vacations and Flights!">
+      <Button fx:id="search_button" layoutX="184.0" layoutY="120.0" mnemonicParsing="false" onMouseClicked="#openSearch" prefHeight="40.0" prefWidth="243.0" text="Search for Vacations and Flights!">
          <effect>
             <SepiaTone />
          </effect>
@@ -43,6 +43,6 @@
             <Font name="Forte" size="15.0" />
          </font>
       </Button>
-      <ImageView fx:id="airplane_search_img" onMouseClicked="#openSearch" fitHeight="40.0" fitWidth="43.0" layoutX="136.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="airplane_search_img" fitHeight="40.0" fitWidth="43.0" layoutX="136.0" layoutY="120.0" onMouseClicked="#openSearch" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
