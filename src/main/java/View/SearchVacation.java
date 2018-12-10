@@ -1,8 +1,12 @@
 package View;
 
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
-public class SearchVacation {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class SearchVacation extends AView implements Initializable {
     public TextField TextFieldCountry, TextFieldTickNum;
     public DatePicker DatePickerDepartures, DataPickerArrivals;
     public Button SearchButton;
@@ -20,6 +24,11 @@ public class SearchVacation {
 
     }
     public void SearchButton(){
+
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
 
     }
 }

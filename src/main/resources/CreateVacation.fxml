@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -10,48 +9,54 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="459.0" prefWidth="648.0" fx:controller="View.CreateVacation" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="459.0" prefWidth="648.0" style="-fx-background-color: #5cbcfc;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.CreateVacation">
    <children>
-      <Label layoutX="19.0" layoutY="60.0" prefHeight="17.0" prefWidth="43.0" text="Country" />
-      <TextField promptText="Enter Destination" fx:id="TextFieldcountryName" layoutX="111.0" layoutY="56.0" />
-      <DatePicker fx:id="DeparturesDate" promptText="Chose Departures Date" layoutX="111.0" layoutY="92.0" />
-      <DatePicker fx:id="ArrivalsDate" promptText="Chose Arrivals Date" layoutX="384.0" layoutY="92.0" />
-      <Label layoutX="19.0" layoutY="96.0" text="Departures Date" />
-      <Label layoutX="307.0" layoutY="96.0" text="Arrivals Date" />
-      <Button fx:id="ButtonCreate" onMouseClicked="#CreateVacation" layoutX="237.0" layoutY="420.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="141.0" text="Create Vacation" />
-      <Label layoutX="21.0" layoutY="133.0" text="Tickets Quantity:">
+      <Label layoutX="16.0" layoutY="87.0" prefHeight="17.0" prefWidth="70.0" text="Origin" textFill="#fdfdfd">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <TextField fx:id="TextFieldOrigin" layoutX="106.0" layoutY="87.0" promptText="Enter Origin Country" />
+      <Label layoutX="304.0" layoutY="87.0" prefHeight="17.0" prefWidth="70.0" text="Destination" textFill="WHITE" />
+      <Label layoutX="303.0" layoutY="173.0" prefHeight="17.0" prefWidth="43.0" text="Price($)" textFill="WHITE" />
+      <TextField fx:id="TextFieldPrice" layoutX="381.0" layoutY="169.0" promptText="Enter Price" />
+      <TextField fx:id="TextFieldcountryName" layoutX="381.0" layoutY="83.0" promptText="Enter Destination" />
+      <DatePicker fx:id="DeparturesDate" layoutX="108.0" layoutY="125.0" promptText="Chose Departures Date" />
+      <DatePicker fx:id="ArrivalsDate" layoutX="381.0" layoutY="125.0" promptText="Chose Arrivals Date" />
+      <Label layoutX="16.0" layoutY="129.0" text="Departures Date" textFill="WHITE" />
+      <Label layoutX="304.0" layoutY="129.0" text="Arrivals Date" textFill="WHITE" />
+      <Button fx:id="ButtonCreate" layoutX="233.0" layoutY="408.0" mnemonicParsing="false" onMouseClicked="#CreateVacation" prefHeight="25.0" prefWidth="141.0" text="Create Vacation" textFill="WHITE" />
+      <Label layoutX="16.0" layoutY="218.0" text="Tickets Quantity:" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <ComboBox fx:id="ChoiceBoxVacationKind" promptText="Enter Vacation Kinds" layoutX="40.0" layoutY="381.0" prefWidth="150.0" />
-      <Label layoutX="38.0" layoutY="385.0" text="Vacation Kind" />
-      <TextField promptText="Enter Airline" fx:id="TextFieldAirline" layoutX="130.0" layoutY="307.0" />
-      <Label layoutX="40.0" layoutY="311.0" text="Airline" />
+      <ComboBox fx:id="ChoiceBoxVacationKind" layoutX="106.0" layoutY="368.0" prefWidth="160.0" promptText="Enter Vacation Kinds" />
+      <Label layoutX="16.0" layoutY="372.0" text="Vacation Kind" textFill="WHITE" />
+      <TextField fx:id="TextFieldAirline" layoutX="108.0" layoutY="169.0" promptText="Enter Airline" />
+      <Label layoutX="18.0" layoutY="173.0" text="Airline" textFill="WHITE" />
       <!--<ComboBox fx:id="ChoiceBoxTickKind" layoutX="130.0" layoutY="346.0" prefWidth="150.0" />-->
       <!--<Label layoutX="40.0" layoutY="350.0" text="Ticket Kind" />-->
-      <CheckBox fx:id="CheckBoxBaggage" layoutX="431.0" layoutY="326.0" mnemonicParsing="false" text="Include Return Flight" />
-      <CheckBox fx:id="CheckBoxConnectionFlight" layoutX="431.0" layoutY="356.0" mnemonicParsing="false" text="have Connection Flight" />
-      <CheckBox fx:id="CheckBoxReturnFlight" layoutX="431.0" layoutY="299.0" mnemonicParsing="false" text="Include baggage" />
-      <CheckBox fx:id="CheckBoxSleepPlace" layoutX="431.0" layoutY="385.0" mnemonicParsing="false" text="Include a place to sleep" />
-      <Label layoutX="24.0" layoutY="172.0" text="Adult">
+      <CheckBox fx:id="CheckBoxBaggage" layoutX="381.0" layoutY="247.0" mnemonicParsing="false" text="Include Return Flight" textFill="WHITE" />
+      <CheckBox fx:id="CheckBoxConnectionFlight" layoutX="381.0" layoutY="277.0" mnemonicParsing="false" text="have Connection Flight" textFill="WHITE" />
+      <CheckBox fx:id="CheckBoxReturnFlight" layoutX="381.0" layoutY="220.0" mnemonicParsing="false" text="Include baggage" textFill="WHITE" />
+      <Button fx:id="ButtonSleepPlace" layoutX="382.0" layoutY="306.0" mnemonicParsing="false" text="Include a place to sleep" textFill="WHITE" />
+      <Label layoutX="20.0" layoutY="257.0" text="Adult" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <ComboBox fx:id="ComboBoxAdult" layoutX="74.0" layoutY="170.0" prefHeight="25.0" prefWidth="51.0" />
-      <Label layoutX="23.0" layoutY="210.0" text="Child">
+      <ComboBox fx:id="ComboBoxAdult" layoutX="73.0" layoutY="255.0" prefHeight="25.0" prefWidth="51.0" />
+      <Label layoutX="20.0" layoutY="295.0" text="Child" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <ComboBox fx:id="ComboBoxChild" layoutX="74.0" layoutY="208.0" prefHeight="25.0" prefWidth="51.0" />
-      <Label layoutX="23.0" layoutY="248.0" text="Infant">
+      <ComboBox fx:id="ComboBoxChild" layoutX="73.0" layoutY="293.0" prefHeight="25.0" prefWidth="51.0" />
+      <Label layoutX="20.0" layoutY="333.0" text="Infant" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <ComboBox fx:id="ComboBoxInfant" layoutX="74.0" layoutY="246.0" prefHeight="25.0" prefWidth="51.0" />
+      <ComboBox fx:id="ComboBoxInfant" layoutX="73.0" layoutY="331.0" prefHeight="25.0" prefWidth="51.0" />
    </children>
 </AnchorPane>
