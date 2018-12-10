@@ -115,13 +115,14 @@ public class CreateVacation extends AView implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ChoiceBoxVacationKind.getItems().addAll("Urbanic", "Exotic");
+        ChoiceBoxVacationKind.getItems().addAll("None","Urbanic", "Exotic");
         ComboBoxAdult.getItems().addAll("0","1","2","3","4","5","6");
         ComboBoxChild.getItems().addAll("0","1","2","3","4","5","6");
         ComboBoxInfant.getItems().addAll("0","1","2","3","4","5","6");
         ComboBoxAdult.setValue("0");
         ComboBoxChild.setValue("0");
         ComboBoxInfant.setValue("0");
+        ChoiceBoxVacationKind.setValue("None");
         ButtonSleepPlace.setDisable(true);
 
     }
