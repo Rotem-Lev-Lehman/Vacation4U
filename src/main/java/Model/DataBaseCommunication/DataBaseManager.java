@@ -107,7 +107,7 @@ public class DataBaseManager implements IDataBaseManager{
 
     @Override
     public List<Message> ReadAllMessages(String username) {
-        return null;
+        return messagesTable.ReadAllMessages(username);
     }
 
     @Override

@@ -6,8 +6,15 @@ import Model.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MessagesTableManager extends ATableManager {
+    private UsersTableManager usersTable;
+
+    public MessagesTableManager(){
+        usersTable = new UsersTableManager();
+    }
 
     public void Create(Message message) {
         connect(); //connect to database
@@ -36,28 +43,73 @@ public class MessagesTableManager extends ATableManager {
     public void UpdateAsSeen(Message message) {
         connect(); //Connect to databse
         //SQL commend
-        String sql = "UPDATE users SET seen = ? , "
-                + "senderID = ? , "
+        String sql = "UPDATE messages SET senderID = ? , "
                 + "receiverID = ? , "
                 + "message = ? , "
-                + "seen = ? , "
+                + "seen = ? "
                 + "WHERE messageID = ?";
 
         try {
             //Run sql commend
             PreparedStatement pstmt = conn.prepareStatement(sql);
             // set the corresponding param
-            pstmt.setString(1, String.valueOf(message.getMessageID()));
-            pstmt.setString(2, String.valueOf(message.getSender()));
-            pstmt.setString(3, String.valueOf(message.getReceiver()));
-            pstmt.setString(4, message.getText());
-            pstmt.setString(5, "1");;
+            pstmt.setString(1, message.getSender().getUsername());
+            pstmt.setString(2, message.getReceiver().getUsername());
+            pstmt.setString(3, message.getText());
+
+            int seen = 0;
+            if(message.isSeen())
+                seen = 1;
+            pstmt.setInt(4, seen);
+            pstmt.setInt(5, message.getMessageID());
             // update
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         closeConnection(); //disconnect from databse
+    }
+
+    public List<Message> ReadAllMessages(String username) {
+        connect(); //connect to database
+
+        //sql commend
+        String sql = "SELECT messageID, senderID, receiverID, message, seen FROM messages WHERE receiverID = ?";
+
+        List<Message> messages = new ArrayList<Message>(); //list of similar messages
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            // set the value
+            pstmt.setString(1, username);
+            //
+            ResultSet rs = pstmt.executeQuery();
+
+            // loop through the result set
+            while (rs.next()) {
+
+                String senderName = rs.getString("senderID");
+                User sender = usersTable.ReadWithOutConnection(senderName);
+
+                String receiverName = rs.getString("receiverID");
+                User receiver = usersTable.ReadWithOutConnection(receiverName);
+
+                int seen = rs.getInt("seen");
+                boolean isSeen = false;
+                if(seen == 1)
+                    isSeen = true;
+
+                Message curr = new Message(sender,receiver,rs.getString("message"),isSeen);
+                curr.setMessageID(rs.getInt("messageID"));
+                messages.add(curr);
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        closeConnection(); //disconnect from database
+
+        return messages;
     }
 
     public int countUnseenMessages(String username) {
