@@ -27,7 +27,7 @@ public class VacationsTableManager extends ATableManager {
         vacation.setVacationID(nextID);
 
         //create vacation - sql command
-        String sql = "INSERT INTO vacations(vacationID,sellerId,startDate,endDate,startCountry,destCountry,typesOfVacation,typeOfHotel,rankingOfHotel,typeOfLuggage,alreadySold,amountOfAdultTickets,amountOfChildTickets,amountOfInfantTickets,price) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO vacations(vacationID,sellerId,startDate,endDate,startCountry,destCountry,typeOfVacation,typeOfHotel,rankingOfHotel,typeOfLuggage,alreadySold,amountOfAdultTickets,amountOfChildTickets,amountOfInfantTickets,price) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         //try to create vacation
         try {
@@ -52,14 +52,15 @@ public class VacationsTableManager extends ATableManager {
             pstmt.setInt(14, vacation.getAmountOfInfantTickets());
             pstmt.setInt(15, vacation.getPrice());
             pstmt.executeUpdate();
-
+            closeConnection(); //close connection
             flightsTable.CreateFlight(vacation.getFlight(), vacation.getVacationID());
         }
         catch (SQLException e){
             //closeConnection(); //close connection to datebase
             e.printStackTrace();
+            closeConnection(); //close connection
         }
-        closeConnection(); //close connection
+
     }
 
     /*

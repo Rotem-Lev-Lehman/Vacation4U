@@ -15,20 +15,12 @@ public class FlightsTableManager extends ATableManager {
     public int CreateFlightWithoutConnection(Flight flight, int vacationID, int flightID){
 
         //create flight - sql command
-        String sql = "INSERT INTO flight(vacationID,flightID,flightCompany,startCountry,destCountry,startDate,endDate,continueFlightID,returnFlightID) VALUES(?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO flights(vacationID,flightID,flightCompany,startCountry,destCountry,startDate,endDate,continueFlightID,returnFlightID) VALUES(?,?,?,?,?,?,?,?,?)";
 
         //try to create flight
         int continueFlightID = -1;
         int returnFlightID = -1;
         try {
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, vacationID);
-            pstmt.setInt(2, flightID);
-            pstmt.setString(3, flight.getFlightCompany());
-            pstmt.setString(4, flight.getStartCountry());
-            pstmt.setString(5, flight.getDestCountry());
-            pstmt.setString(6, flight.getStartDateAsString());
-            pstmt.setString(7, flight.getEndDateAsString());
 
             if(flight.getContinueFlight() != null) {
                 continueFlightID = flightID + 1;
@@ -40,6 +32,17 @@ public class FlightsTableManager extends ATableManager {
                     returnFlightID = flightID + 1;
                 returnFlightID = CreateFlightWithoutConnection(flight.getReturnFlight(), vacationID, returnFlightID);
             }
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, vacationID);
+            pstmt.setInt(2, flightID);
+            pstmt.setString(3, flight.getFlightCompany());
+            pstmt.setString(4, flight.getStartCountry());
+            pstmt.setString(5, flight.getDestCountry());
+            pstmt.setString(6, flight.getStartDateAsString());
+            pstmt.setString(7, flight.getEndDateAsString());
+
+
             pstmt.setInt(8, continueFlightID);
             pstmt.setInt(9, returnFlightID);
             pstmt.executeUpdate();
