@@ -1,22 +1,16 @@
-package Model;
+package Model.DataBaseCommunication;
 
-import java.sql.*;
+import Model.*;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataBaseManager implements IDataBaseManager {
-
-    private String url;
-    private Connection conn;
-
-    public DataBaseManager(){
-        url = "jdbc:sqlite:resources/DataBase.db"; // Set databse project
-        //connect();
-        //closeConnection();
-    }
-
+public class UsersTableManager extends ATableManager {
     //Create user
-    public void Create(User user) throws SQLException{
+    public void Create(User user) throws SQLException {
         connect(); //connect to database
 
         //create user - sql command
@@ -143,31 +137,5 @@ public class DataBaseManager implements IDataBaseManager {
             System.out.println(e.getMessage());
         }
         closeConnection(); //Disconnect from database
-    }
-
-    //Connect to database
-    private void connect() {
-        conn = null;
-        try {
-            // create a connection to the database
-            conn = DriverManager.getConnection(url);
-
-            //System.out.println("Connection to SQLite has been established.");
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    //Disconnect from database
-    private void closeConnection(){
-        try {
-            if (conn != null) {
-                conn.close();
-                //System.out.println("Connection to SQLite has been closed");
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
     }
 }

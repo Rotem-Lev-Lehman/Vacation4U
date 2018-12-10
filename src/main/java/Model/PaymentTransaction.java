@@ -3,19 +3,15 @@ package Model;
 import java.util.Date;
 
 public class PaymentTransaction {
-    private Vacation vacation;
-    private User payer;
-    private User receiver;
+    private Order order;
     private String creditCardNumber;
     private Date validDate;
     private String cvv;
     private int amount;
     private Date paymentDate;
 
-    public PaymentTransaction(Vacation vacation, User payer, User receiver, String creditCardNumber, Date validDate, String cvv, int amount, Date paymentDate) {
-        this.vacation = vacation;
-        this.payer = payer;
-        this.receiver = receiver;
+    public PaymentTransaction(Order order, String creditCardNumber, Date validDate, String cvv, int amount, Date paymentDate) {
+        this.order = order;
         this.creditCardNumber = creditCardNumber;
         this.validDate = validDate;
         this.cvv = cvv;
@@ -23,28 +19,12 @@ public class PaymentTransaction {
         this.paymentDate = paymentDate;
     }
 
-    public Vacation getVacation() {
-        return vacation;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setVacation(Vacation vacation) {
-        this.vacation = vacation;
-    }
-
-    public User getPayer() {
-        return payer;
-    }
-
-    public void setPayer(User payer) {
-        this.payer = payer;
-    }
-
-    public User getReceiver() {
-        return receiver;
-    }
-
-    public void setReceiver(User receiver) {
-        this.receiver = receiver;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     public String getCreditCardNumber() {

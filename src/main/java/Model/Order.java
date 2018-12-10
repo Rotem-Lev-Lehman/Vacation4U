@@ -1,14 +1,22 @@
 package Model;
 
 public class Order {
+    private Vacation vacation;
     private User buyer;
-    private User seller;
     private OrderStatus status;
 
-    public Order(User buyer, User seller, OrderStatus status) {
+    public Order(Vacation vacation, User buyer, OrderStatus status) {
+        this.vacation = vacation;
         this.buyer = buyer;
-        this.seller = seller;
         this.status = status;
+    }
+
+    public Vacation getVacation() {
+        return vacation;
+    }
+
+    public void setVacation(Vacation vacation) {
+        this.vacation = vacation;
     }
 
     public User getBuyer() {
@@ -17,14 +25,6 @@ public class Order {
 
     public void setBuyer(User buyer) {
         this.buyer = buyer;
-    }
-
-    public User getSeller() {
-        return seller;
-    }
-
-    public void setSeller(User seller) {
-        this.seller = seller;
     }
 
     public OrderStatus getStatus() {

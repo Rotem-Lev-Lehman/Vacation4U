@@ -1,4 +1,6 @@
-package Model;
+package Model.DataBaseCommunication;
+
+import Model.*;
 
 import java.sql.SQLException;
 import java.util.List;

@@ -1,5 +1,7 @@
 package Model;
 
+import Model.DataBaseCommunication.IDataBaseManager;
+
 import java.sql.SQLException;
 import java.util.List;
 
