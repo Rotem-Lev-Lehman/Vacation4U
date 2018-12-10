@@ -65,7 +65,7 @@ public abstract class AModel {
     void CreateMessage(Message message){
         dataBaseManager.CreateMessage(message);
     }
-    
+
     List<Message> ReadMessages(String username){
         return dataBaseManager.ReadMessages(username);
     }

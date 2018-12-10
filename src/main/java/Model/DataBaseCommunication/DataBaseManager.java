@@ -1,6 +1,6 @@
 package Model.DataBaseCommunication;
 
-import Model.User;
+import Model.*;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -47,5 +47,50 @@ public class DataBaseManager implements IDataBaseManager{
     @Override
     public void DeleteUser(User user) {
         usersTable.Delete(user);
+    }
+
+    @Override
+    public void CreateVacation(Vacation vacation) {
+
+    }
+
+    @Override
+    public List<Vacation> ReadSimilarVacations(Vacation vacation) {
+        return null;
+    }
+
+    @Override
+    public void UpdateVacation(Vacation vacation) {
+
+    }
+
+    @Override
+    public void CreateOrder(Order order) {
+
+    }
+
+    @Override
+    public List<Order> ReadOrdersForVacation(Vacation vacation) {
+        return null;
+    }
+
+    @Override
+    public void UpdateOrder(Order order) {
+
+    }
+
+    @Override
+    public void CreatePaymentTransaction(PaymentTransaction paymentTransaction) {
+
+    }
+
+    @Override
+    public void CreateMessage(Message message) {
+
+    }
+
+    @Override
+    public List<Message> ReadMessages(String username) {
+        return null;
     }
 }
