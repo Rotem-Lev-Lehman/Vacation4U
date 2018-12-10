@@ -1,5 +1,8 @@
 package View;
 
+import Model.Flight;
+import Model.User;
+import Model.Vacation;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -10,11 +13,12 @@ import java.time.Period;
 import java.util.ResourceBundle;
 
 public class CreateVacation extends AView implements Initializable {
-    public TextField TextFieldcountryName, TextFieldAirline, TextFieldPrice;
+    public TextField TextFieldcountryName, TextFieldAirline, TextFieldPrice, TextFieldOrigin;
     public DatePicker DeparturesDate, ArrivalsDate;
     public Button ButtonCreate, ButtonSleepPlace;
     public ComboBox ChoiceBoxVacationKind, ComboBoxAdult, ComboBoxChild, ComboBoxInfant;
     public CheckBox CheckBoxReturnFlight, CheckBoxConnectionFlight,CheckBoxBaggage;
+    public Flight flight;
 
     public void CountryName(){
 
@@ -32,9 +36,10 @@ public class CreateVacation extends AView implements Initializable {
         String childTicketNumber = ComboBoxChild.getSelectionModel().getSelectedItem().toString();
         String infantTicketNumber = ComboBoxInfant.getSelectionModel().getSelectedItem().toString();
         String destination = TextFieldcountryName.getText();
-        String vacationKind;
+        String OriginCountry= TextFieldOrigin.getText();
+        String vacationKind=" ";
         if(ChoiceBoxVacationKind.getValue() != null)
-            vacationKind = ChoiceBoxVacationKind.getValue().toString();
+             vacationKind = ChoiceBoxVacationKind.getValue().toString();
 
         boolean isConnection = CheckBoxConnectionFlight.isSelected();
         boolean isReturnFlight = CheckBoxReturnFlight.isSelected();
@@ -42,7 +47,13 @@ public class CreateVacation extends AView implements Initializable {
         if(airline.equals("") || price.equals("")|| !legalDates(departureDate,arrivalDate) || destination.equals("")){
             showFillDetailsError();
         }
+        //flight=new Flight()
+        Vacation v= new Vacation(controller.getUser(),flight,departureDate.toString(),arrivalDate.toString(),OriginCountry,destination,vacationKind,false,
+                Integer.parseInt(adultTicketNumber),Integer.parseInt(childTicketNumber),Integer.parseInt(infantTicketNumber));
 
+
+    //public Vacation(User SellerId,String StartDate, String EndDate, String StartCountry, String DestCountry, String TypesOfVacation,
+      //  int alreadySold, int amountOfAdultTickets, int amountOfChildTickets,int amountOfInfantTickets)
     }
 
     private void showFillDetailsError() {
