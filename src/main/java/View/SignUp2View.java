@@ -9,10 +9,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import javax.imageio.ImageIO;
+import java.io.File;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -25,6 +30,8 @@ public class SignUp2View extends AView implements Initializable {
     public Text process_message;
     public PasswordField password, passwordCnf;
     private boolean pressedContinue; //boolean variable to determinate rather user should be null on exist or not
+    public Circle profile_image_circle;
+    private File imageFile;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -36,6 +43,9 @@ public class SignUp2View extends AView implements Initializable {
 
         Image goBackImg = new Image(this.getClass().getResourceAsStream("/images/return_button.png"));
         backImage.setImage(goBackImg);
+
+        Image profileImage = new Image(this.getClass().getResourceAsStream("/images/defaultProfileImage.png"));
+        profile_image_circle.setFill(new ImagePattern(profileImage));
     }
 
     //When screen closed - if the user should be null turn into null and if not then don't
@@ -67,10 +77,11 @@ public class SignUp2View extends AView implements Initializable {
         String passwordText = password.getText();
         String passwordCnfText = passwordCnf.getText();
 
-        String[] strings = new String[3];
+        Object[] strings = new Object[4];
         strings[0] = usernameText;
         strings[1] = passwordText;
         strings[2] = passwordCnfText;
+        strings[3] = imageFile;
 
         setChanged();
         notifyObservers(strings);
@@ -110,5 +121,15 @@ public class SignUp2View extends AView implements Initializable {
             controller.setUser(null);
         Stage currentStage = (Stage) register.getScene().getWindow();
         currentStage.close();
+    }
+
+    public void openImagePicker(MouseEvent mouseEvent) {
+        final FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png");
+        fileChooser.getExtensionFilters().add(imageFilter);
+        Stage currentStage = (Stage) register.getScene().getWindow();
+        imageFile = fileChooser.showOpenDialog(currentStage);
+        Image profileImage = new Image(imageFile.toURI().toString());
+        profile_image_circle.setFill(new ImagePattern(profileImage));
     }
 }
