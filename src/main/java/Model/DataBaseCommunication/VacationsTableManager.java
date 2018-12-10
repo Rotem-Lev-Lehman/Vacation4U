@@ -112,7 +112,54 @@ public class VacationsTableManager extends ATableManager {
     }
 
     public void UpdateVacation(Vacation vacation) {
+        connect(); //Connect to database
+        //SQL commend
+        String sql = "UPDATE vacations SET sellerId = ? , "
+                + "startDate = ? , "
+                + "endDate = ? , "
+                + "startCountry = ? , "
+                + "destCountry = ? , "
+                + "typesOfVacation = ? , "
+                + "typeOfHotel = ? , "
+                + "rankingOfHotel = ? , "
+                + "typeOfLuggage = ? , "
+                + "alreadySold = ? , "
+                + "amountOfAdultTickets = ? , "
+                + "amountOfChildTickets = ? , "
+                + "amountOfInfantTickets = ? , "
+                + "price = ? "
+                + "WHERE vacationID = ?";
 
+        try {
+            //Run sql commend
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            // set the corresponding param
+            pstmt.setString(1, vacation.getSellerId().getUsername());
+            pstmt.setString(2, vacation.getStartDate());
+            pstmt.setString(3, vacation.getEndDate());
+            pstmt.setString(4, vacation.getStartCountry());
+            pstmt.setString(5, vacation.getDestCountry());
+            pstmt.setString(6, vacation.getTypesOfVacation());
+            pstmt.setString(7, vacation.getTypeOfHotel());
+            pstmt.setInt(8, vacation.getRankingOfHotel());
+            pstmt.setString(9, vacation.getTypeOfLuggage());
+
+            int alreadySold = 0;
+            if(vacation.isAlreadySold())
+                alreadySold = 1;
+            pstmt.setInt(10, alreadySold);
+            pstmt.setInt(11, vacation.getAmountOfAdultTickets());
+            pstmt.setInt(12, vacation.getAmountOfChildTickets());
+            pstmt.setInt(13, vacation.getAmountOfInfantTickets());
+            pstmt.setInt(14, vacation.getPrice());
+            pstmt.setInt(15, vacation.getVacationID());
+
+            // update
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        closeConnection(); //disconnect from database
     }
 
     private int getNextID() {

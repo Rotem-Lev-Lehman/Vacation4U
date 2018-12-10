@@ -77,7 +77,7 @@ public class DataBaseManager implements IDataBaseManager{
 
     @Override
     public void UpdateVacation(Vacation vacation) {
-
+        vacationsTable.UpdateVacation(vacation);
     }
 
     @Override
