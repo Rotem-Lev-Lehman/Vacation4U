@@ -45,7 +45,7 @@ public class MessageBoxView extends AView {
         else if(message.getText().contains("approved")){
             String[] strings = new String[3];
             strings[0] = userFrom;
-            strings[1] = "openPayment";
+            strings[1] = "OpenPayment";
             strings[2] = String.valueOf(vacationID);
             setChanged();
             notifyObservers(strings);
@@ -110,7 +110,7 @@ public class MessageBoxView extends AView {
     }
 
     public void sendPayment() {
-        String[] strings = new String[2];
+        String[] strings = new String[3];
         strings[0] = userFrom;
         strings[1] = "buyApproved";
         strings[2] = String.valueOf(vacationID);
