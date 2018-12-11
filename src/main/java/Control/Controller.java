@@ -62,7 +62,7 @@ public class Controller extends AController {
                 else if (strings[1].equals("declineBuyMessage"))
                     sendDeclinedBuyMessage(strings[0], strings[2]);
                 else if (strings[1].equals("buyApproved"))
-                    sendApprovedPaymentMessage(strings[0], strings[2]);
+                    sendApprovedPaymentMessage((MessageBoxView)o);
                 else if (strings[1].equals("buyDeclined"))
                     sendDeclinedPaymentMessage(strings[0], strings[2]);
             }
@@ -81,10 +81,8 @@ public class Controller extends AController {
         model.CreateMessage(new Message(user, sendTo, messageText, false, Integer.parseInt(vacationID)));
     }
 
-    private void sendApprovedPaymentMessage(String sendToUser, String vacationID) {
-        /*User sendTo = new User(sendToUser, "1","1","1","1","1");
-        String messageText = "User " + user.getUsername() + " bought your vacation!";
-        model.CreateMessage(new Message(user, sendTo, messageText, false));*/
+    private void sendApprovedPaymentMessage(MessageBoxView o) {
+        //o.showPaymenyScreen();
     }
 
     //From publisher to buyer when the publisher didn't approve the deal
@@ -156,8 +154,10 @@ public class Controller extends AController {
 
         User newUser = new User(username, passwordtxt, birthDate.toString(), firstname, lastname, city);
         model.UpdateUser(user.getUsername(), newUser); //update user
-        if(imageFile != null)
+        if(imageFile != null) {
             model.UpdateUsersProfileImage(user.getUsername(), imageFile);
+            user = model.ReadUser(user.getUsername());
+        }
 
         setUser(newUser); //set new user
 
@@ -275,7 +275,9 @@ public class Controller extends AController {
     private void setNewOrder(VacationsView vacationView, Vacation v) {
         if(user != null) {
             model.CreateOrder(new Order(v,user,OrderStatus.WaitingForApproval));
-
+            String text = "Hey! User " + user.getUsername() + " wants to buy your vacation";
+            //message from buyer to publisher request to buy vacation
+            model.CreateMessage(new Message(user, v.getSellerId(),text,false,v.getVacationID()));
             vacationView.userExist();
         }
          else
