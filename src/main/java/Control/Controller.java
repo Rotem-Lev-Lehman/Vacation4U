@@ -252,6 +252,7 @@ public class Controller extends AController {
 
         if (currentUser != null && currentUser.getPassword().equals(str[1])) { //if there is a user logged in
             setUser(currentUser);
+            currentUser.setProfileImage(model.ReadUsersProfileImage(str[0]));
             mainPageView.UserExists();
         } else
             mainPageView.UserDoesNotExist();
@@ -272,10 +273,11 @@ public class Controller extends AController {
         return p.getYears() >= 18;
     }
     private void setNewOrder(VacationsView vacationView, Vacation v) {
-        if(user != null)
-               vacationView.userExist();
+        if(user != null) {
+            model.CreateOrder(new Order(v,user,OrderStatus.WaitingForApproval));
 
-
+            vacationView.userExist();
+        }
          else
              vacationView.userNotExist();
 
