@@ -302,7 +302,7 @@ public class Controller extends AController {
 
     }
 
-        /*private void getVacationToShow(VacationsView vacationView, Vacation v){
+    /*private void getVacationToShow(VacationsView vacationView, Vacation v){
             List<Vacation> vacations = model.ReadSimilarVacations(v, new Comparator<Vacation>() {
                 @Override
                 public int compare(Vacation o1, Vacation o2) {
