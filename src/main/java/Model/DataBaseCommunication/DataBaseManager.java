@@ -52,17 +52,17 @@ public class DataBaseManager implements IDataBaseManager{
 
     @Override
     public void CreateUsersProfileImage(String username, File imageFile) {
-
+        usersPicturesTable.CreateUsersProfileImage(username, imageFile);
     }
 
     @Override
     public Image ReadUsersProfileImage(String username) {
-        return null;
+        return usersPicturesTable.ReadUsersProfileImage(username);
     }
 
     @Override
     public void UpdateUsersProfileImage(String username, File imageFile) {
-
+        usersPicturesTable.UpdateUsersProfileImage(username, imageFile);
     }
 
     @Override
@@ -97,7 +97,7 @@ public class DataBaseManager implements IDataBaseManager{
 
     @Override
     public void CreatePaymentTransaction(PaymentTransaction paymentTransaction) {
-
+        paymentDetailsTable.CreatePaymentTransaction(paymentTransaction); // this version
     }
 
     @Override

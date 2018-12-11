@@ -21,6 +21,10 @@ public class Main extends Application {
         AController controller = new Controller();
         controller.setModel(model);
 
+        /*User user1 = new User("1","1","1","1","1","d");
+        User user2 = new User("admin","1","1","1","1","d");
+        model.CreateMessage(new Message(user2, user1, "Hey! admin wants to buy vacation", false));*/
+
         //open main page
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(getClass().getResource("/CreateVacation.fxml").openStream());

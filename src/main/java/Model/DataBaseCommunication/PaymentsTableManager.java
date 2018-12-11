@@ -8,7 +8,6 @@ import java.sql.SQLException;
 public class PaymentsTableManager extends ATableManager {
 
     public void CreatePaymentTransaction(PaymentTransaction paymentTransaction) {
-        /*
         connect(); //connect to database
 
         //create order - sql command
@@ -17,27 +16,19 @@ public class PaymentsTableManager extends ATableManager {
         //try to create order
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, order.getVacation().getVacationID());
-            pstmt.setString(2, order.getBuyer().getUsername());
-            pstmt.setString(3, order.getVacation().getSellerId().getUsername());
-
-            int status;
-            if(order.getStatus() == OrderStatus.Accepted)
-                status = 0;
-            else if(order.getStatus() == OrderStatus.Declined)
-                status = 1;
-            else if(order.getStatus() == OrderStatus.WaitingForApproval)
-                status = 2;
-            else //OrderStatus.WaitingForPayment
-                status = 3;
-            pstmt.setInt(4, status);
+            pstmt.setInt(1, paymentTransaction.getOrder().getVacation().getVacationID());
+            pstmt.setString(2, paymentTransaction.getOrder().getBuyer().getUsername());
+            pstmt.setString(3, paymentTransaction.getOrder().getVacation().getSellerId().getUsername());
+            pstmt.setString(4, paymentTransaction.getCreditCardNumber());
+            pstmt.setString(5, paymentTransaction.getValidDate());
+            pstmt.setString(6, paymentTransaction.getCvv());
+            pstmt.setInt(7, paymentTransaction.getAmount());
+            pstmt.setString(8, paymentTransaction.getPaymentDate().toString());
             pstmt.executeUpdate();
-        }
-        catch (SQLException e){
-            //closeConnection(); //close connection to datebase
+        } catch (SQLException e) {
+            //closeConnection(); //close connection to database
             e.printStackTrace();
         }
         closeConnection(); //close connection
-        */
     }
 }
