@@ -52,10 +52,16 @@ public class Controller extends AController {
             if(arg instanceof String && ((String)arg).equals("Get Messages")){
                 searchForMessages((MailBoxView)o);
             }
+            else if(arg instanceof Message)
+                markMessgeAsRead((Message)arg);
         }else if (o instanceof SearchFlight) {
             if (arg instanceof Vacation)
                 getResultOfSearch((SearchFlight)o,(Vacation)arg);
         }
+    }
+
+    private void markMessgeAsRead(Message message) {
+        model.UpdateMessageAsSeen(message);
     }
 
     private void searchForMessages(MailBoxView o) {

@@ -87,4 +87,6 @@ public abstract class AModel {
     public int CountUnseenMessages(String username){
         return dataBaseManager.CountUnseenMessages(username);
     }
+
+    public void UpdateMessageAsSeen(Message message){dataBaseManager.UpdateMessageAsSeen(message);}
 }
