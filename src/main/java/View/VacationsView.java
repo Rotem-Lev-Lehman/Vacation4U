@@ -1,6 +1,7 @@
 package View;
 
 import Model.Model;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -51,12 +52,12 @@ public class VacationsView extends AView implements Initializable {
     }
 
 
-    public void orderVacation(){
-        if(btnOrderNowV1.isPressed() ){
+    public void orderVacation(ActionEvent e){
+        if(e.getSource() == btnOrderNowV1 ){
             setChanged();
             notifyObservers(v1);
         }
-        if(btnOrderNowV2.isPressed()){
+        if(e.getSource() == btnOrderNowV2){
             setChanged();
             notifyObservers(v2);
         }
