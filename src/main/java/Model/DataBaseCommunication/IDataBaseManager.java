@@ -26,6 +26,7 @@ public interface IDataBaseManager {
     void UpdateVacation(Vacation vacation); //Update a given vacation in the database
 
     void CreateOrder(Order order); //Create Order
+    Order ReadOrder(Vacation vacation, User buyer);
     List<Order> ReadOrdersForVacation(Vacation vacation);
     void UpdateOrderStatus(Order order);
 

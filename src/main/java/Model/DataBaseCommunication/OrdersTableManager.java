@@ -51,6 +51,46 @@ public class OrdersTableManager extends ATableManager {
         closeConnection(); //close connection
     }
 
+    public Order Read(Vacation vacation, User buyer){
+        connect(); //connect to database
+
+        //sql commend
+        String sql = "SELECT vacationID, buyerID, sellerID, status FROM orders WHERE vacationID = ? AND buyerID = ?";
+
+        Order order = null; //order
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            // set the value
+            pstmt.setInt(1, vacation.getVacationID());
+            pstmt.setString(2, buyer.getUsername());
+            //
+            ResultSet rs = pstmt.executeQuery();
+
+            // loop through the result set
+            while (rs.next()) {
+                int intStatus = rs.getInt("status");
+                OrderStatus status;
+                if(intStatus == 0)
+                    status = OrderStatus.Accepted;
+                else if(intStatus == 1)
+                    status = OrderStatus.Declined;
+                else if(intStatus == 2)
+                    status = OrderStatus.WaitingForApproval;
+                else // 3
+                    status = OrderStatus.WaitingForPayment;
+
+                order = new Order(vacation,buyer,status);
+                break;
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        closeConnection(); //disconnect from database
+        return order;
+    }
+
     public List<Order> ReadOrdersForVacation(Vacation vacation) {
         connect(); //connect to database
 

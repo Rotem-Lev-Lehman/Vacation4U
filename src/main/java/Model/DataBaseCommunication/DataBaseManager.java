@@ -125,6 +125,11 @@ public class DataBaseManager implements IDataBaseManager{
     }
 
     @Override
+    public Order ReadOrder(Vacation vacation, User buyer) {
+        return ordersTable.Read(vacation, buyer);
+    }
+
+    @Override
     public List<Order> ReadOrdersForVacation(Vacation vacation) {
         List<Order> orders;
         synchronized (lock) {

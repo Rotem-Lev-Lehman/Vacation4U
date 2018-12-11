@@ -69,6 +69,10 @@ public abstract class AModel {
         dataBaseManager.CreateOrder(order);
     }
 
+    public Order ReadOrder(Vacation vacation, User buyer) {
+        return dataBaseManager.ReadOrder(vacation, buyer);
+    }
+
     public List<Order> ReadOrdersForVacation(Vacation vacation){
         return dataBaseManager.ReadOrdersForVacation(vacation);
     }
