@@ -62,7 +62,7 @@ public class MailBoxView extends AView implements Initializable {
                     Message clickedRow = row.getItem();
                     setChanged();
                     notifyObservers(clickedRow);
-                    openMessageBox(clickedRow.getText(), clickedRow.getSender().getUsername(), clickedRow.isSeen());
+                    openMessageBox(clickedRow.getText(), clickedRow.getSender().getUsername(), clickedRow.isSeen(), clickedRow.getVacationID());
             });
             return row ;
         });
@@ -91,7 +91,7 @@ public class MailBoxView extends AView implements Initializable {
         checkForNewMessages.start();
     }
 
-    private void openMessageBox(String message, String from, boolean seen) {
+    private void openMessageBox(String message, String from, boolean seen, int vacationID) {
         //Parent root = null;
         try {
             /*FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("MessageBox.fxml"));
@@ -110,7 +110,7 @@ public class MailBoxView extends AView implements Initializable {
 
             AView view = fxmlLoader.getController();
             view.setController(controller);
-            ((MessageBoxView)fxmlLoader.getController()).setMessage(message, from);
+            ((MessageBoxView)fxmlLoader.getController()).setMessage(message, from, vacationID);
 
             Stage stage = new Stage();
             stage.setTitle("Message");

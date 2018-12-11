@@ -6,12 +6,14 @@ public class Message {
     private User receiver;
     private String text;
     private boolean seen;
+    private int vacationID;
 
-    public Message(User sender, User receiver, String text, boolean seen) {
+    public Message(User sender, User receiver, String text, boolean seen, int vacationID) {
         this.sender = sender;
         this.receiver = receiver;
         this.text = text;
         this.seen = seen;
+        this.vacationID = vacationID;
     }
 
     public User getSender() {
@@ -52,5 +54,13 @@ public class Message {
 
     public void setMessageID(int messageID) {
         this.messageID = messageID;
+    }
+
+    public int getVacationID() {
+        return vacationID;
+    }
+
+    public void setVacationID(int vacationID) {
+        this.vacationID = vacationID;
     }
 }

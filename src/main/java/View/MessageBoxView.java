@@ -11,8 +11,10 @@ public class MessageBoxView extends AView {
     public Text from;
     public Button agree_btn, decline_btn;
     private String userFrom;
+    private int vacationID;
 
-    public void setMessage(String message, String from) {
+    public void setMessage(String message, String from, int vacationID) {
+        this.vacationID = vacationID;
         userFrom = from;
         this.message.setText(message);
         this.from.setText("~ From: " + from);
@@ -25,9 +27,10 @@ public class MessageBoxView extends AView {
 
     public void doAgree(MouseEvent mouseEvent) {
         if(message.getText().contains("wants to buy")){
-            String[] strings = new String[2];
+            String[] strings = new String[3];
             strings[0] = userFrom;
             strings[1] = "buyMessage";
+            strings[2] = String.valueOf(vacationID);
             setChanged();
             notifyObservers(strings);
 
@@ -39,7 +42,7 @@ public class MessageBoxView extends AView {
             strings[1] = "buyApproved";
             setChanged();
             notifyObservers(strings);*/
-            moveToNewScreen(210,340,"OrderVacation.fxml","Order");
+            moveToNewScreen(210,330,"OrderVacation.fxml","Order");
         }
         Stage stage = (Stage)decline_btn.getScene().getWindow();
         stage.close();
@@ -48,17 +51,19 @@ public class MessageBoxView extends AView {
     public void doDecline(MouseEvent mouseEvent) {
         String add = "";
         if(message.getText().contains("wants to buy")){
-            String[] strings = new String[2];
+            String[] strings = new String[3];
             strings[0] = userFrom;
             strings[1] = "declineBuyMessage";
+            strings[2] = String.valueOf(vacationID);
             setChanged();
             notifyObservers(strings);
             add = "Order";
         }
         else if(message.getText().contains("approved")){
-            String[] strings = new String[2];
+            String[] strings = new String[3];
             strings[0] = userFrom;
             strings[1] = "buyDeclined";
+            strings[2] = String.valueOf(vacationID);
             setChanged();
             notifyObservers(strings);
             add = "Payment";

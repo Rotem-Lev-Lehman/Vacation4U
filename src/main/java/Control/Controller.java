@@ -55,42 +55,45 @@ public class Controller extends AController {
             if (arg instanceof Vacation)
                 getResultOfSearch((SearchFlight)o,(Vacation)arg);
         } else if(o instanceof MessageBoxView){
-            if(arg instanceof String[] && ((String[])arg).length == 2) {
+            if(arg instanceof String[] && ((String[])arg).length == 3) {
                 String[] strings = (String[])arg;
                 if(strings[1].equals("buyMessage"))
-                    sendApprovedBuyMessage(strings[0]);
+                    sendApprovedBuyMessage(strings[0], strings[2]);
                 else if(strings[1].equals("declineBuyMessage"))
-                    sendDeclinedBuyMessage(strings[0]);
+                    sendDeclinedBuyMessage(strings[0], strings[2]);
                 else if(strings[1].equals("buyApproved"))
-                    sendApprovedPaymentMessage(strings[0]);
+                    sendApprovedPaymentMessage(strings[0], strings[2]);
                 else if(strings[1].equals("buyDeclined"))
-                    sendDeclinedPaymentMessage(strings[0]);
+                    sendDeclinedPaymentMessage(strings[0], strings[2]);
             }
         }
     }
 
-    private void sendDeclinedPaymentMessage(String sendToUser) {
+    //from buyer to publisher when the buyer didn't pay
+    private void sendDeclinedPaymentMessage(String sendToUser, String vacationID) {
         User sendTo = new User(sendToUser, "1","1","1","1","1");
         String messageText = "Sorry, User " + user.getUsername() + " didn't pay for the vacation";
-        model.CreateMessage(new Message(user, sendTo, messageText, false));
+        model.CreateMessage(new Message(user, sendTo, messageText, false, Integer.parseInt(vacationID)));
     }
 
-    private void sendApprovedPaymentMessage(String sendToUser) {
+    private void sendApprovedPaymentMessage(String sendToUser, String vacationID) {
         /*User sendTo = new User(sendToUser, "1","1","1","1","1");
         String messageText = "User " + user.getUsername() + " bought your vacation!";
         model.CreateMessage(new Message(user, sendTo, messageText, false));*/
     }
 
-    private void sendDeclinedBuyMessage(String sendToUser) {
+    //From publisher to buyer when the publisher didn't approve the deal
+    private void sendDeclinedBuyMessage(String sendToUser, String vacationID) {
         User sendTo = new User(sendToUser, "1","1","1","1","1");
         String messageText = "Sorry, User " + user.getUsername() + " didn't approve your order request";
-        model.CreateMessage(new Message(user, sendTo, messageText, false));
+        model.CreateMessage(new Message(user, sendTo, messageText, false, Integer.parseInt(vacationID)));
     }
 
-    private void sendApprovedBuyMessage(String sendToUser) {
+    //From publisher to buyer when the publisher approves the request
+    private void sendApprovedBuyMessage(String sendToUser, String vacationID) {
         User sendTo = new User(sendToUser, "1","1","1","1","1");
         String messageText = "Hey! User " + user.getUsername() + " approved your order request. Click Agree if you wish to pay";
-        model.CreateMessage(new Message(user, sendTo, messageText, false));
+        model.CreateMessage(new Message(user, sendTo, messageText, false, Integer.parseInt(vacationID)));
     }
 
     private void markMessageAsRead(Message message) {

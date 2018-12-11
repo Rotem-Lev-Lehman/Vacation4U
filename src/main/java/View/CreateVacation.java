@@ -69,10 +69,10 @@ public class CreateVacation extends AView implements Initializable {
             showFillDetailsError();
             return;
         }
-        if((!ButtonSleepPlace.isSelected())&&(place.equals("")||rankPlace.equals(""))){
+        if((ButtonSleepPlace.isSelected())&&(place.equals("")||rankPlace.equals(""))){
             place="";
             rankPlace="";
-            showDateDetailsError();
+            showFillDetailsError();
             return;
         }
         if(!legalDates(departureDate,arrivalDate)){
@@ -81,7 +81,10 @@ public class CreateVacation extends AView implements Initializable {
             return;
         }
         flight=new Flight(airline,OriginCountry,destination, departureDate,arrivalDate);
-        Vacation v= new Vacation(controller.getUser(),flight,departureDate.toString(),arrivalDate.toString(),OriginCountry,destination,vacationKind,place,Integer.parseInt(rankPlace),"default",
+        int rank = -1;
+        if(!rankPlace.equals(""))
+            rank = Integer.parseInt(rankPlace);
+        Vacation v= new Vacation(controller.getUser(),flight,departureDate.toString(),arrivalDate.toString(),OriginCountry,destination,vacationKind,place,rank,"default",
                 false,Integer.parseInt(adultTicketNumber),Integer.parseInt(childTicketNumber),Integer.parseInt(infantTicketNumber),0);
         setChanged();
         notifyObservers(v);
