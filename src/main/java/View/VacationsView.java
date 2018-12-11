@@ -64,7 +64,11 @@ public class VacationsView extends AView implements Initializable {
 
     public void userExist(){
         //move to next page - or make an order, ask ido
-        moveToNewScreen(400, 470, "OrderVacation.fxml", "OrderVacation");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("Order Send");
+        alert.setContentText("Order Send Successfully");
+        alert.show();
+
 
     }
 
@@ -78,16 +82,27 @@ public class VacationsView extends AView implements Initializable {
     }
 
     public void prevPage(){
-        if(vacationListToView.size()>currIndex && 0<=currIndex) {
-            v1 = vacationToShow(vacationListToView, currIndex);
+
+        if(currIndex-2>0){
+            v1 = vacationToShow(vacationListToView, currIndex-2);
+            v2 = vacationToShow(vacationListToView, currIndex-1);
+            currIndex= currIndex-2;
+        }else {
+            v1 = vacationToShow(vacationListToView, currIndex-1);
             currIndex--;
         }
-        if(vacationListToView.size()>currIndex && 0<=currIndex) {
-            v2 = vacationToShow(vacationListToView, currIndex);
-            currIndex--;
-        }
-        btn_next.setDisable(false);
+
+//        if(vacationListToView.size()>currIndex && 0<=currIndex-2) {
+//            v1 = vacationToShow(vacationListToView, currIndex);
+//            currIndex--;
+//        }
+//        if(vacationListToView.size()>currIndex && 0<=currIndex) {
+//            v2 = vacationToShow(vacationListToView, currIndex);
+//            currIndex--;
+//        }
         show();
+        btn_next.setDisable(false);
+
     }
 
     public void nextPage(){
