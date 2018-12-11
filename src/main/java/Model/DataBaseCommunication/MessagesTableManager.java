@@ -19,7 +19,7 @@ public class MessagesTableManager extends ATableManager {
     public void Create(Message message) {
         connect(); //connect to database
         //create user - sql command
-        String sql = "INSERT INTO messages(messageID,senderID,receiverID,message,seen) VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO messages(messageID,senderID,receiverID,message,seen,vacationID) VALUES(?,?,?,?,?,?)";
 
         int nextID = getNextID();
         //try to create user
@@ -30,6 +30,7 @@ public class MessagesTableManager extends ATableManager {
             pstmt.setString(3, message.getReceiver().getUsername());
             pstmt.setString(4, message.getText());
             pstmt.setInt(5, 0);
+            pstmt.setInt(6, message.getVacationID());
             pstmt.executeUpdate();
             message.setMessageID(nextID);
         }
@@ -65,7 +66,7 @@ public class MessagesTableManager extends ATableManager {
         connect(); //connect to database
 
         //sql commend
-        String sql = "SELECT messageID, senderID, receiverID, message, seen FROM messages WHERE receiverID = ?";
+        String sql = "SELECT messageID, senderID, receiverID, message, seen, vacationID FROM messages WHERE receiverID = ?";
 
         List<Message> messages = new ArrayList<Message>(); //list of similar messages
         try {
@@ -89,9 +90,9 @@ public class MessagesTableManager extends ATableManager {
                 if(seen == 1)
                     isSeen = true;
 
-                String vacationIdString = rs.getString("vacationID");
+                int vacationID = rs.getInt("vacationID");
 
-                Message curr = new Message(sender,receiver,rs.getString("message"),isSeen,Integer.parseInt(vacationIdString));
+                Message curr = new Message(sender,receiver,rs.getString("message"),isSeen,vacationID);
                 curr.setMessageID(rs.getInt("messageID"));
                 messages.add(curr);
             }
