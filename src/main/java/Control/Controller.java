@@ -310,12 +310,16 @@ public class Controller extends AController {
         return p.getYears() >= 18;
     }
     private void setNewOrder(VacationsView vacationView, Vacation v) {
-        if(user != null) {
+
+        if(user != null && !user.getUsername().equals(v.getSellerId().getUsername())) {
             model.CreateOrder(new Order(v,user,OrderStatus.WaitingForApproval));
             String text = "Hey! User " + user.getUsername() + " wants to buy your vacation";
             //message from buyer to publisher request to buy vacation
             model.CreateMessage(new Message(user, v.getSellerId(),text,false,v.getVacationID()));
             vacationView.userExist();
+        }
+        else if(user != null && user.getUsername().equals(v.getSellerId().getUsername())){
+            vacationView.userIsSeller();
         }
          else
              vacationView.userNotExist();
@@ -339,8 +343,8 @@ public class Controller extends AController {
 
         if(vacations.size() == 0)
             searchFlight.showEmptyList();
-
-       searchFlight.show(vacations);
+        else
+            searchFlight.show(vacations);
      //   VacationsView.show(vacations);
 
 

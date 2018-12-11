@@ -70,6 +70,13 @@ public class VacationsView extends AView implements Initializable {
         alert.show();
         return;
     }
+    public void userIsSeller(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText("ERROR");
+        alert.setContentText("Can't Buy This Vacation");
+        alert.show();
+        return;
+    }
 
     public void prevPage(){
 
@@ -100,20 +107,7 @@ public class VacationsView extends AView implements Initializable {
             if(currIndex < 1)
                 btn_prev.setDisable(true);
         }
-        /*else {
-            v1 = vacationToShow(vacationListToView, currIndex-1);
-            currIndex--;
-        }
-        */
 
-//        if(vacationListToView.size()>currIndex && 0<=currIndex-2) {
-//            v1 = vacationToShow(vacationListToView, currIndex);
-//            currIndex--;
-//        }
-//        if(vacationListToView.size()>currIndex && 0<=currIndex) {
-//            v2 = vacationToShow(vacationListToView, currIndex);
-//            currIndex--;
-//        }
 
 
   //  }
@@ -130,13 +124,7 @@ public class VacationsView extends AView implements Initializable {
             v1 = vacationToShow(vacationListToView, currIndex);
             currIndex++;
         }
-//        if(vacationListToView.size()>currIndex && 0<=currIndex) {
-//            v2 = vacationToShow(vacationListToView, currIndex);
-//            currIndex++;
-            //v2IsChanged = true;
-// }
-//        else
-//            v2 = null;
+
 
         show();
         if(currIndex > vacationListToView.size() - 1)
@@ -157,36 +145,6 @@ public class VacationsView extends AView implements Initializable {
     }
 
     private void show(){
-        /*
-        if(currIndex==0||currIndex==1 || currIndex==2)
-            btn_prev.setDisable(true);
-        if(currIndex>=vacationListToView.size())
-            btn_next.setDisable(true);
-
-        */
-//        if (v2==null/* || (v2!=null && !v2IsChanged)*/){
-//            TVacationToV2.setVisible(false);
-//            originCountryV2.setVisible(false);
-//            TVacationFromV2.setVisible(false);
-//            btnOrderNowV2.setVisible(false);
-//            TairlineV2.setVisible(false);
-//            DestinationCountryV2.setVisible(false);
-//            airlineV2.setVisible(false);
-//            fillpriceV2.setVisible(false);
-//            LPriceV2.setVisible(false);
-//            ArrivalsDateV2.setVisible(false);
-//            DeparturesDateV2.setVisible(false);
-//            filldepartureDateV2.setVisible(false);
-//            fillarrivalsDateV2.setVisible(false);
-//        }
-//        else if(v2!=null/* && v2IsChanged*/){
-//            originCountryV2.setText(v2.getStartCountry());
-//            DestinationCountryV2.setText(v2.getDestCountry());
-//            airlineV2.setText(v2.getFlight().getFlightCompany());
-//            fillpriceV2.setText(Integer.toString(v2.getPrice()));
-//            filldepartureDateV2.setText(v2.getStartDate());
-//            fillarrivalsDateV2.setText(v2.getEndDate());
-//        }
 
         if(v1!=null ){
             originCountryV1.setText(v1.getStartCountry());

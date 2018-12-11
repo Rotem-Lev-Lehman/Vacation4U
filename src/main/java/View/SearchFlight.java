@@ -119,7 +119,10 @@ public class SearchFlight extends AView implements Initializable  {
    }
 
    public void showEmptyList(){
-
+       Alert alert = new Alert(Alert.AlertType.INFORMATION);
+       alert.setHeaderText("No Result");
+       alert.setContentText("No Result Found");
+       alert.show();
    }
 
    public void show(List<Vacation> vacationList){
@@ -137,7 +140,7 @@ public class SearchFlight extends AView implements Initializable  {
        }
        Stage stage = new Stage();
        stage.setTitle("Vacations");
-       stage.setScene(new Scene(root, 575, 300));
+       stage.setScene(new Scene(root, 700, 350));
        stage.show();
 
    }
@@ -153,7 +156,7 @@ public class SearchFlight extends AView implements Initializable  {
     private void showFillDetailsError() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText("Error");
-        alert.setContentText("Please Fill Correct Fields");
+        alert.setContentText("Fill Correct Price And Date Fields");
         alert.show();
     }
     private boolean legalDates(LocalDate departureDate, LocalDate arrivalDate) {
