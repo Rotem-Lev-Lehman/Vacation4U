@@ -12,6 +12,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutionException;
 
 public class CreateVacation extends AView implements Initializable {
     public TextField TextFieldcountryName, TextFieldAirline, TextFieldPrice, TextFieldOrigin;
@@ -84,16 +85,38 @@ public class CreateVacation extends AView implements Initializable {
             showDateDetailsError();
             return;
         }
+        if(!isInt(price)){
+            showPriceError();
+            return;
+        }
+        int priceInt = Integer.parseInt(price);
         flight=new Flight(airline,OriginCountry,destination, departureDate,arrivalDate);
         int rank = -1;
         if(!rankPlace.equals(""))
             rank = Integer.parseInt(rankPlace);
         Vacation v= new Vacation(controller.getUser(),flight,departureDate.toString(),arrivalDate.toString(),OriginCountry,destination,vacationKind,place,rank,"default",
-                false,Integer.parseInt(adultTicketNumber),Integer.parseInt(childTicketNumber),Integer.parseInt(infantTicketNumber),0);
+                false,Integer.parseInt(adultTicketNumber),Integer.parseInt(childTicketNumber),Integer.parseInt(infantTicketNumber),priceInt);
         setChanged();
         notifyObservers(v);
         createIsSuccess();
 
+    }
+
+    private boolean isInt(String price) {
+        try{
+            Integer.parseInt(price);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+    private void showPriceError() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText("Error");
+        alert.setContentText("Please put number input into price");
+        alert.show();
+        return;
     }
 
     private void showFillDetailsError() {
