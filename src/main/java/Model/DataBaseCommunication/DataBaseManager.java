@@ -15,6 +15,7 @@ public class DataBaseManager implements IDataBaseManager{
     private OrdersTableManager ordersTable;
     private PaymentsTableManager paymentDetailsTable;
     private UsersPicturesTableManager usersPicturesTable;
+    private Object lock;
 
     public DataBaseManager(){
         usersTable = new UsersTableManager();
@@ -23,100 +24,153 @@ public class DataBaseManager implements IDataBaseManager{
         ordersTable = new OrdersTableManager();
         paymentDetailsTable = new PaymentsTableManager();
         usersPicturesTable = new UsersPicturesTableManager();
+        lock = new Object();
     }
 
     @Override
     public void CreateUser(User user) throws SQLException {
-        usersTable.Create(user);
+        synchronized (lock) {
+            usersTable.Create(user);
+        }
     }
 
     @Override
     public User ReadUser(String username) {
-        return usersTable.Read(username);
+        User user;
+        synchronized (lock) {
+            user = usersTable.Read(username);
+        }
+        return user;
     }
 
     @Override
     public List<User> ReadSimilarUsers(String username) {
-        return usersTable.ReadSimilar(username);
+        List<User> users;
+        synchronized (lock) {
+            users = usersTable.ReadSimilar(username);
+        }
+        return users;
     }
 
     @Override
     public void UpdateUser(String username, User user) {
-        usersTable.Update(username, user);
+        synchronized (lock) {
+            usersTable.Update(username, user);
+        }
     }
 
     @Override
     public void DeleteUser(User user) {
-        usersTable.Delete(user);
+        synchronized (lock) {
+            usersTable.Delete(user);
+        }
     }
 
     @Override
-    public void CreateUsersProfileImage(String username, File imageFile) {
-        usersPicturesTable.CreateUsersProfileImage(username, imageFile);
+    public void CreateUsersProfileImage(String username, File imageFile) { //test
+        synchronized (lock) {
+            usersPicturesTable.CreateUsersProfileImage(username, imageFile);
+        }
     }
 
     @Override
-    public Image ReadUsersProfileImage(String username) {
-        return usersPicturesTable.ReadUsersProfileImage(username);
+    public Image ReadUsersProfileImage(String username) { //test
+        Image image;
+        synchronized (lock) {
+            image = usersPicturesTable.ReadUsersProfileImage(username);
+        }
+        return image;
     }
 
     @Override
-    public void UpdateUsersProfileImage(String username, File imageFile) {
-        usersPicturesTable.UpdateUsersProfileImage(username, imageFile);
+    public void UpdateUsersProfileImage(String username, File imageFile) { //test
+        synchronized (lock) {
+            usersPicturesTable.UpdateUsersProfileImage(username, imageFile);
+        }
     }
 
     @Override
     public void CreateVacation(Vacation vacation) {
-        vacationsTable.CreateVacation(vacation);
+        synchronized (lock) {
+            vacationsTable.CreateVacation(vacation);
+        }
     }
 
     @Override
     public List<Vacation> ReadSimilarVacations(Vacation vacation, Comparator<Vacation> vacationsComparator) {
-        return vacationsTable.ReadSimilarVacationsNotBought(vacation, vacationsComparator);
+        List<Vacation> vacations;
+        synchronized (lock) {
+            vacations = vacationsTable.ReadSimilarVacationsNotBought(vacation, vacationsComparator);
+        }
+        return vacations;
     }
 
     @Override
-    public void UpdateVacation(Vacation vacation) {
-        vacationsTable.UpdateVacation(vacation);
+    public void UpdateVacation(Vacation vacation) { //test
+        synchronized (lock) {
+            vacationsTable.UpdateVacation(vacation);
+        }
     }
 
     @Override
     public void CreateOrder(Order order) {
-        ordersTable.CreateOrder(order);
+        synchronized (lock) {
+            ordersTable.CreateOrder(order);
+        }
     }
 
     @Override
     public List<Order> ReadOrdersForVacation(Vacation vacation) {
-        return ordersTable.ReadOrdersForVacation(vacation);
+        List<Order> orders;
+        synchronized (lock) {
+            orders = ordersTable.ReadOrdersForVacation(vacation);
+        }
+        return orders;
     }
 
     @Override
     public void UpdateOrderStatus(Order order) {
-        ordersTable.UpdateOrderStatus(order);
+        synchronized (lock) {
+            ordersTable.UpdateOrderStatus(order);
+        }
     }
 
     @Override
     public void CreatePaymentTransaction(PaymentTransaction paymentTransaction) {
-        paymentDetailsTable.CreatePaymentTransaction(paymentTransaction); // this version
+        synchronized (lock) {
+            paymentDetailsTable.CreatePaymentTransaction(paymentTransaction);
+        }
     }
 
     @Override
     public void CreateMessage(Message message) {
-        messagesTable.Create(message);
+        synchronized (lock) {
+            messagesTable.Create(message);
+        }
     }
 
     @Override
     public List<Message> ReadAllMessages(String username) {
-        return messagesTable.ReadAllMessages(username);
+        List<Message> messages;
+        synchronized (lock) {
+            messages = messagesTable.ReadAllMessages(username);
+        }
+        return messages;
     }
 
     @Override
     public int CountUnseenMessages(String username) {
-        return messagesTable.countUnseenMessages(username);
+        int count;
+        synchronized (lock) {
+            count = messagesTable.countUnseenMessages(username);
+        }
+        return count;
     }
 
     @Override
     public void UpdateMessageAsSeen(Message message) {
-        messagesTable.UpdateAsSeen(message);
+        synchronized (lock) {
+            messagesTable.UpdateAsSeen(message);
+        }
     }
 }

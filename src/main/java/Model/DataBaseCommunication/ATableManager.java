@@ -7,12 +7,12 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public abstract class ATableManager {
-    private String url;
-    protected Connection conn;
-    protected static Object lock = new Object();
+    private static String url = "jdbc:sqlite:resources/DataBase.db"; // Set database project
+    protected static Connection conn;
+    //protected static Object lock = new Object();
 
     public ATableManager(){
-        url = "jdbc:sqlite:resources/DataBase.db"; // Set database project
+        //url = "jdbc:sqlite:resources/DataBase.db"; // Set database project
         //connect();
         //closeConnection();
     }
