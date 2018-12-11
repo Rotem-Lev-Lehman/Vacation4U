@@ -89,7 +89,9 @@ public class MessagesTableManager extends ATableManager {
                 if(seen == 1)
                     isSeen = true;
 
-                Message curr = new Message(sender,receiver,rs.getString("message"),isSeen);
+                String vacationIdString = rs.getString("vacationID");
+
+                Message curr = new Message(sender,receiver,rs.getString("message"),isSeen,Integer.parseInt(vacationIdString));
                 curr.setMessageID(rs.getInt("messageID"));
                 messages.add(curr);
             }
