@@ -167,6 +167,6 @@ public class HomePageView extends AView implements Initializable {
     }
 
     public void openMailBox(MouseEvent mouseEvent) {
-        moveToNewScreen(650, 500, "MailBox.fxml","MailBox");
+        moveToNewScreen(600, 400, "MailBox.fxml","MailBox");
     }
 }

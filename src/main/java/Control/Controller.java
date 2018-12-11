@@ -1,9 +1,6 @@
 package Control;
 
-import Model.Message;
-import Model.PaymentTransaction;
-import Model.User;
-import Model.Vacation;
+import Model.*;
 import View.*;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
@@ -53,14 +50,50 @@ public class Controller extends AController {
                 searchForMessages((MailBoxView)o);
             }
             else if(arg instanceof Message)
-                markMessgeAsRead((Message)arg);
+                markMessageAsRead((Message)arg);
         }else if (o instanceof SearchFlight) {
             if (arg instanceof Vacation)
                 getResultOfSearch((SearchFlight)o,(Vacation)arg);
+        } else if(o instanceof MessageBoxView){
+            if(arg instanceof String[] && ((String[])arg).length == 2) {
+                String[] strings = (String[])arg;
+                if(strings[1].equals("buyMessage"))
+                    sendApprovedBuyMessage(strings[0]);
+                else if(strings[1].equals("declineBuyMessage"))
+                    sendDeclinedBuyMessage(strings[0]);
+                else if(strings[1].equals("buyApproved"))
+                    sendApprovedPaymentMessage(strings[0]);
+                else if(strings[1].equals("buyDeclined"))
+                    sendDeclinedPaymentMessage(strings[0]);
+            }
         }
     }
 
-    private void markMessgeAsRead(Message message) {
+    private void sendDeclinedPaymentMessage(String sendToUser) {
+        User sendTo = new User(sendToUser, "1","1","1","1","1");
+        String messageText = "Sorry, User " + user.getUsername() + " didn't pay for the vacation";
+        model.CreateMessage(new Message(user, sendTo, messageText, false));
+    }
+
+    private void sendApprovedPaymentMessage(String sendToUser) {
+        /*User sendTo = new User(sendToUser, "1","1","1","1","1");
+        String messageText = "User " + user.getUsername() + " bought your vacation!";
+        model.CreateMessage(new Message(user, sendTo, messageText, false));*/
+    }
+
+    private void sendDeclinedBuyMessage(String sendToUser) {
+        User sendTo = new User(sendToUser, "1","1","1","1","1");
+        String messageText = "Sorry, User " + user.getUsername() + " didn't approve your order request";
+        model.CreateMessage(new Message(user, sendTo, messageText, false));
+    }
+
+    private void sendApprovedBuyMessage(String sendToUser) {
+        User sendTo = new User(sendToUser, "1","1","1","1","1");
+        String messageText = "Hey! User " + user.getUsername() + " approved your order request. Click Agree if you wish to pay";
+        model.CreateMessage(new Message(user, sendTo, messageText, false));
+    }
+
+    private void markMessageAsRead(Message message) {
         model.UpdateMessageAsSeen(message);
     }
 
@@ -251,7 +284,7 @@ public class Controller extends AController {
 
     }
 
-        private void getVacationToShow(VacationsView vacationView, Vacation v){
+        /*private void getVacationToShow(VacationsView vacationView, Vacation v){
             List<Vacation> vacations = model.ReadSimilarVacations(v, new Comparator<Vacation>() {
                 @Override
                 public int compare(Vacation o1, Vacation o2) {
@@ -266,7 +299,7 @@ public class Controller extends AController {
             vacationView.vacationToShow(vacations,0);
 
 
-        }
+        }*/
 
 
 }

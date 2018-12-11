@@ -41,8 +41,8 @@
             <Font size="8.0" />
          </font>
       </Text>
-      <Circle fx:id="profile_image_circle" fill="#e1eaf3" layoutX="189.0" layoutY="155.0" radius="58.0" stroke="BLACK" strokeType="INSIDE" onMouseClicked="#openImagePicker" />
-      <Label layoutX="236.0" layoutY="189.0" text="click to choose image" onMouseClicked="#openImagePicker">
+      <Circle fx:id="profile_image_circle" fill="#e1eaf3" layoutX="189.0" layoutY="155.0" onMouseClicked="#openImagePicker" radius="58.0" stroke="BLACK" strokeType="INSIDE" />
+      <Label layoutX="236.0" layoutY="189.0" onMouseClicked="#openImagePicker" text="click to choose image">
          <font>
             <Font size="8.0" />
          </font>

@@ -41,7 +41,11 @@ public class MailBoxView extends AView implements Initializable {
     //Show users that were found
     public void showMessages(List<Message> messages){
         //show results
-        messagesObservableList = FXCollections.observableArrayList(messages/*tableMessages*/);
+        List<Message> reversed = new ArrayList<>();
+        for (int i = messages.size()-1; i >=0; i--) {
+            reversed.add(messages.get(i));
+        }
+        messagesObservableList = FXCollections.observableArrayList(reversed/*messages*//*tableMessages*/);
         messagesTable.setItems(messagesObservableList);
     }
 
@@ -56,9 +60,9 @@ public class MailBoxView extends AView implements Initializable {
             TableRow<Message> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                     Message clickedRow = row.getItem();
-                    openMessageBox(clickedRow.getText(), clickedRow.getSender().getUsername(), clickedRow.isSeen());
                     setChanged();
                     notifyObservers(clickedRow);
+                    openMessageBox(clickedRow.getText(), clickedRow.getSender().getUsername(), clickedRow.isSeen());
             });
             return row ;
         });
@@ -88,20 +92,37 @@ public class MailBoxView extends AView implements Initializable {
     }
 
     private void openMessageBox(String message, String from, boolean seen) {
-        Parent root = null;
+        //Parent root = null;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("MessageBox.fxml"));
+            /*FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("MessageBox.fxml"));
+            AView view = loader.getController();
             root = loader.load();
             MessageBoxView messageBoxView = loader.getController();
             messageBoxView.setMessage(message, from); //set the dictionary
+            Stage stage = new Stage();
+            stage.setTitle("Message");
+            stage.setScene(new Scene(root, 600, 320));
+            stage.show();
+            view.setDefaults(stage);*/
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            Parent root = null;
+            root = fxmlLoader.load(getClass().getResource("/MessageBox.fxml").openStream());
+
+            AView view = fxmlLoader.getController();
+            view.setController(controller);
+            ((MessageBoxView)fxmlLoader.getController()).setMessage(message, from);
+
+            Stage stage = new Stage();
+            stage.setTitle("Message");
+            stage.setScene(new Scene(root, 600, 320));
+            stage.show();
+
+            view.setDefaults(stage);
+
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Stage stage = new Stage();
-        stage.setTitle("Message");
-        stage.setScene(new Scene(root, 600, 255));
-        stage.show();
     }
 
     public void showNoResult() {
