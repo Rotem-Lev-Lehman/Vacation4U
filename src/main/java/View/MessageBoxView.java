@@ -1,10 +1,16 @@
 package View;
 
+import Model.Order;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class MessageBoxView extends AView {
     public Text message;
@@ -37,15 +43,38 @@ public class MessageBoxView extends AView {
             showAlert("Message was sent to " + userFrom + " - order request approved");
         }
         else if(message.getText().contains("approved")){
-            /*String[] strings = new String[2];
+            String[] strings = new String[3];
             strings[0] = userFrom;
-            strings[1] = "buyApproved";
+            strings[1] = "openPayment";
+            strings[2] = String.valueOf(vacationID);
             setChanged();
-            notifyObservers(strings);*/
-            moveToNewScreen(210,330,"OrderVacation.fxml","Order");
+            notifyObservers(strings);
+            //moveToPayment();
+            //moveToNewScreen(210,330,"OrderVacation.fxml","Order");
         }
         Stage stage = (Stage)decline_btn.getScene().getWindow();
         stage.close();
+    }
+
+    public void moveToPayment(Order order) {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Parent root = null;
+        try {
+            root = fxmlLoader.load(getClass().getResource("/OrderVacation.fxml").openStream());
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }
+
+        AView view = fxmlLoader.getController();
+        view.setController(controller);
+        ((OrderVacation)fxmlLoader.getController()).setMessageBoxView(this, order);
+
+        Stage stage = new Stage();
+        stage.setTitle("Message");
+        stage.setScene(new Scene(root, 210, 320));
+        stage.show();
+
+        view.setDefaults(stage);
     }
 
     public void doDecline(MouseEvent mouseEvent) {
@@ -78,5 +107,14 @@ public class MessageBoxView extends AView {
         alert.setContentText(text);
         alert.setTitle("Information");
         alert.show();
+    }
+
+    public void sendPayment() {
+        String[] strings = new String[2];
+        strings[0] = userFrom;
+        strings[1] = "buyApproved";
+        strings[2] = String.valueOf(vacationID);
+        setChanged();
+        notifyObservers(strings);
     }
 }

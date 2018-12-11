@@ -118,6 +118,10 @@ public class SearchFlight extends AView implements Initializable  {
 
    }
 
+   public void showEmptyList(){
+
+   }
+
    public void show(List<Vacation> vacationList){
         //this.moveToNewScreen(575, 300, "VacationsView.fxml", "VacationsView");
        Parent root = null;

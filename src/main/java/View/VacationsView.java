@@ -21,29 +21,18 @@ public class VacationsView extends AView implements Initializable {
     public Label DestinationCountryV1;
     public Label airlineV1;
     public Label fillpriceV1;
-    public Label TVacationToV2;
-    public Label originCountryV2;
-    public Label TVacationFromV2;
-    public Button btnOrderNowV2;
-    public Label TairlineV2;
-    public Label DestinationCountryV2;
-    public Label airlineV2;
-    public Label fillpriceV2;
+
     public Button btn_next;
     public Button btn_prev;
     public int currIndex;
     public List<Vacation> vacationListToView;
     public Vacation v1;
-    public Vacation v2;
     public Label TVacationFrom;
     public Label TVacationTo;
-    public Label LPriceV2;
-    public Label ArrivalsDateV2;
-    public Label DeparturesDateV2;
+
     public Label filldepartureDateV1;
     public Label fillarrivalsDateV1;
-    public Label filldepartureDateV2;
-    public Label fillarrivalsDateV2;
+
 
     public boolean v2IsChanged;
 
@@ -57,10 +46,10 @@ public class VacationsView extends AView implements Initializable {
             setChanged();
             notifyObservers(v1);
         }
-        if(e.getSource() == btnOrderNowV2){
-            setChanged();
-            notifyObservers(v2);
-        }
+//        if(e.getSource() == btnOrderNowV2){
+//            setChanged();
+//            notifyObservers(v2);
+//        }
     }
 
     public void userExist(){
@@ -84,24 +73,31 @@ public class VacationsView extends AView implements Initializable {
 
     public void prevPage(){
 
-        if(currIndex-2 >=0){
-           if(v2 != null) {
-                currIndex = currIndex - 2;
-                v1 = vacationToShow(vacationListToView, currIndex - 2);
-                v2 = vacationToShow(vacationListToView, currIndex - 1);
 
-                btn_next.setDisable(false);
-            }
-            else
-            {
-                currIndex = currIndex - 1;
-                v1 = vacationToShow(vacationListToView, currIndex - 2);
-                v2 = vacationToShow(vacationListToView, currIndex - 1);
-                btn_next.setDisable(false);
-                v2IsChanged = false;
-            }
+        if(currIndex-1>=0) {
+            v1 = vacationToShow(vacationListToView, currIndex - 1);
+            currIndex--;
+            btn_next.setDisable(false);
+        }
+
+//        if(currIndex-2 >=0){
+//           if(v2 != null) {
+//                currIndex = currIndex - 2;
+//                v1 = vacationToShow(vacationListToView, currIndex - 2);
+//                v2 = vacationToShow(vacationListToView, currIndex - 1);
+//
+//                btn_next.setDisable(false);
+//            }
+//            else
+//            {
+//                currIndex = currIndex - 1;
+//                v1 = vacationToShow(vacationListToView, currIndex - 2);
+//                v2 = vacationToShow(vacationListToView, currIndex - 1);
+//                btn_next.setDisable(false);
+//                v2IsChanged = false;
+//            }
             show();
-            if(currIndex < 2)
+            if(currIndex < 1)
                 btn_prev.setDisable(true);
         }
         /*else {
@@ -120,11 +116,13 @@ public class VacationsView extends AView implements Initializable {
 //        }
 
 
-    }
+  //  }
 
     public void nextPage(){
+
+
         v2IsChanged=false;
-        if(currIndex  < 2)
+        if(currIndex  < 1)
             btn_prev.setDisable(true);
         else
             btn_prev.setDisable(false);
@@ -132,13 +130,13 @@ public class VacationsView extends AView implements Initializable {
             v1 = vacationToShow(vacationListToView, currIndex);
             currIndex++;
         }
-        if(vacationListToView.size()>currIndex && 0<=currIndex) {
-            v2 = vacationToShow(vacationListToView, currIndex);
-            currIndex++;
+//        if(vacationListToView.size()>currIndex && 0<=currIndex) {
+//            v2 = vacationToShow(vacationListToView, currIndex);
+//            currIndex++;
             //v2IsChanged = true;
-        }
-        else
-            v2 = null;
+// }
+//        else
+//            v2 = null;
 
         show();
         if(currIndex > vacationListToView.size() - 1)
@@ -150,7 +148,7 @@ public class VacationsView extends AView implements Initializable {
         vacationListToView = vacations;
 
         currIndex = 0;
-        if(vacations.size() < 3) {
+        if(vacations.size() < 1) {
             btn_next.setDisable(true);
             btn_prev.setDisable(true);
         }
@@ -166,29 +164,29 @@ public class VacationsView extends AView implements Initializable {
             btn_next.setDisable(true);
 
         */
-        if (v2==null/* || (v2!=null && !v2IsChanged)*/){
-            TVacationToV2.setVisible(false);
-            originCountryV2.setVisible(false);
-            TVacationFromV2.setVisible(false);
-            btnOrderNowV2.setVisible(false);
-            TairlineV2.setVisible(false);
-            DestinationCountryV2.setVisible(false);
-            airlineV2.setVisible(false);
-            fillpriceV2.setVisible(false);
-            LPriceV2.setVisible(false);
-            ArrivalsDateV2.setVisible(false);
-            DeparturesDateV2.setVisible(false);
-            filldepartureDateV2.setVisible(false);
-            fillarrivalsDateV2.setVisible(false);
-        }
-        else if(v2!=null/* && v2IsChanged*/){
-            originCountryV2.setText(v2.getStartCountry());
-            DestinationCountryV2.setText(v2.getDestCountry());
-            airlineV2.setText(v2.getFlight().getFlightCompany());
-            fillpriceV2.setText(Integer.toString(v2.getPrice()));
-            filldepartureDateV2.setText(v2.getStartDate());
-            fillarrivalsDateV2.setText(v2.getEndDate());
-        }
+//        if (v2==null/* || (v2!=null && !v2IsChanged)*/){
+//            TVacationToV2.setVisible(false);
+//            originCountryV2.setVisible(false);
+//            TVacationFromV2.setVisible(false);
+//            btnOrderNowV2.setVisible(false);
+//            TairlineV2.setVisible(false);
+//            DestinationCountryV2.setVisible(false);
+//            airlineV2.setVisible(false);
+//            fillpriceV2.setVisible(false);
+//            LPriceV2.setVisible(false);
+//            ArrivalsDateV2.setVisible(false);
+//            DeparturesDateV2.setVisible(false);
+//            filldepartureDateV2.setVisible(false);
+//            fillarrivalsDateV2.setVisible(false);
+//        }
+//        else if(v2!=null/* && v2IsChanged*/){
+//            originCountryV2.setText(v2.getStartCountry());
+//            DestinationCountryV2.setText(v2.getDestCountry());
+//            airlineV2.setText(v2.getFlight().getFlightCompany());
+//            fillpriceV2.setText(Integer.toString(v2.getPrice()));
+//            filldepartureDateV2.setText(v2.getStartDate());
+//            fillarrivalsDateV2.setText(v2.getEndDate());
+//        }
 
         if(v1!=null ){
             originCountryV1.setText(v1.getStartCountry());
@@ -199,6 +197,7 @@ public class VacationsView extends AView implements Initializable {
             fillarrivalsDateV1.setText(v1.getEndDate());
 
         }
+
     }
 
 

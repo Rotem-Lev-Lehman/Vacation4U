@@ -2,6 +2,7 @@ package Control;
 
 import Model.*;
 import View.*;
+import com.sun.org.apache.xpath.internal.operations.Or;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 
@@ -62,9 +63,11 @@ public class Controller extends AController {
                 else if (strings[1].equals("declineBuyMessage"))
                     sendDeclinedBuyMessage(strings[0], strings[2]);
                 else if (strings[1].equals("buyApproved"))
-                    sendApprovedPaymentMessage((MessageBoxView)o);
+                    sendApprovedPaymentMessage(strings[0], strings[2]);
                 else if (strings[1].equals("buyDeclined"))
                     sendDeclinedPaymentMessage(strings[0], strings[2]);
+                else if (strings[1].equals("OpenPayment"))
+                    openPayment((MessageBoxView) o,strings[0], strings[2]);
             }
         }else if (o instanceof VacationsView) {
              if (arg instanceof Vacation)
@@ -73,16 +76,37 @@ public class Controller extends AController {
 
     }
 
+    private void openPayment(MessageBoxView msgBoxView, String sendToUser, String vacationID) {
+        Vacation v = model.ReadVacation(Integer.parseInt(vacationID));
+        Order order = model.ReadOrder(v, user);
+        msgBoxView.moveToPayment(order);
+
+    }
 
     //from buyer to publisher when the buyer didn't pay
     private void sendDeclinedPaymentMessage(String sendToUser, String vacationID) {
         User sendTo = new User(sendToUser, "1","1","1","1","1");
         String messageText = "Sorry, User " + user.getUsername() + " didn't pay for the vacation";
         model.CreateMessage(new Message(user, sendTo, messageText, false, Integer.parseInt(vacationID)));
+
+        //updae order status
+        Vacation v = new Vacation(user,null,"","","","","","",-1,"",false,-1,-1,-1,-1);
+        v.setVacationID(Integer.parseInt(vacationID));
+        Order order = new Order(v, user, OrderStatus.Declined);
+        model.UpdateOrder(order);
     }
 
-    private void sendApprovedPaymentMessage(MessageBoxView o) {
-        //o.showPaymenyScreen();
+    //From buyer to publisher - Vacation was bought
+    private void sendApprovedPaymentMessage(String sendToUser,String vacationID) {
+        User sendTo = new User(sendToUser, "1","1","1","1","1");
+        String messageText = "Yay! User " + user.getUsername() + " bought the vacation you have published";
+        model.CreateMessage(new Message(user,sendTo,messageText,false, Integer.parseInt(vacationID)));
+
+        Vacation v = model.ReadVacation(Integer.parseInt(vacationID));
+        v.setAlreadySold(true);
+        Order order = new Order(v, user, OrderStatus.Accepted);
+        model.UpdateOrder(order);
+        model.UpdateVacation(v);
     }
 
     //From publisher to buyer when the publisher didn't approve the deal
@@ -90,6 +114,13 @@ public class Controller extends AController {
         User sendTo = new User(sendToUser, "1","1","1","1","1");
         String messageText = "Sorry, User " + user.getUsername() + " didn't approve your order request";
         model.CreateMessage(new Message(user, sendTo, messageText, false, Integer.parseInt(vacationID)));
+
+        //updae order status
+        Vacation v = new Vacation(user,null,"","","","","","",-1,"",false,-1,-1,-1,-1);
+        v.setVacationID(Integer.parseInt(vacationID));
+        User buyer = new User(sendToUser,"","","","","");
+        Order order = new Order(v, buyer, OrderStatus.Declined);
+        model.UpdateOrder(order);
     }
 
     //From publisher to buyer when the publisher approves the request
@@ -97,6 +128,13 @@ public class Controller extends AController {
         User sendTo = new User(sendToUser, "1","1","1","1","1");
         String messageText = "Hey! User " + user.getUsername() + " approved your order request. Click Agree if you wish to pay";
         model.CreateMessage(new Message(user, sendTo, messageText, false, Integer.parseInt(vacationID)));
+
+        //updae order status
+        Vacation v = new Vacation(user,null,"","","","","","",-1,"",false,-1,-1,-1,-1);
+        v.setVacationID(Integer.parseInt(vacationID));
+        User buyer = new User(sendToUser,"","","","","");
+        Order order = new Order(v, buyer, OrderStatus.WaitingForPayment);
+        model.UpdateOrder(order);
     }
 
     private void markMessageAsRead(Message message) {
@@ -117,6 +155,7 @@ public class Controller extends AController {
     }
 
     private void createPayment(OrderVacation o, PaymentTransaction arg) {
+
         model.CreatePaymentTransaction(arg);
     }
 
@@ -154,10 +193,8 @@ public class Controller extends AController {
 
         User newUser = new User(username, passwordtxt, birthDate.toString(), firstname, lastname, city);
         model.UpdateUser(user.getUsername(), newUser); //update user
-        if(imageFile != null) {
+        if(imageFile != null)
             model.UpdateUsersProfileImage(user.getUsername(), imageFile);
-            user = model.ReadUser(user.getUsername());
-        }
 
         setUser(newUser); //set new user
 
@@ -299,6 +336,9 @@ public class Controller extends AController {
 
             }
         });
+
+        if(vacations.size() == 0)
+            searchFlight.showEmptyList();
 
        searchFlight.show(vacations);
      //   VacationsView.show(vacations);

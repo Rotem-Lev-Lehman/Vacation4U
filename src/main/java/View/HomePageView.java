@@ -172,6 +172,6 @@ public class HomePageView extends AView implements Initializable {
     }
 
     public void OpenSearchFlight(ActionEvent actionEvent) {
-        moveToNewScreen(575, 300, "SearchFlight.fxml", "Search");
+        moveToNewScreen(600, 550, "SearchFlight.fxml", "Search");
     }
 }
