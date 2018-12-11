@@ -53,6 +53,10 @@ public abstract class AModel {
         dataBaseManager.CreateVacation(vacation);
     }
 
+    public void ReadVacation(int vacationID){
+        dataBaseManager.ReadVacation(vacationID);
+    }
+
     public List<Vacation> ReadSimilarVacations(Vacation vacation, Comparator<Vacation> vacationComparator){
         return dataBaseManager.ReadSimilarVacations(vacation, vacationComparator);
     }

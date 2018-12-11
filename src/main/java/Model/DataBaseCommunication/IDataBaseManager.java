@@ -21,6 +21,7 @@ public interface IDataBaseManager {
     void UpdateUsersProfileImage(String username, File imageFile);
 
     void CreateVacation(Vacation vacation); //Create Vacation
+    Vacation ReadVacation(int vacationID);
     List<Vacation> ReadSimilarVacations(Vacation vacation, Comparator<Vacation> vacationsComparator); //Read vacations with similar parameters
     void UpdateVacation(Vacation vacation); //Update a given vacation in the database
 

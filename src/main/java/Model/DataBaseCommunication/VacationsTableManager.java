@@ -64,6 +64,47 @@ public class VacationsTableManager extends ATableManager {
 
     }
 
+    public Vacation Read(int vacationID){
+        connect(); //connect to database
+
+        //sql commend
+        String sql = "SELECT vacationID, sellerId, startDate, endDate, startCountry, destCountry, typeOfVacation, typeOfHotel, rankingOfHotel, typeOfLuggage, alreadySold, amountOfAdultTickets, amountOfChildTickets, amountOfInfantTickets, price FROM vacations WHERE vacationID = ?";
+
+        Vacation vacation = null; // vacations
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            // set the value
+            pstmt.setInt(1, vacationID);
+            //
+            ResultSet rs = pstmt.executeQuery();
+
+            // loop through the result set
+            while (rs.next()) {
+
+                String username = rs.getString("sellerId");
+                User seller = usersTable.Read(username);
+
+                Flight flight = flightsTable.GetFlight(vacationID);
+
+                int alreadySoldDataBase = rs.getInt("alreadySold");
+                boolean alreadySold = false;
+                if(alreadySoldDataBase == 1)
+                    alreadySold = true;
+
+                vacation = new Vacation(seller,flight,rs.getString("startDate"),rs.getString("endDate"),rs.getString("startCountry"),rs.getString("destCountry"),
+                        rs.getString("typeOfVacation"),rs.getString("typeOfHotel"),rs.getInt("rankingOfHotel"),rs.getString("typeOfLuggage"),alreadySold,rs.getInt("amountOfAdultTickets"),rs.getInt("amountOfChildTickets"),rs.getInt("amountOfInfantTickets"),rs.getInt("price"));
+                vacation.setVacationID(vacationID);
+                break;
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        closeConnection(); //disconnect from database
+
+        return vacation;
+    }
+
     public List<Vacation> ReadSimilarVacationsNotBought(Vacation vacation, Comparator<Vacation> vacationsComparator) {
         connect(); //connect to database
 

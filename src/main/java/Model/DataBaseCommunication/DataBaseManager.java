@@ -97,6 +97,11 @@ public class DataBaseManager implements IDataBaseManager{
     }
 
     @Override
+    public Vacation ReadVacation(int vacationID) {
+        return vacationsTable.Read(vacationID);
+    }
+
+    @Override
     public List<Vacation> ReadSimilarVacations(Vacation vacation, Comparator<Vacation> vacationsComparator) {
         List<Vacation> vacations;
         synchronized (lock) {
