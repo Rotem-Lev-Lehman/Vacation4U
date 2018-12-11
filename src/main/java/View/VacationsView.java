@@ -84,14 +84,31 @@ public class VacationsView extends AView implements Initializable {
 
     public void prevPage(){
 
-        if(currIndex-2>0){
-            v1 = vacationToShow(vacationListToView, currIndex-2);
-            v2 = vacationToShow(vacationListToView, currIndex-1);
-            currIndex= currIndex-2;
-        }else {
+        if(currIndex-2 >=0){
+           if(v2 != null) {
+                currIndex = currIndex - 2;
+                v1 = vacationToShow(vacationListToView, currIndex - 2);
+                v2 = vacationToShow(vacationListToView, currIndex - 1);
+
+                btn_next.setDisable(false);
+            }
+            else
+            {
+                currIndex = currIndex - 1;
+                v1 = vacationToShow(vacationListToView, currIndex - 2);
+                v2 = vacationToShow(vacationListToView, currIndex - 1);
+                btn_next.setDisable(false);
+                v2IsChanged = false;
+            }
+            show();
+            if(currIndex < 2)
+                btn_prev.setDisable(true);
+        }
+        /*else {
             v1 = vacationToShow(vacationListToView, currIndex-1);
             currIndex--;
         }
+        */
 
 //        if(vacationListToView.size()>currIndex && 0<=currIndex-2) {
 //            v1 = vacationToShow(vacationListToView, currIndex);
@@ -101,13 +118,16 @@ public class VacationsView extends AView implements Initializable {
 //            v2 = vacationToShow(vacationListToView, currIndex);
 //            currIndex--;
 //        }
-        show();
-        btn_next.setDisable(false);
+
 
     }
 
     public void nextPage(){
         v2IsChanged=false;
+        if(currIndex  < 2)
+            btn_prev.setDisable(true);
+        else
+            btn_prev.setDisable(false);
         if(vacationListToView.size()>currIndex && 0<=currIndex) {
             v1 = vacationToShow(vacationListToView, currIndex);
             currIndex++;
@@ -115,22 +135,14 @@ public class VacationsView extends AView implements Initializable {
         if(vacationListToView.size()>currIndex && 0<=currIndex) {
             v2 = vacationToShow(vacationListToView, currIndex);
             currIndex++;
+            //v2IsChanged = true;
         }
-        btn_prev.setDisable(false);
-        show();
+        else
+            v2 = null;
 
-    }
-    public void showFirstPage(){
-        if(vacationListToView.size()>currIndex && 0<=currIndex) {
-            v1 = vacationToShow(vacationListToView, currIndex);
-            currIndex++;
-        }
-        if(vacationListToView.size()>currIndex && 0<=currIndex) {
-            v2 = vacationToShow(vacationListToView, currIndex);
-            currIndex++;
-            v2IsChanged=true;
-        }
         show();
+        if(currIndex > vacationListToView.size() - 1)
+            btn_next.setDisable(true);
 
     }
 
@@ -138,17 +150,23 @@ public class VacationsView extends AView implements Initializable {
         vacationListToView = vacations;
 
         currIndex = 0;
-        showFirstPage();
+        if(vacations.size() < 3) {
+            btn_next.setDisable(true);
+            btn_prev.setDisable(true);
+        }
+        nextPage();
 
     }
 
     private void show(){
+        /*
         if(currIndex==0||currIndex==1 || currIndex==2)
             btn_prev.setDisable(true);
         if(currIndex>=vacationListToView.size())
             btn_next.setDisable(true);
 
-        if (v2==null || (v2!=null && !v2IsChanged)){
+        */
+        if (v2==null/* || (v2!=null && !v2IsChanged)*/){
             TVacationToV2.setVisible(false);
             originCountryV2.setVisible(false);
             TVacationFromV2.setVisible(false);
@@ -163,7 +181,7 @@ public class VacationsView extends AView implements Initializable {
             filldepartureDateV2.setVisible(false);
             fillarrivalsDateV2.setVisible(false);
         }
-        else if(v2!=null && v2IsChanged){
+        else if(v2!=null/* && v2IsChanged*/){
             originCountryV2.setText(v2.getStartCountry());
             DestinationCountryV2.setText(v2.getDestCountry());
             airlineV2.setText(v2.getFlight().getFlightCompany());
