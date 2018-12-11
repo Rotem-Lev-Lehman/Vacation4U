@@ -81,7 +81,6 @@ public class CreateVacation extends AView implements Initializable {
             return;
         }
         if(!legalDates(departureDate,arrivalDate)){
-            moveToNewScreen(400, 470, "OrderVacation.fxml", "Register");
             showDateDetailsError();
             return;
         }
