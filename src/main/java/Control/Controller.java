@@ -56,18 +56,23 @@ public class Controller extends AController {
                 getResultOfSearch((SearchFlight)o,(Vacation)arg);
         } else if(o instanceof MessageBoxView){
             if(arg instanceof String[] && ((String[])arg).length == 3) {
-                String[] strings = (String[])arg;
-                if(strings[1].equals("buyMessage"))
+                String[] strings = (String[]) arg;
+                if (strings[1].equals("buyMessage"))
                     sendApprovedBuyMessage(strings[0], strings[2]);
-                else if(strings[1].equals("declineBuyMessage"))
+                else if (strings[1].equals("declineBuyMessage"))
                     sendDeclinedBuyMessage(strings[0], strings[2]);
-                else if(strings[1].equals("buyApproved"))
+                else if (strings[1].equals("buyApproved"))
                     sendApprovedPaymentMessage(strings[0], strings[2]);
-                else if(strings[1].equals("buyDeclined"))
+                else if (strings[1].equals("buyDeclined"))
                     sendDeclinedPaymentMessage(strings[0], strings[2]);
             }
+        }else if (o instanceof VacationsView) {
+             if (arg instanceof Vacation)
+                    setNewOrder((VacationsView) o, (Vacation) arg);
         }
+
     }
+
 
     //from buyer to publisher when the buyer didn't pay
     private void sendDeclinedPaymentMessage(String sendToUser, String vacationID) {
@@ -266,6 +271,16 @@ public class Controller extends AController {
         Period p = Period.between(date, dateNow);
         return p.getYears() >= 18;
     }
+    private void setNewOrder(VacationsView vacationView, Vacation v) {
+        if(user != null)
+               vacationView.userExist();
+
+
+         else
+             vacationView.userNotExist();
+
+    }
+
 
 
     private void getResultOfSearch(SearchFlight searchFlight, Vacation v){

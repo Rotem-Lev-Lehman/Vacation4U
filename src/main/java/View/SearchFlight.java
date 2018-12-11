@@ -4,9 +4,14 @@ package View;
 import Model.Flight;
 import Model.User;
 import Model.Vacation;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.Period;
@@ -80,9 +85,15 @@ public class SearchFlight extends AView implements Initializable  {
             minPrice = Integer.parseInt(Min);
         }
 
+        if(originCountry.equals("") ||destinationCountry.equals("")){
+            showFillAllDetailsError();
+            return;
+        }
 
-        if(originCountry.equals("") ||destinationCountry.equals("") ||(departureDate!=null && arrivalDate!= null && !legalDates(departureDate,arrivalDate)) || !legalRangPrice(minPrice,maxPrice)){
+
+        if((departureDate!=null && arrivalDate!= null && !legalDates(departureDate,arrivalDate)) || !legalRangPrice(minPrice,maxPrice)){
             showFillDetailsError();
+            return;
         }
 
         int adultNumOfTicket=0;
@@ -104,7 +115,7 @@ public class SearchFlight extends AView implements Initializable  {
         boolean isSleepPlace = CheckBoxSleepPlace.isSelected();
 
         Flight F=new Flight(airline, originCountry, destinationCountry, departureDate, arrivalDate);
-        Vacation v=new Vacation( user, F, departureDateString, arrivalDateString, originCountry, destinationCountry, vacationKind, "",0,baggageType,false,adultNumOfTicket, childNumOfTicket,infantNumOfTicket,minPrice);
+        Vacation v=new Vacation( user, F, departureDateString, arrivalDateString, originCountry, destinationCountry, vacationKind, "",0,baggageType,false,adultNumOfTicket, childNumOfTicket,infantNumOfTicket,maxPrice);
 
         setChanged();
         notifyObservers(v);
@@ -112,7 +123,21 @@ public class SearchFlight extends AView implements Initializable  {
    }
 
    public void show(List<Vacation> vacationList){
-        this.moveToNewScreen(575, 300, "VacationsView.fxml", "VacationsView");
+        //this.moveToNewScreen(575, 300, "VacationsView.fxml", "VacationsView");
+       Parent root = null;
+       try {
+           FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("VacationsView.fxml"));
+           root = loader.load();
+           VacationsView vacationsView = loader.getController();
+           vacationsView.setVacations(vacationList);
+
+       } catch (IOException e) {
+           e.printStackTrace();
+       }
+       Stage stage = new Stage();
+       stage.setTitle("Vacations");
+       stage.setScene(new Scene(root, 575, 300));
+       stage.show();
 
    }
 
@@ -120,6 +145,13 @@ public class SearchFlight extends AView implements Initializable  {
         if(maxPrice>=minPrice)
             return true;
         return false;
+    }
+
+    private void showFillAllDetailsError() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText("Error");
+        alert.setContentText("Please Fill All Fields");
+        alert.show();
     }
 
     private void showFillDetailsError() {
@@ -135,6 +167,8 @@ public class SearchFlight extends AView implements Initializable  {
         Period p2 = Period.between(departureDate, arrivalDate);
         return !p.isNegative() && !p1.isNegative() && !p2.isNegative();
     }
+
+
 
     public void Country(){
 
