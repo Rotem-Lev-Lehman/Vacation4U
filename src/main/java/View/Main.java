@@ -23,7 +23,7 @@ public class Main extends Application {
 
         /*User user1 = new User("1","1","1","1","1","d");
         User user2 = new User("admin","1","1","1","1","d");
-        model.CreateMessage(new Message(user2, user1, "Hey! admin wants to buy vacation", false));*/
+        model.CreateMessage(new Message(user2, user1, "Hey! admin wants to buy vacation", false,4));*/
 
         //open main page
         FXMLLoader fxmlLoader = new FXMLLoader();

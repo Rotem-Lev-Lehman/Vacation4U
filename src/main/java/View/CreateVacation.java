@@ -46,6 +46,10 @@ public class CreateVacation extends AView implements Initializable {
     public void CreateVacation(){
         String airline = TextFieldAirline.getText();
         if(ButtonSleepPlace.isSelected()) {
+            if(Place.getValue() == null || Place.getValue().equals("") || RankPlace.getValue() == null || RankPlace.getValue().equals("")){
+                showFillDetailsError();
+                return;
+            }
             place = Place.getValue().toString();
             rankPlace = RankPlace.getValue().toString();
         }
