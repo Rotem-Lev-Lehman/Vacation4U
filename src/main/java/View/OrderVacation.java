@@ -2,6 +2,7 @@ package View;
 
 import Model.Order;
 import Model.PaymentTransaction;
+import Model.Vacation;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -16,7 +17,7 @@ public class OrderVacation extends AView implements Initializable {
     public TextField Name,ValidDate,cvv,creditCardNname;
     public ImageView payment_img;
     public Button Continue;
-    Order order;
+    Order order;/*=new Order(controller.getUser(),false);*/
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

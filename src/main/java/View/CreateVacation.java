@@ -21,8 +21,8 @@ public class CreateVacation extends AView implements Initializable {
     public ComboBox ChoiceBoxVacationKind, ComboBoxAdult, ComboBoxChild, ComboBoxInfant, RankPlace, Place;
     public CheckBox CheckBoxReturnFlight, CheckBoxConnectionFlight,CheckBoxBaggage;
     public Flight flight;
-    String rankPlace;
-    String place;
+    String rankPlace="";
+    String place="";
 
     public void CountryName(){
 
@@ -39,14 +39,16 @@ public class CreateVacation extends AView implements Initializable {
         else{
             Place.setVisible(false);
             RankPlace.setVisible(false);
-            place=" ";
-            rankPlace=" ";
+            place="";
+            rankPlace="";
         }
     }
     public void CreateVacation(){
         String airline = TextFieldAirline.getText();
-        place=Place.getValue().toString();
-        rankPlace=RankPlace.getValue().toString();
+        if(ButtonSleepPlace.isSelected()) {
+            place = Place.getValue().toString();
+            rankPlace = RankPlace.getValue().toString();
+        }
         String price = TextFieldPrice.getText();
         LocalDate departureDate = DeparturesDate.getValue();
         LocalDate arrivalDate = ArrivalsDate.getValue();
@@ -67,8 +69,14 @@ public class CreateVacation extends AView implements Initializable {
             showFillDetailsError();
             return;
         }
-
+        if((!ButtonSleepPlace.isSelected())&&(place.equals("")||rankPlace.equals(""))){
+            place="";
+            rankPlace="";
+            showDateDetailsError();
+            return;
+        }
         if(!legalDates(departureDate,arrivalDate)){
+            moveToNewScreen(400, 470, "OrderVacation.fxml", "Register");
             showDateDetailsError();
             return;
         }
@@ -77,6 +85,7 @@ public class CreateVacation extends AView implements Initializable {
                 false,Integer.parseInt(adultTicketNumber),Integer.parseInt(childTicketNumber),Integer.parseInt(infantTicketNumber),0);
         setChanged();
         notifyObservers(v);
+        createIsSuccess();
 
     }
 
@@ -87,7 +96,13 @@ public class CreateVacation extends AView implements Initializable {
         alert.show();
         return;
     }
-
+    private void createIsSuccess() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("Create");
+        alert.setContentText("Create successfully");
+        alert.show();
+        return;
+    }
     private void showDateDetailsError() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText("Error");
@@ -95,6 +110,7 @@ public class CreateVacation extends AView implements Initializable {
         alert.show();
         return;
     }
+
 
     private boolean legalDates(LocalDate departureDate, LocalDate arrivalDate) {
         LocalDate dateNow = java.time.LocalDate.now();
