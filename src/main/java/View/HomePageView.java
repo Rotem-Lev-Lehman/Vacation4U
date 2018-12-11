@@ -1,5 +1,6 @@
 package View;
 
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -168,5 +169,9 @@ public class HomePageView extends AView implements Initializable {
 
     public void openMailBox(MouseEvent mouseEvent) {
         moveToNewScreen(600, 400, "MailBox.fxml","MailBox");
+    }
+
+    public void OpenSearchFlight(ActionEvent actionEvent) {
+        moveToNewScreen(575, 300, "SearchFlight.fxml", "Search");
     }
 }
