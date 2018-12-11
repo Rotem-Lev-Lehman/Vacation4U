@@ -337,6 +337,9 @@ public class Controller extends AController {
             }
         });
 
+        if(vacations.size() == 0)
+            searchFlight.showEmptyList();
+
        searchFlight.show(vacations);
      //   VacationsView.show(vacations);
 
