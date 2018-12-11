@@ -98,7 +98,11 @@ public class DataBaseManager implements IDataBaseManager{
 
     @Override
     public Vacation ReadVacation(int vacationID) {
-        return vacationsTable.Read(vacationID);
+        Vacation vacation;
+        synchronized (lock){
+            vacation = vacationsTable.Read(vacationID);
+        }
+        return vacation;
     }
 
     @Override
@@ -126,7 +130,11 @@ public class DataBaseManager implements IDataBaseManager{
 
     @Override
     public Order ReadOrder(Vacation vacation, User buyer) {
-        return ordersTable.Read(vacation, buyer);
+        Order order;
+        synchronized (lock){
+            order = ordersTable.Read(vacation, buyer);
+        }
+        return order;
     }
 
     @Override
