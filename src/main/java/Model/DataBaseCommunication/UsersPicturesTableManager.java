@@ -10,6 +10,7 @@ import java.awt.image.WritableRaster;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -106,18 +107,12 @@ public class UsersPicturesTableManager extends ATableManager {
     }
 
     private byte[] extractBytes (File imageFile) {
-        // open image
-        BufferedImage bufferedImage = null;
+        byte[] bytes = null;
         try {
-            bufferedImage = ImageIO.read(imageFile);
+            bytes = Files.readAllBytes(imageFile.toPath());
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        // get DataBufferBytes from Raster
-        WritableRaster raster = bufferedImage .getRaster();
-        DataBufferByte data   = (DataBufferByte) raster.getDataBuffer();
-
-        return data.getData();
+        return bytes;
     }
 }
