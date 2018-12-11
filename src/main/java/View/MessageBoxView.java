@@ -31,7 +31,7 @@ public class MessageBoxView extends AView {
             setChanged();
             notifyObservers(strings);
 
-            showAlert("Message was sent to " + userFrom + " - order request declined");
+            showAlert("Message was sent to " + userFrom + " - order request approved");
         }
         else if(message.getText().contains("approved")){
             /*String[] strings = new String[2];

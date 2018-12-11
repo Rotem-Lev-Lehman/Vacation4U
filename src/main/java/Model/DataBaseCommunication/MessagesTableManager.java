@@ -34,34 +34,25 @@ public class MessagesTableManager extends ATableManager {
             message.setMessageID(nextID);
         }
         catch (SQLException e){
-            //closeConnection(); //close connection to datebase
+            //closeConnection(); //close connection to database
             e.printStackTrace();
         }
         closeConnection(); //close connection
     }
 
     public void UpdateAsSeen(Message message) {
-        connect(); //Connect to databse
+        connect(); //Connect to database
         //SQL commend
-        String sql = "UPDATE messages SET senderID = ? , "
-                + "receiverID = ? , "
-                + "message = ? , "
-                + "seen = ? "
+        String sql = "UPDATE messages SET seen = ? "
                 + "WHERE messageID = ?";
 
         try {
             //Run sql commend
             PreparedStatement pstmt = conn.prepareStatement(sql);
             // set the corresponding param
-            pstmt.setString(1, message.getSender().getUsername());
-            pstmt.setString(2, message.getReceiver().getUsername());
-            pstmt.setString(3, message.getText());
-
-            int seen = 0;
-            if(message.isSeen())
-                seen = 1;
-            pstmt.setInt(4, seen);
-            pstmt.setInt(5, message.getMessageID());
+            int seen = 1;
+            pstmt.setInt(1, seen);
+            pstmt.setInt(2, message.getMessageID());
             // update
             pstmt.executeUpdate();
         } catch (SQLException e) {
