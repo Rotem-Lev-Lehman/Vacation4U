@@ -68,7 +68,7 @@ public class VacationsTableManager extends ATableManager {
         connect(); //connect to database
 
         //sql commend
-        String sql = "SELECT vacationID, sellerId, startDate, endDate, startCountry, destCountry, typesOfVacation, typeOfHotel, rankingOfHotel, typeOfLuggage, alreadySold, amountOfAdultTickets, amountOfChildTickets, amountOfInfantTickets, price FROM vacations WHERE startCountry LIKE ? AND destCountry LIKE ? AND alreadySold = ?";
+        String sql = "SELECT vacationID, sellerId, startDate, endDate, startCountry, destCountry, typeOfVacation, typeOfHotel, rankingOfHotel, typeOfLuggage, alreadySold, amountOfAdultTickets, amountOfChildTickets, amountOfInfantTickets, price FROM vacations WHERE startCountry LIKE ? AND destCountry LIKE ? AND alreadySold = ?";
 
         List<Vacation> vacations = new ArrayList<Vacation>(); //list of similar vacations
         try {
@@ -96,7 +96,7 @@ public class VacationsTableManager extends ATableManager {
                     alreadySold = true;
 
                 Vacation curr = new Vacation(seller,flight,rs.getString("startDate"),rs.getString("endDate"),rs.getString("startCountry"),rs.getString("destCountry"),
-                        rs.getString("typesOfVacation"),rs.getString("typeOfHotel"),rs.getInt("rankingOfHotel"),rs.getString("typeOfLuggage"),alreadySold,rs.getInt("amountOfAdultTickets"),rs.getInt("amountOfChildTickets"),rs.getInt("amountOfInfantTickets"),rs.getInt("price"));
+                        rs.getString("typeOfVacation"),rs.getString("typeOfHotel"),rs.getInt("rankingOfHotel"),rs.getString("typeOfLuggage"),alreadySold,rs.getInt("amountOfAdultTickets"),rs.getInt("amountOfChildTickets"),rs.getInt("amountOfInfantTickets"),rs.getInt("price"));
                 curr.setVacationID(vacationID);
                 vacations.add(curr);
             }
@@ -118,7 +118,7 @@ public class VacationsTableManager extends ATableManager {
                 + "endDate = ? , "
                 + "startCountry = ? , "
                 + "destCountry = ? , "
-                + "typesOfVacation = ? , "
+                + "typeOfVacation = ? , "
                 + "typeOfHotel = ? , "
                 + "rankingOfHotel = ? , "
                 + "typeOfLuggage = ? , "
