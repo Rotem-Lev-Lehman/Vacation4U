@@ -72,27 +72,27 @@ public class DataBaseManager implements IDataBaseManager{
 
     @Override
     public List<Vacation> ReadSimilarVacations(Vacation vacation, Comparator<Vacation> vacationsComparator) {
-        return null;
+        return vacationsTable.ReadSimilarVacationsNotBought(vacation, vacationsComparator);
     }
 
     @Override
     public void UpdateVacation(Vacation vacation) {
-
+        vacationsTable.UpdateVacation(vacation);
     }
 
     @Override
     public void CreateOrder(Order order) {
-
+        ordersTable.CreateOrder(order);
     }
 
     @Override
     public List<Order> ReadOrdersForVacation(Vacation vacation) {
-        return null;
+        return ordersTable.ReadOrdersForVacation(vacation);
     }
 
     @Override
-    public void UpdateOrder(Order order) {
-
+    public void UpdateOrderStatus(Order order) {
+        ordersTable.UpdateOrderStatus(order);
     }
 
     @Override
@@ -107,11 +107,16 @@ public class DataBaseManager implements IDataBaseManager{
 
     @Override
     public List<Message> ReadAllMessages(String username) {
-        return null;
+        return messagesTable.ReadAllMessages(username);
     }
 
     @Override
     public int CountUnseenMessages(String username) {
         return messagesTable.countUnseenMessages(username);
+    }
+
+    @Override
+    public void UpdateMessageAsSeen(Message message) {
+        messagesTable.UpdateAsSeen(message);
     }
 }

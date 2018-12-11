@@ -1,65 +1,123 @@
 package View;
 
 
+import Model.Flight;
+import Model.User;
+import Model.Vacation;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.List;
 import java.util.ResourceBundle;
 
-public class SearchFlight extends AView implements Initializable {
-    public TextField TextFieldCountry, TextFieldAirline;
+public class SearchFlight extends AView implements Initializable  {
+    public TextField TextFieldCountryOrigin, TextFieldAirline;
     public DatePicker DatePickerDepartures,DatePickerArrivals;
     public ComboBox ChoiceBoxVacationKind,ChoiceBoxTickKind;
     public CheckBox CheckBoxReturnFlight,CheckBoxBaggage, CheckBoxSleepPlace;
     public Button SearchButton;
-    public TextField TextFieldOriginCountry;
-    public TextField TextFieldDestinationCountry;
+    public TextField DestCounty;
+   // public TextField TextFieldDestinationCountry;
     public TextField TextMaxPrice;
     public TextField TextMinPrice;
     public ComboBox AdultNumOfTicket;
     public ComboBox InfantNumOfTicket;
     public ComboBox ChildNumOfTicket;
     public CheckBox CheckNonStopFlight;
+    public User user;
+    public ComboBox ChoiceBoxBaggageType;
 
 
     public void searchVacation(){
 
 
-        String originCountry = TextFieldOriginCountry.getText();
-        String destinationCountry =TextFieldCountry.getText();
-        String airline = TextFieldAirline.getText();
-        LocalDate departureDate = DatePickerDepartures.getValue();
-        LocalDate arrivalDate = DatePickerArrivals.getValue();
+        String originCountry = TextFieldCountryOrigin.getText();
+        String destinationCountry =DestCounty.getText();
 
-        String vacationKind;
+        String airline="";
+        if (TextFieldAirline.getText()!= null)
+            airline = TextFieldAirline.getText();
+
+        String departureDateString="";
+        LocalDate departureDate=null;
+        if (DatePickerDepartures.getValue()!= null) {
+            departureDateString = DatePickerDepartures.getValue().toString();
+            departureDate =DatePickerArrivals.getValue();
+        }
+
+        String arrivalDateString="";
+        LocalDate arrivalDate=null;
+        if (DatePickerArrivals.getValue()!= null) {
+            arrivalDateString = DatePickerArrivals.getValue().toString();
+            arrivalDate = DatePickerArrivals.getValue();
+
+        }
+
+        String vacationKind="";
         if(ChoiceBoxVacationKind.getValue() != null)
             vacationKind = ChoiceBoxVacationKind.getValue().toString();
 
-        int minPrice =Integer.parseInt(TextMinPrice.getText());
-        int maxPrice =Integer.parseInt(TextMaxPrice.getText());
+        String baggageType="";
+        if(ChoiceBoxBaggageType.getValue()!=null)
+            baggageType= ChoiceBoxBaggageType.getValue().toString();
 
-        if(!legalDates(departureDate,arrivalDate) || !legalRangPrice(minPrice,maxPrice)){
+        int maxPrice=0;
+        String Max ="";
+         if(!TextMaxPrice.getText().toString().equals("")) {
+                 Max = TextMaxPrice.getText().toString();
+                 maxPrice = Integer.parseInt(Max);
+
+         }
+
+
+        int minPrice=0;
+        String Min ="";
+        if(!TextMinPrice.getText().toString().equals("")) {
+            Min = TextMinPrice.getText().toString();
+            minPrice = Integer.parseInt(Min);
+        }
+
+
+        if(originCountry.equals("") ||destinationCountry.equals("") ||(departureDate!=null && arrivalDate!= null && !legalDates(departureDate,arrivalDate)) || !legalRangPrice(minPrice,maxPrice)){
             showFillDetailsError();
         }
 
-        String adultNumOfTicket = AdultNumOfTicket.getSelectionModel().getSelectedItem().toString();
-        String childNumOfTicket = ChildNumOfTicket.getSelectionModel().getSelectedItem().toString();
-        String infantNumOfTicket = InfantNumOfTicket.getSelectionModel().getSelectedItem().toString();
+        int adultNumOfTicket=0;
+        if(AdultNumOfTicket.getSelectionModel().getSelectedItem().toString()!=null)
+            adultNumOfTicket = Integer.parseInt(AdultNumOfTicket.getSelectionModel().getSelectedItem().toString());
 
-        boolean isIncludeBaggage = CheckBoxBaggage.isSelected();
+        int childNumOfTicket=0;
+        if(ChildNumOfTicket.getSelectionModel().getSelectedItem().toString()!=null)
+            childNumOfTicket = Integer.parseInt(ChildNumOfTicket.getSelectionModel().getSelectedItem().toString());
+
+        int infantNumOfTicket=0;
+        if(InfantNumOfTicket.getSelectionModel().getSelectedItem().toString()!=null)
+            infantNumOfTicket = Integer.parseInt(InfantNumOfTicket.getSelectionModel().getSelectedItem().toString());
+
+
+
         boolean isReturnFlight = CheckBoxReturnFlight.isSelected();
         boolean isConnection = CheckNonStopFlight.isSelected();
         boolean isSleepPlace = CheckBoxSleepPlace.isSelected();
 
+        Flight F=new Flight(airline, originCountry, destinationCountry, departureDate, arrivalDate);
+        Vacation v=new Vacation( user, F, departureDateString, arrivalDateString, originCountry, destinationCountry, vacationKind, "",0,baggageType,false,adultNumOfTicket, childNumOfTicket,infantNumOfTicket,minPrice);
 
+        setChanged();
+        notifyObservers(v);
+
+   }
+
+   public void show(List<Vacation> vacationList){
+        this.moveToNewScreen(575, 300, "VacationsView.fxml", "VacationsView");
 
    }
 
     private boolean legalRangPrice(int minPrice, int maxPrice) {
-        if(maxPrice>minPrice)
+        if(maxPrice>=minPrice)
             return true;
         return false;
     }
@@ -113,8 +171,17 @@ public class SearchFlight extends AView implements Initializable {
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ChoiceBoxTickKind.getItems().addAll("Adult", "Child", "Infant");
+ //       ChoiceBoxTickKind.getItems().addAll("Adult", "Child", "Infant");
         ChoiceBoxVacationKind.getItems().addAll("Urbanic", "Exotic");
+        ChoiceBoxBaggageType.getItems().addAll("None");//// ADD
+
+        AdultNumOfTicket.getItems().addAll("0","1","2","3","4","5","6");
+        ChildNumOfTicket.getItems().addAll("0","1","2","3","4","5","6");
+        InfantNumOfTicket.getItems().addAll("0","1","2","3","4","5","6");
+        AdultNumOfTicket.setValue("0");
+        ChildNumOfTicket.setValue("0");
+        InfantNumOfTicket.setValue("0");
+
     }
 
 

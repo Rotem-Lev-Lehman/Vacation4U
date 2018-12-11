@@ -26,12 +26,13 @@ public interface IDataBaseManager {
 
     void CreateOrder(Order order); //Create Order
     List<Order> ReadOrdersForVacation(Vacation vacation);
-    void UpdateOrder(Order order);
+    void UpdateOrderStatus(Order order);
 
     void CreatePaymentTransaction(PaymentTransaction paymentTransaction);
 
     void CreateMessage(Message message);
     List<Message> ReadAllMessages(String username);
     int CountUnseenMessages(String username);
+    void UpdateMessageAsSeen(Message message);
 
 }

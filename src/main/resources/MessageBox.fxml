@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="255.0" prefWidth="600.0" style="-fx-background-color: #2193D1;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MessageBoxView">
+   <children>
+      <Text fill="WHITE" layoutX="14.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Message" wrappingWidth="240.7877655029297">
+         <font>
+            <Font name="Blackadder ITC" size="48.0" />
+         </font>
+      </Text>
+      <Line endX="575.1715698242188" endY="-7.62939453125E-6" layoutX="33.0" layoutY="77.0" startX="-100.0" stroke="WHITE" strokeWidth="4.0" />
+      <Text fx:id="message" fill="WHITE" layoutX="14.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="from" fill="WHITE" layoutX="10.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- From " />
+   </children>
+</AnchorPane>

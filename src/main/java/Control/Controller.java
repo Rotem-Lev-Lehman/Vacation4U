@@ -1,5 +1,6 @@
 package Control;
 
+import Model.Message;
 import Model.PaymentTransaction;
 import Model.User;
 import Model.Vacation;
@@ -11,6 +12,7 @@ import java.io.File;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -46,6 +48,32 @@ public class Controller extends AController {
         } else if (o instanceof OrderVacation){
             if(arg instanceof PaymentTransaction)
                 createPayment((OrderVacation)o,(PaymentTransaction)arg);
+        } else if( o instanceof MailBoxView){
+            if(arg instanceof String && ((String)arg).equals("Get Messages")){
+                searchForMessages((MailBoxView)o);
+            }
+            else if(arg instanceof Message)
+                markMessgeAsRead((Message)arg);
+        }else if (o instanceof SearchFlight) {
+            if (arg instanceof Vacation)
+                getResultOfSearch((SearchFlight)o,(Vacation)arg);
+        }
+    }
+
+    private void markMessgeAsRead(Message message) {
+        model.UpdateMessageAsSeen(message);
+    }
+
+    private void searchForMessages(MailBoxView o) {
+        List<Message> messages = model.ReadAllMessages(user.getUsername());
+
+        if(messages== null || messages.size() == 0){ //if there are no results
+            //say no results
+            o.showNoResult();
+        }
+        else {
+            //show messages
+           o.showMessages(messages);
         }
     }
 
@@ -202,4 +230,43 @@ public class Controller extends AController {
         Period p = Period.between(date, dateNow);
         return p.getYears() >= 18;
     }
+
+
+    private void getResultOfSearch(SearchFlight searchFlight, Vacation v){
+        List<Vacation> vacations = model.ReadSimilarVacations(v, new Comparator<Vacation>() {
+            @Override
+            public int compare(Vacation o1, Vacation o2) {
+                if(o1.getPrice()>o2.getPrice())
+                    return 1;
+                else if(o1.getPrice()<o2.getPrice())
+                    return -1;
+                return 0;
+
+            }
+        });
+
+       searchFlight.show(vacations);
+     //   VacationsView.show(vacations);
+
+
+    }
+
+        private void getVacationToShow(VacationsView vacationView, Vacation v){
+            List<Vacation> vacations = model.ReadSimilarVacations(v, new Comparator<Vacation>() {
+                @Override
+                public int compare(Vacation o1, Vacation o2) {
+                    if(o1.getPrice()>o2.getPrice())
+                        return 1;
+                    else if(o1.getPrice()<o2.getPrice())
+                        return -1;
+                    return 0;
+
+                }
+            });
+            vacationView.vacationToShow(vacations,0);
+
+
+        }
+
+
 }
