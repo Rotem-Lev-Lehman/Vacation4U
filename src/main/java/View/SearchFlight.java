@@ -113,6 +113,7 @@ public class SearchFlight extends AView implements Initializable  {
 
    public void show(List<Vacation> vacationList){
         this.moveToNewScreen(575, 300, "VacationsView.fxml", "VacationsView");
+
    }
 
     private boolean legalRangPrice(int minPrice, int maxPrice) {

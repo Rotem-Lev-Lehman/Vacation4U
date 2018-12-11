@@ -241,9 +241,26 @@ public class Controller extends AController {
 
        searchFlight.show(vacations);
      //   VacationsView.show(vacations);
+
+
     }
 
+        private void getVacationToShow(VacationsView vacationView, Vacation v){
+            List<Vacation> vacations = model.ReadSimilarVacations(v, new Comparator<Vacation>() {
+                @Override
+                public int compare(Vacation o1, Vacation o2) {
+                    if(o1.getPrice()>o2.getPrice())
+                        return 1;
+                    else if(o1.getPrice()<o2.getPrice())
+                        return -1;
+                    return 0;
 
+                }
+            });
+            vacationView.vacationToShow(vacations,0);
+
+
+        }
 
 
 }
