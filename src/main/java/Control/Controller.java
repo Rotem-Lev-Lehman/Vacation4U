@@ -34,8 +34,8 @@ public class Controller extends AController {
             if (arg instanceof Object[] && ((Object[]) arg).length == 4)
                 checkSignUp1((SignUp1View) o, (Object[]) arg);
         } else if (o instanceof SignUp2View) {
-            if (arg instanceof Object[] && ((Object[][]) arg).length == 4)
-                checkSignUp2((SignUp2View) o, (String[]) arg);
+            if (arg instanceof Object[] && ((Object[]) arg).length == 4)
+                checkSignUp2((SignUp2View) o, (Object[]) arg);
         } else if (o instanceof UpdateView) {
             if (arg instanceof Object[] && ((Object[]) arg).length == 7)
                 checkUpdate((UpdateView) o, (Object[]) arg);
