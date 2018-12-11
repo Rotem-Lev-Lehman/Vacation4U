@@ -88,7 +88,7 @@ public class VacationsTableManager extends ATableManager {
 
                 int vacationID = rs.getInt("vacationID");
 
-                Flight flight = flightsTable.GetFlightWithoutConnection(vacationID);
+                Flight flight = flightsTable.GetFlight(vacationID);
 
                 int alreadySoldDataBase = rs.getInt("alreadySold");
                 boolean alreadySold = false;
