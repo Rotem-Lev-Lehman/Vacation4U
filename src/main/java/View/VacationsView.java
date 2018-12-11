@@ -44,6 +44,7 @@ public class VacationsView extends AView implements Initializable {
     public Label filldepartureDateV2;
     public Label fillarrivalsDateV2;
 
+    public boolean v2IsChanged;
 
     public void VacationView(){
 
@@ -77,19 +78,20 @@ public class VacationsView extends AView implements Initializable {
     }
 
     public void prevPage(){
-        if(vacationListToView.size()>currIndex && 0<currIndex) {
+        if(vacationListToView.size()>currIndex && 0<=currIndex) {
             v1 = vacationToShow(vacationListToView, currIndex);
             currIndex--;
         }
-        if(vacationListToView.size()>currIndex && 0<currIndex) {
+        if(vacationListToView.size()>currIndex && 0<=currIndex) {
             v2 = vacationToShow(vacationListToView, currIndex);
             currIndex--;
         }
-
+        btn_next.setDisable(false);
         show();
     }
 
     public void nextPage(){
+        v2IsChanged=false;
         if(vacationListToView.size()>currIndex && 0<=currIndex) {
             v1 = vacationToShow(vacationListToView, currIndex);
             currIndex++;
@@ -97,6 +99,20 @@ public class VacationsView extends AView implements Initializable {
         if(vacationListToView.size()>currIndex && 0<=currIndex) {
             v2 = vacationToShow(vacationListToView, currIndex);
             currIndex++;
+        }
+        btn_prev.setDisable(false);
+        show();
+
+    }
+    public void showFirstPage(){
+        if(vacationListToView.size()>currIndex && 0<=currIndex) {
+            v1 = vacationToShow(vacationListToView, currIndex);
+            currIndex++;
+        }
+        if(vacationListToView.size()>currIndex && 0<=currIndex) {
+            v2 = vacationToShow(vacationListToView, currIndex);
+            currIndex++;
+            v2IsChanged=true;
         }
         show();
 
@@ -106,16 +122,17 @@ public class VacationsView extends AView implements Initializable {
         vacationListToView = vacations;
 
         currIndex = 0;
-        nextPage();
+        showFirstPage();
+
     }
 
     private void show(){
-        if(currIndex==0)
+        if(currIndex==0||currIndex==1 || currIndex==2)
             btn_prev.setDisable(true);
         if(currIndex>=vacationListToView.size())
             btn_next.setDisable(true);
 
-        if (v2==null){
+        if (v2==null || (v2!=null && !v2IsChanged)){
             TVacationToV2.setVisible(false);
             originCountryV2.setVisible(false);
             TVacationFromV2.setVisible(false);
@@ -130,7 +147,7 @@ public class VacationsView extends AView implements Initializable {
             filldepartureDateV2.setVisible(false);
             fillarrivalsDateV2.setVisible(false);
         }
-        else if(v2!=null){
+        else if(v2!=null && v2IsChanged){
             originCountryV2.setText(v2.getStartCountry());
             DestinationCountryV2.setText(v2.getDestCountry());
             airlineV2.setText(v2.getFlight().getFlightCompany());
@@ -138,7 +155,8 @@ public class VacationsView extends AView implements Initializable {
             filldepartureDateV2.setText(v2.getStartDate());
             fillarrivalsDateV2.setText(v2.getEndDate());
         }
-        if(v1!=null){
+
+        if(v1!=null ){
             originCountryV1.setText(v1.getStartCountry());
             DestinationCountryV1.setText(v1.getDestCountry());
             airlineV1.setText(v1.getFlight().getFlightCompany());
@@ -153,6 +171,7 @@ public class VacationsView extends AView implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         currIndex=0;
+        v2IsChanged=false;
 
 
     }

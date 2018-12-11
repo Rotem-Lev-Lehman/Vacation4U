@@ -85,10 +85,6 @@ public class SearchFlight extends AView implements Initializable  {
             minPrice = Integer.parseInt(Min);
         }
 
-        if(originCountry.equals("") ||destinationCountry.equals("")){
-            showFillAllDetailsError();
-            return;
-        }
 
 
         if((departureDate!=null && arrivalDate!= null && !legalDates(departureDate,arrivalDate)) || !legalRangPrice(minPrice,maxPrice)){
@@ -147,12 +143,7 @@ public class SearchFlight extends AView implements Initializable  {
         return false;
     }
 
-    private void showFillAllDetailsError() {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setHeaderText("Error");
-        alert.setContentText("Please Fill All Fields");
-        alert.show();
-    }
+
 
     private void showFillDetailsError() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
