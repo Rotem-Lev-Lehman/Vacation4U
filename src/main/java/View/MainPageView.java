@@ -32,7 +32,7 @@ public class MainPageView extends AView implements Initializable {
         String password = passwordTextField.getText();
 
         //Show error message if not all details are filled
-        if (username == null || password == null || username.equals("hi") || password.equals("")) {
+        if (username == null || password == null || username.equals("") || password.equals("")) {
             message.setText("Please enter username and password");
             return;
         }
@@ -85,6 +85,6 @@ public class MainPageView extends AView implements Initializable {
     }
 
     public void openSearch(MouseEvent mouseEvent) {
-        moveToNewScreen(600, 400, "SearchPage.fxml", "Search");
+        moveToNewScreen(600, 550, "SearchFlight.fxml", "Search");
     }
 }
