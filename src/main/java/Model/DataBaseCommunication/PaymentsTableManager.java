@@ -27,7 +27,7 @@ public class PaymentsTableManager extends ATableManager {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             //closeConnection(); //close connection to database
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         closeConnection(); //close connection
     }

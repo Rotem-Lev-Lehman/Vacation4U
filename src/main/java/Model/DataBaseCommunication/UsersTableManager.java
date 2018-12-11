@@ -29,7 +29,7 @@ public class UsersTableManager extends ATableManager {
         }
         catch (SQLException e){
             closeConnection(); //close connection to datebase
-            throw e;
+            //throw e;
         }
         closeConnection(); //close connection
     }
@@ -63,7 +63,7 @@ public class UsersTableManager extends ATableManager {
             }
         }
         catch (SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
 
         closeConnection(); //disconnect from database
@@ -96,7 +96,7 @@ public class UsersTableManager extends ATableManager {
             // update
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         closeConnection(); //disconnect from databse
     }
@@ -114,7 +114,7 @@ public class UsersTableManager extends ATableManager {
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         closeConnection(); //Disconnect from database
     }
@@ -137,7 +137,7 @@ public class UsersTableManager extends ATableManager {
             }
         }
         catch (SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         return user;
     }

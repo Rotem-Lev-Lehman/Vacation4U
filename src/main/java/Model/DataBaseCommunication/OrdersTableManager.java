@@ -46,7 +46,7 @@ public class OrdersTableManager extends ATableManager {
         }
         catch (SQLException e){
             //closeConnection(); //close connection to datebase
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         closeConnection(); //close connection
     }
@@ -84,7 +84,7 @@ public class OrdersTableManager extends ATableManager {
             }
         }
         catch (SQLException e) {
-            e.printStackTrace();
+           // e.printStackTrace();
         }
 
         closeConnection(); //disconnect from database
@@ -118,7 +118,7 @@ public class OrdersTableManager extends ATableManager {
                 else // 3
                     status = OrderStatus.WaitingForPayment;
 
-                User buyer = usersTable.Read(rs.getString("buyerID"));
+                User buyer = usersTable.ReadWithOutConnection(rs.getString("buyerID"));
 
                 Order curr = new Order(vacation,buyer,status);
 
@@ -126,7 +126,7 @@ public class OrdersTableManager extends ATableManager {
             }
         }
         catch (SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
 
         closeConnection(); //disconnect from database
@@ -159,7 +159,7 @@ public class OrdersTableManager extends ATableManager {
             // update
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         closeConnection(); //disconnect from database
     }

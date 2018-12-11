@@ -58,7 +58,7 @@ public class VacationsTableManager extends ATableManager {
         }
         catch (SQLException e){
             //closeConnection(); //close connection to datebase
-            e.printStackTrace();
+            //e.printStackTrace();
             closeConnection(); //close connection
         }
 
@@ -82,9 +82,9 @@ public class VacationsTableManager extends ATableManager {
             while (rs.next()) {
 
                 String username = rs.getString("sellerId");
-                User seller = usersTable.Read(username);
+                User seller = usersTable.ReadWithOutConnection(username);
 
-                Flight flight = flightsTable.GetFlight(vacationID);
+                Flight flight = flightsTable.GetFlightWithoutConnection(vacationID);
 
                 int alreadySoldDataBase = rs.getInt("alreadySold");
                 boolean alreadySold = false;
@@ -98,7 +98,7 @@ public class VacationsTableManager extends ATableManager {
             }
         }
         catch (SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         closeConnection(); //disconnect from database
 
@@ -125,11 +125,11 @@ public class VacationsTableManager extends ATableManager {
             while (rs.next()) {
 
                 String username = rs.getString("sellerId");
-                User seller = usersTable.Read(username);
+                User seller = usersTable.ReadWithOutConnection(username);
 
                 int vacationID = rs.getInt("vacationID");
 
-                Flight flight = flightsTable.GetFlight(vacationID);
+                Flight flight = flightsTable.GetFlightWithoutConnection(vacationID);
 
                 int alreadySoldDataBase = rs.getInt("alreadySold");
                 boolean alreadySold = false;
@@ -143,7 +143,7 @@ public class VacationsTableManager extends ATableManager {
             }
         }
         catch (SQLException e) {
-            e.printStackTrace();
+           // e.printStackTrace();
         }
         closeConnection(); //disconnect from database
 
@@ -197,7 +197,7 @@ public class VacationsTableManager extends ATableManager {
             // update
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         closeConnection(); //disconnect from database
     }
@@ -217,7 +217,7 @@ public class VacationsTableManager extends ATableManager {
             nextID++;
         }
         catch (SQLException e){
-            e.printStackTrace();
+           // e.printStackTrace();
         }
         return nextID;
     }

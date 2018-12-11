@@ -51,7 +51,7 @@ public class FlightsTableManager extends ATableManager {
         }
         catch (SQLException e){
             //closeConnection(); //close connection to datebase
-            e.printStackTrace();
+            //e.printStackTrace();
         }
 
         if(returnFlightID == -1)
@@ -101,7 +101,7 @@ public class FlightsTableManager extends ATableManager {
             }
         }
         catch (SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         return flight;
     }

@@ -36,7 +36,7 @@ public class MessagesTableManager extends ATableManager {
         }
         catch (SQLException e){
             //closeConnection(); //close connection to database
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         closeConnection(); //close connection
     }
@@ -57,7 +57,7 @@ public class MessagesTableManager extends ATableManager {
             // update
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         closeConnection(); //disconnect from databse
     }
@@ -80,10 +80,10 @@ public class MessagesTableManager extends ATableManager {
             while (rs.next()) {
 
                 String senderName = rs.getString("senderID");
-                User sender = usersTable.Read(senderName);
+                User sender = usersTable.ReadWithOutConnection(senderName);
 
                 String receiverName = rs.getString("receiverID");
-                User receiver = usersTable.Read(receiverName);
+                User receiver = usersTable.ReadWithOutConnection(receiverName);
 
                 int seen = rs.getInt("seen");
                 boolean isSeen = false;
@@ -98,7 +98,7 @@ public class MessagesTableManager extends ATableManager {
             }
         }
         catch (SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         closeConnection(); //disconnect from database
 
@@ -122,7 +122,7 @@ public class MessagesTableManager extends ATableManager {
             }
         }
         catch (SQLException e){
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         closeConnection();
         return amount;
@@ -143,7 +143,7 @@ public class MessagesTableManager extends ATableManager {
             nextID++;
         }
         catch (SQLException e){
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         return nextID;
     }

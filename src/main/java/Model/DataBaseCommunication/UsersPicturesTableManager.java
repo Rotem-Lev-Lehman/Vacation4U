@@ -34,7 +34,7 @@ public class UsersPicturesTableManager extends ATableManager {
         }
         catch (SQLException e){
             //closeConnection(); //close connection to database
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         closeConnection(); //close connection
     }
@@ -61,7 +61,7 @@ public class UsersPicturesTableManager extends ATableManager {
             }
         }
         catch (SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
 
         closeConnection(); //disconnect from database
@@ -79,7 +79,7 @@ public class UsersPicturesTableManager extends ATableManager {
             BufferedImage img = ImageIO.read(new ByteArrayInputStream(picturesBytes));
             image = SwingFXUtils.toFXImage(img, null);
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         return image;
     }
@@ -101,7 +101,7 @@ public class UsersPicturesTableManager extends ATableManager {
             // update
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         closeConnection(); //disconnect from database
     }
@@ -111,7 +111,7 @@ public class UsersPicturesTableManager extends ATableManager {
         try {
             bytes = Files.readAllBytes(imageFile.toPath());
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         return bytes;
     }
