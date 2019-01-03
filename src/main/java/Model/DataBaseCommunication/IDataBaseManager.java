@@ -37,4 +37,5 @@ public interface IDataBaseManager {
     int CountUnseenMessages(String username);
     void UpdateMessageAsSeen(Message message);
 
+    boolean checkHasVacation(String username);
 }

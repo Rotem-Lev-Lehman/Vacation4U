@@ -191,4 +191,9 @@ public class DataBaseManager implements IDataBaseManager{
             messagesTable.UpdateAsSeen(message);
         }
     }
+
+    @Override
+    public boolean checkHasVacation(String username) {
+        throw new RuntimeException("Not implemented in DataBaseManger - function checkHasVacations");
+    }
 }

@@ -9,5 +9,4 @@ public class Model extends AModel{
         dataBaseManager = new DataBaseManager();
     }
 
-
 }

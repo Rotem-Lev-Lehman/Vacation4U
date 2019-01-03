@@ -97,4 +97,6 @@ public abstract class AModel {
     }
 
     public void UpdateMessageAsSeen(Message message){dataBaseManager.UpdateMessageAsSeen(message);}
+
+    public boolean checkHasVacation(String username){ return dataBaseManager.checkHasVacation(username);}
 }

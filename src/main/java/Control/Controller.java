@@ -82,8 +82,16 @@ public class Controller extends AController {
         }else if (o instanceof VacationsView) {
              if (arg instanceof Vacation)
                     setNewOrder((VacationsView) o, (Vacation) arg);
+             if(arg instanceof String){
+                 if(((String)arg).equals("checkForOwnVacation"))
+                     setHasVacation((VacationsView) o);
+             }
         }
 
+    }
+
+    private void setHasVacation(VacationsView o) {
+        o.setHasVacations(model.checkHasVacation(user.getUsername()));
     }
 
     private void sendVacationBought(String sendToUser, String vacationID) {

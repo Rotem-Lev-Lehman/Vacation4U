@@ -7,6 +7,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import Model.Vacation;
+import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.List;
@@ -24,6 +25,7 @@ public class VacationsView extends AView implements Initializable {
 
     public Button btn_next;
     public Button btn_prev;
+    public Button trade_btn;
     public int currIndex;
     public List<Vacation> vacationListToView;
     public Vacation v1;
@@ -35,6 +37,7 @@ public class VacationsView extends AView implements Initializable {
 
 
     public boolean v2IsChanged;
+    private boolean hasVacations; //boolean that states if the user created a vacation (for trade purpose)
 
     public void VacationView(){
 
@@ -163,7 +166,8 @@ public class VacationsView extends AView implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         currIndex=0;
         v2IsChanged=false;
-
+        setChanged();
+        notifyObservers("checkForOwnVacation");
 
     }
 
@@ -174,5 +178,14 @@ public class VacationsView extends AView implements Initializable {
 
         return null;
 
+    }
+
+    public void tradeVacations(MouseEvent mouseEvent) {
+
+    }
+
+    public void setHasVacations(boolean bool){
+        hasVacations = bool;
+        trade_btn.setDisable(!hasVacations);
     }
 }
