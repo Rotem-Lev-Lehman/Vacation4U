@@ -62,6 +62,7 @@ public class MailBoxView extends AView implements Initializable {
                     Message clickedRow = row.getItem();
                     setChanged();
                     notifyObservers(clickedRow);
+
                     openMessageBox(clickedRow.getText(), clickedRow.getSender().getUsername(), clickedRow.isSeen(), clickedRow.getVacationID());
             });
             return row ;

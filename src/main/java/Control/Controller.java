@@ -58,8 +58,8 @@ public class Controller extends AController {
         } else if(o instanceof MessageBoxView){
             if(arg instanceof String[] && ((String[])arg).length == 3) {
                 String[] strings = (String[]) arg;
-                if (strings[1].equals("buyMessage"))
-                    sendApprovedBuyMessage(strings[0], strings[2]);
+                if (strings[1].contains("buyMessage;"))
+                    sendApprovedBuyMessage(strings[0], strings[2], strings[1]);
                 else if (strings[1].equals("declineBuyMessage"))
                     sendDeclinedBuyMessage(strings[0], strings[2]);
                 else if (strings[1].equals("buyApproved"))
@@ -68,11 +68,51 @@ public class Controller extends AController {
                     sendDeclinedPaymentMessage(strings[0], strings[2]);
                 else if (strings[1].equals("OpenPayment"))
                     openPayment((MessageBoxView) o,strings[0], strings[2]);
+                else if (strings[1].equals("contactApproved"))
+                    sendContactApproved(strings[0], strings[2]);
+                else if (strings[1].equals("publisherBuyDeclined"))
+                    sendPublisherDeclinedPaymentMessage(strings[0], strings[2]);
+                else if (strings[1].equals("vacationBought"))
+                    sendVacationBought(strings[0], strings[2]);
+            }
+            else if(arg instanceof Object[] && ((Object[])arg).length == 2){
+                if(((Object[])arg)[0].equals("getVacDetails"))
+                    getVacationDetails((MessageBoxView)o,(int)((Object[])arg)[1]);
             }
         }else if (o instanceof VacationsView) {
              if (arg instanceof Vacation)
                     setNewOrder((VacationsView) o, (Vacation) arg);
         }
+
+    }
+
+    private void sendVacationBought(String sendToUser, String vacationID) {
+        User sendTo = new User(sendToUser, "1","1","1","1","1");
+        String messageText = "Yay! You bought the vacation";
+        model.CreateMessage(new Message(user,sendTo,messageText,false, Integer.parseInt(vacationID)));
+
+        Vacation v = model.ReadVacation(Integer.parseInt(vacationID));
+        v.setAlreadySold(true);
+        Order order = new Order(v, user, OrderStatus.Accepted);
+        model.UpdateOrder(order);
+        model.UpdateVacation(v);
+    }
+
+    private void getVacationDetails(MessageBoxView o, int vacationID) {
+        Vacation v = model.ReadVacation(vacationID);
+        String details = "Origin: " + v.getStartCountry() + "\n" +
+                            "Destination: " + v.getDestCountry() + "\n" +
+                            "Departure Date: " + v.getStartDate() + "\n" +
+                            "Arrival Date: " + v.getEndDate() + "\n" +
+                            "Price: " + v.getPrice();
+        o.setVacationDeatils(details);
+    }
+
+    //Message from publisher (actually from buyer) to buyer - approve money delivery
+    private void sendContactApproved(String sendToUser, String vacationID) {
+        User sendTo = new User(sendToUser, "1","1","1","1","1");
+        String messageText = "Hey! Please confirm that you have payed for the vacation";
+        model.CreateMessage(new Message(sendTo, user, messageText, false, Integer.parseInt(vacationID)));
 
     }
 
@@ -96,7 +136,20 @@ public class Controller extends AController {
         model.UpdateOrder(order);
     }
 
-    //From buyer to publisher - Vacation was bought
+    //from publisher to buyer when the publisher claims the buyer didn't pay
+    private void sendPublisherDeclinedPaymentMessage(String sendToUser, String vacationID) {
+        User sendTo = new User(sendToUser, "1","1","1","1","1");
+        String messageText = "Sorry, User " + user.getUsername() + " claim you didn't pay for the vacation. The order is cancelled";
+        model.CreateMessage(new Message(user, sendTo, messageText, false, Integer.parseInt(vacationID)));
+
+        //updae order status
+        Vacation v = new Vacation(user,null,"","","","","","",-1,"",false,-1,-1,-1,-1);
+        v.setVacationID(Integer.parseInt(vacationID));
+        Order order = new Order(v, user, OrderStatus.Declined);
+        model.UpdateOrder(order);
+    }
+
+    /*//From buyer to publisher - Vacation was bought
     private void sendApprovedPaymentMessage(String sendToUser,String vacationID) {
         User sendTo = new User(sendToUser, "1","1","1","1","1");
         String messageText = "Yay! User " + user.getUsername() + " bought the vacation you have published";
@@ -107,6 +160,13 @@ public class Controller extends AController {
         Order order = new Order(v, user, OrderStatus.Accepted);
         model.UpdateOrder(order);
         model.UpdateVacation(v);
+    }*/
+
+    //From buyer to publisher - buyer paid, does publisher agree?
+    private void sendApprovedPaymentMessage(String sendToUser,String vacationID) {
+        User sendTo = new User(sendToUser, "1","1","1","1","1");
+        String messageText = "Hey! Please confirm that user " + user.getUsername() +" have payed for the vacation";
+        model.CreateMessage(new Message(user, sendTo, messageText, false, Integer.parseInt(vacationID)));
     }
 
     //From publisher to buyer when the publisher didn't approve the deal
@@ -124,12 +184,13 @@ public class Controller extends AController {
     }
 
     //From publisher to buyer when the publisher approves the request
-    private void sendApprovedBuyMessage(String sendToUser, String vacationID) {
+    private void sendApprovedBuyMessage(String sendToUser, String vacationID, String partPhoneNumber) {
         User sendTo = new User(sendToUser, "1","1","1","1","1");
-        String messageText = "Hey! User " + user.getUsername() + " approved your order request. Click Agree if you wish to pay";
+        String phoneNumber = partPhoneNumber.split(";")[1];
+        String messageText = "Hello! User " + user.getUsername() + " approved your order request. Contact Info: " + phoneNumber;
         model.CreateMessage(new Message(user, sendTo, messageText, false, Integer.parseInt(vacationID)));
 
-        //updae order status
+        //update order status
         Vacation v = new Vacation(user,null,"","","","","","",-1,"",false,-1,-1,-1,-1);
         v.setVacationID(Integer.parseInt(vacationID));
         User buyer = new User(sendToUser,"","","","","");
