@@ -78,7 +78,7 @@ public abstract class AModel {
     }
 
     public void UpdateOrder(Order order){
-        //dataBaseManager.UpdateOrder(order);
+        dataBaseManager.UpdateOrderStatus(order);
     }
 
     public void CreatePaymentTransaction(PaymentTransaction paymentTransaction){
@@ -96,9 +96,18 @@ public abstract class AModel {
         return dataBaseManager.CountUnseenMessages(username);
     }
 
-    public void UpdateMessageAsSeen(Message message){dataBaseManager.UpdateMessageAsSeen(message);}
+    public void UpdateMessageAsSeen(Message message){
+        dataBaseManager.UpdateMessageAsSeen(message);
+    }
 
-    public boolean checkHasVacation(String username){ return dataBaseManager.checkHasVacation(username);}
+    public boolean checkHasVacation(String username){
+        return dataBaseManager.checkHasVacation(username);
+    }
 
-    public List<Vacation> ReadVacationsForUser(String username){ return dataBaseManager.ReadVacationsForUser(username);}
+    public int CountVacationsByUserID(String username){
+        return dataBaseManager.CountVacationsByUserID(username);
+    }
+    public List<Vacation> ReadVacationsByUserID(String username){
+        return dataBaseManager.ReadVacationsByUserID(username);
+    }
 }

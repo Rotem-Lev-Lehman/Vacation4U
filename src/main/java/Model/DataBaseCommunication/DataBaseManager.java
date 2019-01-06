@@ -193,10 +193,19 @@ public class DataBaseManager implements IDataBaseManager{
     }
 
     @Override
+    public int CountVacationsByUserID(String username){
+        int count;
+        synchronized (lock){
+            count = vacationsTable.CountVacationsByUserID(username);
+        }
+        return count;
+    }
+
+    @Override
     public boolean checkHasVacation(String username) {
         boolean hasVacation = false;
         synchronized (lock){
-            int count = vacationsTable.CountVacationForUser(username);
+            int count = vacationsTable.CountVacationsByUserID(username);
             if(count > 0)
                 hasVacation = true;
         }
@@ -204,10 +213,10 @@ public class DataBaseManager implements IDataBaseManager{
     }
 
     @Override
-    public List<Vacation> ReadVacationsForUser(String username) {
+    public List<Vacation> ReadVacationsByUserID(String username) {
         List<Vacation> vacations;
         synchronized (lock){
-            vacations = vacationsTable.ReadVacationsForUser(username);
+            vacations = vacationsTable.ReadVacationsByUserID(username);
         }
         return vacations;
     }

@@ -123,7 +123,7 @@ public class Controller extends AController {
         if(user.getUsername().equals(vacation.getSellerId().getUsername()))
             o.userIsSeller();
         else {
-            List<Vacation> vacations = model.ReadVacationsForUser(user.getUsername());
+            List<Vacation> vacations = model.ReadVacationsByUserID(user.getUsername());
             o.openOwnVacations(vacations);
         }
     }

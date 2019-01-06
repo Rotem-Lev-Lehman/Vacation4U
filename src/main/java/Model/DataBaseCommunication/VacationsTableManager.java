@@ -223,7 +223,7 @@ public class VacationsTableManager extends ATableManager {
     }
 
     //Counting vacations for user - WHICH ARE NOT SOLD
-    public int CountVacationForUser(String username) {
+    public int CountVacationsByUserID(String username) {
         connect();
         String sql = "SELECT COUNT(vacationID) AS amount FROM vacations WHERE sellerID = ? AND alreadySold = ?";
         int amount = 0;
@@ -248,7 +248,7 @@ public class VacationsTableManager extends ATableManager {
     }
 
     //Reading vacations for user - WHICH ARE NOT SOLD
-    public List<Vacation> ReadVacationsForUser(String username) {
+    public List<Vacation> ReadVacationsByUserID(String username) {
         connect(); //connect to database
 
         //sql commend

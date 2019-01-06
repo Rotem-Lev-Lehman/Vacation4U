@@ -39,5 +39,6 @@ public interface IDataBaseManager {
 
     boolean checkHasVacation(String username);
 
-    List<Vacation> ReadVacationsForUser(String username);
+    int CountVacationsByUserID(String username);
+    List<Vacation> ReadVacationsByUserID(String username);
 }
