@@ -81,7 +81,7 @@ public class MessageTradeBoxView extends AView {
             strings[3] = String.valueOf(vacationIDToTrade);
             setChanged();
             notifyObservers(strings);
-            showAlert("Trade confirmation sent!");
+            showAlert("Trade declined message sent!");
             Stage stage = (Stage)decline_btn.getScene().getWindow();
             stage.close();
         }

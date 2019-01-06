@@ -11,7 +11,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainPageView">
    <children>
-      <ImageView fx:id="logo" fitHeight="267.0" fitWidth="341.0" layoutX="165.0" layoutY="-68.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="logo" fitHeight="267.0" fitWidth="341.0" layoutX="165.0" layoutY="-49.0" pickOnBounds="true" preserveRatio="true">
 
       </ImageView>
       <TextField fx:id="usernameTextField" layoutX="234.0" layoutY="218.0" promptText="Username" />

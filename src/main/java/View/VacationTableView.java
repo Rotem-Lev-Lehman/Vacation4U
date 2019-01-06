@@ -9,6 +9,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -66,6 +67,9 @@ public class VacationTableView extends AView implements Initializable {
                     alert1.setHeaderText("Trade Order Sent");
                     alert1.setContentText("Trade Order Sent, waiting for approval");
                     alert1.show();
+
+                    Stage currentStage = (Stage) table.getScene().getWindow();
+                    currentStage.close();
                 }
             });
             return row;

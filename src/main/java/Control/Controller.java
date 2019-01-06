@@ -78,9 +78,9 @@ public class Controller extends AController {
         }else if(o instanceof MessageTradeBoxView){
             if(arg instanceof String[] && ((String[])arg).length == 4) {
                 String[] strings = (String[]) arg;
-                if (strings[1].contains("vacationTrade"))
+                if (strings[1].equals("vacationTrade"))
                     sendApprovedTradeMessage(strings[0], strings[2], strings[3]);
-                if(strings[1].contains("vacationTradeDeclined"))
+                if(strings[1].equals("vacationTradeDeclined"))
                     sendDeclinedTradeMessage(strings[0], strings[2], strings[3]);
             }
             if(arg instanceof Object[] && ((Object[])arg).length == 3) {
@@ -109,7 +109,7 @@ public class Controller extends AController {
     }
 
     private void sendDeclinedTradeMessage(String userNameTo, String vacationIdOwn, String vacationIDToTrade) {
-        String messageString = "Hello! User " + user.getUsername() + " accepted your trade";
+        String messageString = "Sorry, User " + user.getUsername() + " didn't approve the trade";
         User userSendTo = model.ReadUser(userNameTo);
         TradingMessage msg = new TradingMessage(user, userSendTo, messageString,false, Integer.valueOf(vacationIDToTrade), Integer.valueOf(vacationIdOwn));
         model.CreateMessage(msg);
@@ -128,7 +128,7 @@ public class Controller extends AController {
     private void sendApprovedTradeMessage(String userNameTo, String vacationIdOwn, String vacationIDToTrade) {
         String messageString = "Hello! User " + user.getUsername() + " accepted your trade";
         User userSendTo = model.ReadUser(userNameTo);
-        TradingMessage msg = new TradingMessage(user, userSendTo, messageString,false, Integer.valueOf(vacationIDToTrade), Integer.valueOf(vacationIdOwn));
+        TradingMessage msg = new TradingMessage(user, userSendTo, messageString,false, Integer.valueOf(vacationIdOwn), Integer.valueOf(vacationIDToTrade));
         model.CreateMessage(msg);
 
         Vacation v1 = model.ReadVacation(Integer.valueOf(vacationIdOwn));
@@ -147,7 +147,7 @@ public class Controller extends AController {
     }
 
     private void sendTradeMessage(Vacation vacationToTrade, Vacation vacationOwn) {
-        String messageString = "Sorry, User " + user.getUsername() + " didn't approve the trade";
+        String messageString = "Hey! User " + user.getUsername() + " wants to trade the following vacations:";
         TradingMessage msg = new TradingMessage(user, vacationToTrade.getSellerId(),messageString, false, vacationToTrade.getVacationID(), vacationOwn.getVacationID());
         model.CreateMessage(msg);
 

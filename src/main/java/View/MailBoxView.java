@@ -1,6 +1,7 @@
 package View;
 
 import Model.Message;
+import Model.TradingMessage;
 import Model.User;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
@@ -63,7 +64,12 @@ public class MailBoxView extends AView implements Initializable {
                     setChanged();
                     notifyObservers(clickedRow);
 
-                    openMessageBox(clickedRow.getText(), clickedRow.getSender().getUsername(), clickedRow.isSeen(), clickedRow.getVacationID());
+                    if(clickedRow instanceof TradingMessage) {
+                        TradingMessage tradeMsg = (TradingMessage)clickedRow;
+                        openTradingMessageBox(tradeMsg.getText(), tradeMsg.getSender().getUsername(), tradeMsg.isSeen(), tradeMsg.getVacationIDToTrade(), tradeMsg.getVacationID());
+                    }
+                    else
+                        openMessageBox(clickedRow.getText(), clickedRow.getSender().getUsername(), clickedRow.isSeen(), clickedRow.getVacationID());
             });
             return row ;
         });
@@ -90,6 +96,30 @@ public class MailBoxView extends AView implements Initializable {
             }
         });
         checkForNewMessages.start();
+    }
+
+    private void openTradingMessageBox(String message, String from, boolean seen, int vacationIDToTrade, int vacationID) {
+        try {
+
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            Parent root = null;
+            root = fxmlLoader.load(getClass().getResource("/MessageTradeBox.fxml").openStream());
+
+            AView view = fxmlLoader.getController();
+            view.setController(controller);
+            ((MessageTradeBoxView)fxmlLoader.getController()).setMessage(message, from, vacationID, vacationIDToTrade);
+
+            Stage stage = new Stage();
+            stage.setTitle("Message");
+            stage.setScene(new Scene(root, 600, 405));
+            stage.show();
+
+            view.setDefaults(stage);
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void openMessageBox(String message, String from, boolean seen, int vacationID) {
