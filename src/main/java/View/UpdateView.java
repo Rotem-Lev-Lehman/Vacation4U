@@ -105,6 +105,16 @@ public class UpdateView extends AView implements Initializable {
         process_message.setText("Username taken, Pick a different one");
     }
 
+    //Show error message in cause user picked a not legal age - function is called by controller
+    public void setMessageLegalAge(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Illegal birth date");
+        alert.setHeaderText(null);
+        alert.setContentText("You must be above 18 years old");
+
+        alert.showAndWait();
+    }
+
     //Show successful message if information was updated successfully
     public void showSuccessAlert() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

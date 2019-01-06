@@ -317,6 +317,12 @@ public class Controller extends AController {
             return;
         }
 
+        //Check if age of user is legal
+        if(!legalAge(birthDate)){
+            updateView.setMessageLegalAge();
+            return;
+        }
+
         User newUser = new User(username, passwordtxt, birthDate.toString(), firstname, lastname, city);
         model.UpdateUser(user.getUsername(), newUser); //update user
         if(imageFile != null)
