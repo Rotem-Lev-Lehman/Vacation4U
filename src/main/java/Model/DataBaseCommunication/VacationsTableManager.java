@@ -221,4 +221,72 @@ public class VacationsTableManager extends ATableManager {
         }
         return nextID;
     }
+
+    //Counting vacations for user - WHICH ARE NOT SOLD
+    public int CountVacationForUser(String username) {
+        connect();
+        String sql = "SELECT COUNT(vacationID) AS amount FROM vacations WHERE sellerID = ? AND alreadySold = ?";
+        int amount = 0;
+        try{
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,username);
+            pstmt.setInt(2,0);
+            ResultSet rs = pstmt.executeQuery();
+
+            // loop through the result set
+            while (rs.next()) {
+                amount = rs.getInt("amount");
+                break;
+            }
+        }
+        catch (SQLException e){
+            //e.printStackTrace();
+        }
+        closeConnection();
+        return amount;
+
+    }
+
+    //Reading vacations for user - WHICH ARE NOT SOLD
+    public List<Vacation> ReadVacationsForUser(String username) {
+        connect(); //connect to database
+
+        //sql commend
+        String sql = "SELECT vacationID,sellerId,startDate,endDate,startCountry,destCountry, alreadySold,price FROM vacations WHERE sellerID = ? AND alreadySold = ?";
+
+        List<Vacation> vacations = new ArrayList<Vacation>();
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            // set the value
+            pstmt.setString(1, username);
+            pstmt.setInt(2, 0); //not bought
+            //
+            ResultSet rs = pstmt.executeQuery();
+
+            // loop through the result set
+            while (rs.next()) {
+
+                String startDate = rs.getString("startDate");
+                String endDate = rs.getString("endDate");
+                String startCountry = rs.getString("startCountry");
+                String destCountry = rs.getString("destCountry");
+
+                String sellerName = rs.getString("sellerID");
+                User seller = usersTable.ReadWithOutConnection(sellerName);
+
+                int vacationID = rs.getInt("vacationID");
+                int price = rs.getInt("price");
+
+                Vacation curr = new Vacation(seller, null, startDate, endDate, startCountry, destCountry, "", "", -1, "", false, 0,0,0,price);
+                curr.setVacationID(vacationID);
+                vacations.add(curr);
+            }
+        }
+        catch (SQLException e) {
+            //e.printStackTrace();
+        }
+        closeConnection(); //disconnect from database
+
+        return vacations;
+    }
 }

@@ -2,13 +2,18 @@ package View;
 
 import Model.Model;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import Model.Vacation;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -39,10 +44,6 @@ public class VacationsView extends AView implements Initializable {
     public boolean v2IsChanged;
     private boolean hasVacations; //boolean that states if the user created a vacation (for trade purpose)
 
-    public void VacationView(){
-
-    }
-
 
     public void orderVacation(ActionEvent e){
         if(e.getSource() == btnOrderNowV1 ){
@@ -58,8 +59,8 @@ public class VacationsView extends AView implements Initializable {
     public void userExist(){
         //move to next page - or make an order, ask ido
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setHeaderText("Order Send");
-        alert.setContentText("Order Send Successfully");
+        alert.setHeaderText("Order Sent");
+        alert.setContentText("Order Sent Successfully");
         alert.show();
 
 
@@ -69,14 +70,14 @@ public class VacationsView extends AView implements Initializable {
         //error
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText("Error");
-        alert.setContentText("Only Exist User Can Order");
+        alert.setContentText("Only Logged-In User Can Order");
         alert.show();
         return;
     }
     public void userIsSeller(){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText("ERROR");
-        alert.setContentText("Can't Buy This Vacation");
+        alert.setContentText("User Can't Buy or Trade His Own Vacation");
         alert.show();
         return;
     }
@@ -166,9 +167,6 @@ public class VacationsView extends AView implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         currIndex=0;
         v2IsChanged=false;
-        setChanged();
-        notifyObservers("checkForOwnVacation");
-
     }
 
     public  Vacation vacationToShow(List<Vacation> vacationList, int indexInList){
@@ -181,11 +179,39 @@ public class VacationsView extends AView implements Initializable {
     }
 
     public void tradeVacations(MouseEvent mouseEvent) {
-
+        Object[] objects = new Object[2];
+        objects[0] = "Can Trade";
+        objects[1] = v1;
+        setChanged();
+        notifyObservers(objects);
     }
 
     public void setHasVacations(boolean bool){
         hasVacations = bool;
         trade_btn.setDisable(!hasVacations);
+    }
+
+    public void CheckForOwnVacations(){
+        setChanged();
+        notifyObservers("checkForOwnVacation");
+    }
+
+    public void openOwnVacations(List<Vacation> vacations){
+        Parent root = null;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("VacationTable.fxml"));
+            root = loader.load();
+            VacationTableView vacationTableView = loader.getController();
+            vacationTableView.setController(controller);
+            vacationTableView.setVacations(vacations);
+            vacationTableView.setVacationToTrade(v1);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Stage stage = new Stage();
+        stage.setTitle("Your Vacations");
+        stage.setScene(new Scene(root, 600, 400));
+        stage.show();
     }
 }

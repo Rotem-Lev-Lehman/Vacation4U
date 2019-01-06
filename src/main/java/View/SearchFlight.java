@@ -134,6 +134,7 @@ public class SearchFlight extends AView implements Initializable  {
            VacationsView vacationsView = loader.getController();
            vacationsView.setVacations(vacationList);
            vacationsView.setController(controller);
+           vacationsView.CheckForOwnVacations();
 
        } catch (IOException e) {
            e.printStackTrace();

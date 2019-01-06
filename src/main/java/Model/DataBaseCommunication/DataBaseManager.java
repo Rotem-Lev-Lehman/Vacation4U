@@ -194,6 +194,21 @@ public class DataBaseManager implements IDataBaseManager{
 
     @Override
     public boolean checkHasVacation(String username) {
-        throw new RuntimeException("Not implemented in DataBaseManger - function checkHasVacations");
+        boolean hasVacation = false;
+        synchronized (lock){
+            int count = vacationsTable.CountVacationForUser(username);
+            if(count > 0)
+                hasVacation = true;
+        }
+        return hasVacation;
+    }
+
+    @Override
+    public List<Vacation> ReadVacationsForUser(String username) {
+        List<Vacation> vacations;
+        synchronized (lock){
+            vacations = vacationsTable.ReadVacationsForUser(username);
+        }
+        return vacations;
     }
 }

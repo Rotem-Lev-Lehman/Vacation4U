@@ -86,12 +86,42 @@ public class Controller extends AController {
                  if(((String)arg).equals("checkForOwnVacation"))
                      setHasVacation((VacationsView) o);
              }
+             if(arg instanceof Object[]){
+                 if(((Object[]) arg).length == 2 && ((Object[]) arg)[0].equals("Can Trade"))
+                     trade((VacationsView)o, (Vacation)((Object[]) arg)[1]);
+             }
+        } else if (o instanceof VacationTableView){
+            if(arg instanceof Vacation[] && ((Vacation[]) arg).length == 2){
+                Vacation[] vacations = (Vacation[])arg;
+                sendTradeMessage(vacations[0], vacations[1]);
+            }
         }
 
     }
 
+    private void sendTradeMessage(Vacation vacationToTrade, Vacation vacationOwn) {
+        MessageTrading msg = new MessageTrading(user, vacationToTrade.getSellerId(),"", false, vacationToTrade.getVacationID(), vacationOwn.getVacationID());
+        model.CreateMessage(msg);
+
+        Order order = new Order(vacationToTrade, user, OrderStatus.WaitingForApproval);
+        model.CreateOrder(order);
+
+        Order order2 = new Order(vacationOwn, vacationToTrade.getSellerId(), OrderStatus.WaitingForApproval);
+        model.CreateOrder(order2);
+    }
+
+    private void trade(VacationsView o, Vacation vacation) {
+        if(user.getUsername().equals(vacation.getSellerId().getUsername()))
+            o.userIsSeller();
+        else {
+            List<Vacation> vacations = model.ReadVacationsForUser(user.getUsername());
+            o.openOwnVacations(vacations);
+        }
+    }
+
     private void setHasVacation(VacationsView o) {
-        o.setHasVacations(model.checkHasVacation(user.getUsername()));
+        if(user != null)
+            o.setHasVacations(model.checkHasVacation(user.getUsername()));
     }
 
     private void sendVacationBought(String sendToUser, String vacationID) {

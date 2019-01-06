@@ -38,4 +38,6 @@ public interface IDataBaseManager {
     void UpdateMessageAsSeen(Message message);
 
     boolean checkHasVacation(String username);
+
+    List<Vacation> ReadVacationsForUser(String username);
 }
