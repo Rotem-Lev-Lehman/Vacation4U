@@ -106,7 +106,7 @@ public class MessagesTableManager extends ATableManager {
                     curr = new Message(sender,receiver,rs.getString("message"),isSeen,vacationID);
                 else
                     curr = new TradingMessage(sender,receiver,rs.getString("message"),isSeen,vacationID, vacationIDToTrade);
-                
+
                 curr.setMessageID(rs.getInt("messageID"));
                 messages.add(curr);
             }
