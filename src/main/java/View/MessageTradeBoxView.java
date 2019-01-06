@@ -40,13 +40,19 @@ public class MessageTradeBoxView extends AView {
 
 
     public void setVacationDetails(String detailsOwn, String detailsToTrade) {
-        details_txt.setText(detailsOwn);
-        details_txt_otherUser.setText(detailsToTrade);
+        if(message.getText().contains("Hello!")) {
+            details_txt.setText(detailsToTrade);
+            details_txt_otherUser.setText(detailsOwn);
+        }
+        else{
+            details_txt.setText(detailsOwn);
+            details_txt_otherUser.setText(detailsToTrade);
+        }
     }
 
     public void doAgree(MouseEvent mouseEvent) {
         if(message.getText().contains("wants to trade")){
-            String[] strings = new String[3];
+            String[] strings = new String[4];
             strings[0] = userFrom;
             strings[1] = "vacationTrade";
             strings[2] = String.valueOf(vacationIDOwn);
@@ -67,10 +73,26 @@ public class MessageTradeBoxView extends AView {
     }
 
     public void doDecline(MouseEvent mouseEvent) {
+        if(message.getText().contains("wants to trade")){
+            String[] strings = new String[4];
+            strings[0] = userFrom;
+            strings[1] = "vacationTradeDeclined";
+            strings[2] = String.valueOf(vacationIDOwn);
+            strings[3] = String.valueOf(vacationIDToTrade);
+            setChanged();
+            notifyObservers(strings);
+            showAlert("Trade confirmation sent!");
+            Stage stage = (Stage)decline_btn.getScene().getWindow();
+            stage.close();
+        }
     }
 
     public void okButtonClicked(MouseEvent mouseEvent) {
+        Stage stage = (Stage) decline_btn.getScene().getWindow();
+        stage.close();
+        return;
     }
+
 }
 
 
