@@ -76,7 +76,18 @@ public class Controller extends AController {
                 if(((Object[])arg)[0].equals("getVacDetails"))
                     getVacationDetails((MessageBoxView)o,(int)((Object[])arg)[1]);
             }
-        }else if (o instanceof VacationsView) {
+        }else if(o instanceof MessageTradeBoxView){
+            if(arg instanceof String[] && ((String[])arg).length == 3) {
+                String[] strings = (String[]) arg;
+                if (strings[1].contains("buyMessage;")){}
+                    //sendApprovedBuyMessage(strings[0], strings[2], strings[1]);
+            }
+            if(arg instanceof Object[] && ((Object[])arg).length == 3) {
+                if (((Object[]) arg)[0].equals("getVacDetails"))
+                    getVacationsDetails((MessageTradeBoxView) o, (int) ((Object[]) arg)[1], (int) ((Object[]) arg)[2]);
+            }
+
+        } else if (o instanceof VacationsView) {
              if (arg instanceof Vacation)
                     setNewOrder((VacationsView) o, (Vacation) arg);
              if(arg instanceof String){
@@ -97,7 +108,8 @@ public class Controller extends AController {
     }
 
     private void sendTradeMessage(Vacation vacationToTrade, Vacation vacationOwn) {
-        TradingMessage msg = new TradingMessage(user, vacationToTrade.getSellerId(),"", false, vacationToTrade.getVacationID(), vacationOwn.getVacationID());
+        String messageString = "Hey! User " + user.getUsername() + " wants to trade with you the following vacations:";
+        TradingMessage msg = new TradingMessage(user, vacationToTrade.getSellerId(),messageString, false, vacationToTrade.getVacationID(), vacationOwn.getVacationID());
         model.CreateMessage(msg);
 
         Order order = new Order(vacationToTrade, user, OrderStatus.WaitingForApproval);
@@ -141,6 +153,24 @@ public class Controller extends AController {
                             "Arrival Date: " + v.getEndDate() + "\n" +
                             "Price: " + v.getPrice();
         o.setVacationDeatils(details);
+    }
+
+    private void getVacationsDetails(MessageTradeBoxView o, int vacationIDOwn, int vacationIDToTrade){
+        Vacation vOwn = model.ReadVacation(vacationIDOwn);
+        String detailsOwn = "Origin: " + vOwn.getStartCountry() + "\n" +
+                "Destination: " + vOwn.getDestCountry() + "\n" +
+                "Departure Date: " + vOwn.getStartDate() + "\n" +
+                "Arrival Date: " + vOwn.getEndDate() + "\n" +
+                "Price: " + vOwn.getPrice();
+
+        Vacation vToTrade = model.ReadVacation(vacationIDToTrade);
+        String detailsToTrade = "Origin: " + vToTrade.getStartCountry() + "\n" +
+                "Destination: " + vToTrade.getDestCountry() + "\n" +
+                "Departure Date: " + vToTrade.getStartDate() + "\n" +
+                "Arrival Date: " + vToTrade.getEndDate() + "\n" +
+                "Price: " + vToTrade.getPrice();
+
+        o.setVacationDetails(detailsOwn, detailsToTrade);
     }
 
     //Message from publisher (actually from buyer) to buyer - approve money delivery
