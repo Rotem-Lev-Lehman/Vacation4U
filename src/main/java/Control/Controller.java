@@ -2,9 +2,7 @@ package Control;
 
 import Model.*;
 import View.*;
-import com.sun.org.apache.xpath.internal.operations.Or;
 import javafx.scene.image.Image;
-import javafx.scene.paint.ImagePattern;
 
 import java.io.File;
 import java.sql.SQLException;
@@ -13,7 +11,6 @@ import java.time.Period;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Observable;
-import java.util.Observer;
 
 public class Controller extends AController {
 
@@ -100,7 +97,7 @@ public class Controller extends AController {
     }
 
     private void sendTradeMessage(Vacation vacationToTrade, Vacation vacationOwn) {
-        MessageTrading msg = new MessageTrading(user, vacationToTrade.getSellerId(),"", false, vacationToTrade.getVacationID(), vacationOwn.getVacationID());
+        TradingMessage msg = new TradingMessage(user, vacationToTrade.getSellerId(),"", false, vacationToTrade.getVacationID(), vacationOwn.getVacationID());
         model.CreateMessage(msg);
 
         Order order = new Order(vacationToTrade, user, OrderStatus.WaitingForApproval);

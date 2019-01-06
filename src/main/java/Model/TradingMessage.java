@@ -1,10 +1,10 @@
 package Model;
 
-public class MessageTrading extends Message {
+public class TradingMessage extends Message {
 
     private int vacationIDToTrade;
 
-    public MessageTrading(User sender, User receiver, String text, boolean seen, int vacationIDToBuy, int vacationIDToTrade){
+    public TradingMessage(User sender, User receiver, String text, boolean seen, int vacationIDToBuy, int vacationIDToTrade){
         super(sender, receiver, text, seen, vacationIDToBuy);
         this.vacationIDToTrade = vacationIDToTrade;
     }
