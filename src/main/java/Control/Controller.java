@@ -40,9 +40,6 @@ public class Controller extends AController {
         } else if (o instanceof  CreateVacation){
             if(arg instanceof Vacation)
                 createVacation((CreateVacation)o, (Vacation)arg);
-        } else if (o instanceof OrderVacation){
-            if(arg instanceof PaymentTransaction)
-                createPayment((OrderVacation)o,(PaymentTransaction)arg);
         } else if( o instanceof MailBoxView){
             if(arg instanceof String && ((String)arg).equals("Get Messages")){
                 searchForMessages((MailBoxView)o);
@@ -63,8 +60,10 @@ public class Controller extends AController {
                     sendApprovedPaymentMessage(strings[0], strings[2]);
                 else if (strings[1].equals("buyDeclined"))
                     sendDeclinedPaymentMessage(strings[0], strings[2]);
+                /*
                 else if (strings[1].equals("OpenPayment"))
                     openPayment((MessageBoxView) o,strings[0], strings[2]);
+                */
                 else if (strings[1].equals("contactApproved"))
                     sendContactApproved(strings[0], strings[2]);
                 else if (strings[1].equals("publisherBuyDeclined"))
@@ -221,12 +220,14 @@ public class Controller extends AController {
 
     }
 
+    /*
     private void openPayment(MessageBoxView msgBoxView, String sendToUser, String vacationID) {
         Vacation v = model.ReadVacation(Integer.parseInt(vacationID));
         Order order = model.ReadOrder(v, user);
-        msgBoxView.moveToPayment(order);
+        //msgBoxView.moveToPayment(order);
 
     }
+    */
 
     //from buyer to publisher when the buyer didn't pay
     private void sendDeclinedPaymentMessage(String sendToUser, String vacationID) {
@@ -318,11 +319,6 @@ public class Controller extends AController {
             //show messages
            o.showMessages(messages);
         }
-    }
-
-    private void createPayment(OrderVacation o, PaymentTransaction arg) {
-
-        model.CreatePaymentTransaction(arg);
     }
 
     private void createVacation(CreateVacation o, Vacation arg) {

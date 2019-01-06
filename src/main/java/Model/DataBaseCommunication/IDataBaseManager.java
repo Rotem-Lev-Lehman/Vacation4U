@@ -30,8 +30,6 @@ public interface IDataBaseManager {
     List<Order> ReadOrdersForVacation(Vacation vacation);
     void UpdateOrderStatus(Order order);
 
-    void CreatePaymentTransaction(PaymentTransaction paymentTransaction);
-
     void CreateMessage(Message message);
     List<Message> ReadAllMessages(String username);
     int CountUnseenMessages(String username);

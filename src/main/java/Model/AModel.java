@@ -81,10 +81,6 @@ public abstract class AModel {
         dataBaseManager.UpdateOrderStatus(order);
     }
 
-    public void CreatePaymentTransaction(PaymentTransaction paymentTransaction){
-        dataBaseManager.CreatePaymentTransaction(paymentTransaction);
-    }
-
     public void CreateMessage(Message message){
         dataBaseManager.CreateMessage(message);
     }

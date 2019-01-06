@@ -90,27 +90,6 @@ public class MessageBoxView extends AView {
         phone_number_txtField.setVisible(true);
     }
 
-    public void moveToPayment(Order order) {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        Parent root = null;
-        try {
-            root = fxmlLoader.load(getClass().getResource("/OrderVacation.fxml").openStream());
-        } catch (IOException e) {
-            System.out.println(e.toString());
-        }
-
-        AView view = fxmlLoader.getController();
-        view.setController(controller);
-        ((OrderVacation)fxmlLoader.getController()).setMessageBoxView(this, order);
-
-        Stage stage = new Stage();
-        stage.setTitle("Message");
-        stage.setScene(new Scene(root, 210, 320));
-        stage.show();
-
-        view.setDefaults(stage);
-    }
-
     public void doDecline(MouseEvent mouseEvent) {
         String add = "";
         if(message.getText().contains("wants to buy")){

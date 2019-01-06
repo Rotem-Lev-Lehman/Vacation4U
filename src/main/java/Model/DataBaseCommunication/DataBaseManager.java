@@ -13,7 +13,6 @@ public class DataBaseManager implements IDataBaseManager{
     private VacationsTableManager vacationsTable;
     private MessagesTableManager messagesTable;
     private OrdersTableManager ordersTable;
-    private PaymentsTableManager paymentDetailsTable;
     private UsersPicturesTableManager usersPicturesTable;
     private Object lock;
 
@@ -22,7 +21,6 @@ public class DataBaseManager implements IDataBaseManager{
         vacationsTable = new VacationsTableManager();
         messagesTable = new MessagesTableManager();
         ordersTable = new OrdersTableManager();
-        paymentDetailsTable = new PaymentsTableManager();
         usersPicturesTable = new UsersPicturesTableManager();
         lock = new Object();
     }
@@ -150,13 +148,6 @@ public class DataBaseManager implements IDataBaseManager{
     public void UpdateOrderStatus(Order order) {
         synchronized (lock) {
             ordersTable.UpdateOrderStatus(order);
-        }
-    }
-
-    @Override
-    public void CreatePaymentTransaction(PaymentTransaction paymentTransaction) {
-        synchronized (lock) {
-            paymentDetailsTable.CreatePaymentTransaction(paymentTransaction);
         }
     }
 
