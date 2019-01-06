@@ -1,6 +1,7 @@
 package Model.DataBaseCommunication;
 
 import Model.Message;
+import Model.TradingMessage;
 import Model.User;
 
 import java.sql.PreparedStatement;
@@ -19,7 +20,7 @@ public class MessagesTableManager extends ATableManager {
     public void Create(Message message) {
         connect(); //connect to database
         //create user - sql command
-        String sql = "INSERT INTO messages(messageID,senderID,receiverID,message,seen,vacationID) VALUES(?,?,?,?,?,?)";
+        String sql = "INSERT INTO messages(messageID,senderID,receiverID,message,seen,vacationID,vacationIDToTrade) VALUES(?,?,?,?,?,?,?)";
 
         int nextID = getNextID();
         //try to create user
@@ -31,6 +32,12 @@ public class MessagesTableManager extends ATableManager {
             pstmt.setString(4, message.getText());
             pstmt.setInt(5, 0);
             pstmt.setInt(6, message.getVacationID());
+
+            int vacIdToTrade = -1;
+            if(message instanceof TradingMessage)
+                vacIdToTrade = ((TradingMessage)message).getVacationIDToTrade();
+            pstmt.setInt(7, vacIdToTrade);
+
             pstmt.executeUpdate();
             message.setMessageID(nextID);
         }
@@ -66,7 +73,7 @@ public class MessagesTableManager extends ATableManager {
         connect(); //connect to database
 
         //sql commend
-        String sql = "SELECT messageID, senderID, receiverID, message, seen, vacationID FROM messages WHERE receiverID = ?";
+        String sql = "SELECT messageID, senderID, receiverID, message, seen, vacationID, vacationIDToTrade FROM messages WHERE receiverID = ?";
 
         List<Message> messages = new ArrayList<Message>(); //list of similar messages
         try {
@@ -92,7 +99,14 @@ public class MessagesTableManager extends ATableManager {
 
                 int vacationID = rs.getInt("vacationID");
 
-                Message curr = new Message(sender,receiver,rs.getString("message"),isSeen,vacationID);
+                int vacationIDToTrade = rs.getInt("vacationIDToTrade");
+
+                Message curr;
+                if(vacationIDToTrade == -1)
+                    curr = new Message(sender,receiver,rs.getString("message"),isSeen,vacationID);
+                else
+                    curr = new TradingMessage(sender,receiver,rs.getString("message"),isSeen,vacationID, vacationIDToTrade);
+                
                 curr.setMessageID(rs.getInt("messageID"));
                 messages.add(curr);
             }
