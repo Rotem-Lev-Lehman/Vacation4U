@@ -1,7 +1,7 @@
-# Vacation4U
+# EveryVacation4U
 A platform for air plane tickets deals
 
-=====Welcome to Vacation4U===============
+=====Welcome to EveryVacation4U===============
 
 If you're having any trouble with our app please read our instructions:
 - Please do import Maven settings. When cloning the project you will be asked to import maven settings, please make sure you do (maybe your IDE imports them automatically).
@@ -37,6 +37,16 @@ If you're having any trouble with our app please read our instructions:
 - User 1 creates vacation
 - User 2 orders vacation
 - User 1 will get a message that someone wants to buy the vacation and will choose rather to accept or decline the request
-- User 2 will get a message according to user 1's choice. If user 1 accepted the request then user 2 will have the option to pay
-- If User 2 chose to pay so a message Will be sent to User 1 that the vacation was bought
-- All the process above are documented in that database
+- If User 1 chose to accept the order, he will need to input his phone number
+- User 2 will get a message according to user 1's choice. If user 1 accepted the request then user 2 will get another message asking him to approve that he has paid to User 1
+- If User 2 confirms that he has paid, then User 1 will get a message that will ask him to confirm that User 2 actually paid. If User 2 doesn't confirm that he has paid then the purchase is canceled.
+- If User 1 confirms that User 2 has paid, then the purchase is confirmed in the system. If User 1 doesn't confirm that User 2 has paid then the purchase is canceled.
+- All the processes above are documented in that database
+
+---Trading Process---
+- User 1 creates vacation
+- User 2 creates vacation
+- User 2 trades choose the "Trade" button after he searched User 1's vacation
+- User 2 chooses one of his own vacation that he wants to trade with. A message is sent to User 1 regarding the trade
+- If user 1 confirms the trade, then User 2 will get a message saying that the trade has been confirmed. If User 1 doesn't accept the trade, then User 2 gets a message saying the trade is off.
+- All the processes above are documented in that database

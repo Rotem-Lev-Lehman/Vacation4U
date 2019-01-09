@@ -52,8 +52,6 @@ public class MailBoxView extends AView implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //Set columns name and set image to imageView
-        //messageColumn.setCellValueFactory(new PropertyValueFactory<>("from"));
         messageColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getText()));
         fromColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSender().getUsername()));/*new PropertyValueFactory<>("receiverID")*/
         seenColumn.setCellValueFactory(new PropertyValueFactory<>("seen"));

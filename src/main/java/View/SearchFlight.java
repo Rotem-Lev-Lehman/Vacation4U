@@ -2,7 +2,6 @@ package View;
 
 
 import Model.Flight;
-import Model.User;
 import Model.Vacation;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -32,7 +31,6 @@ public class SearchFlight extends AView implements Initializable  {
     public ComboBox InfantNumOfTicket;
     public ComboBox ChildNumOfTicket;
     public CheckBox CheckNonStopFlight;
-    public User user;
     public ComboBox ChoiceBoxBaggageType;
 
 
@@ -111,7 +109,7 @@ public class SearchFlight extends AView implements Initializable  {
         boolean isSleepPlace = CheckBoxSleepPlace.isSelected();
 
         Flight F=new Flight(airline, originCountry, destinationCountry, departureDate, arrivalDate);
-        Vacation v=new Vacation( user, F, departureDateString, arrivalDateString, originCountry, destinationCountry, vacationKind, "",0,baggageType,false,adultNumOfTicket, childNumOfTicket,infantNumOfTicket,maxPrice);
+        Vacation v=new Vacation( null, F, departureDateString, arrivalDateString, originCountry, destinationCountry, vacationKind, "",0,baggageType,false,adultNumOfTicket, childNumOfTicket,infantNumOfTicket,maxPrice);
 
         setChanged();
         notifyObservers(v);
